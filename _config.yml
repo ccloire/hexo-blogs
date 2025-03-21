@@ -5,8 +5,8 @@
 # Site
 title: Loire's Blog
 subtitle: '技术笔记与知识管理'
-description: '记录CS学习路线以及高中数理教培、马列毛学习'
-keywords: '个人首次博客尝试'
+description: '记录CS学习路线以及各类经验分享'
+keywords: '个人首个博客网站'
 author: 'Loire'
 language: zh-CN
 timezone: 'Asia/Shanghai'
@@ -39,8 +39,8 @@ external_link:
   field: site # Apply to the whole site
   exclude: ''
 filename_case: 0
-render_drafts: false
-post_asset_folder: false
+render_drafts: true
+post_asset_folder: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
