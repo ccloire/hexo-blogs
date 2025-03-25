@@ -29,6 +29,17 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
+    <title>如何低代码搭建个人博客？</title>
+    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
+<h2 id="方案介绍">方案介绍</h2>
+<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+]]></content>
+      <tags>
+        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>markdown语法总结</title>
     <url>/2025/02/27/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1 id="markdown语法总结"><span
@@ -146,17 +157,6 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 ]]></content>
       <tags>
         <tag>基础工具使用指南</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何低代码搭建个人博客？</title>
-    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
-<h2 id="方案介绍">方案介绍</h2>
-<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
-]]></content>
-      <tags>
-        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
       </tags>
   </entry>
 </search>
