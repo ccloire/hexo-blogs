@@ -96,10 +96,10 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: anzhiyu
+theme: landscape
 plugins:
-  - hexo-renderer-pandoc
-hexo-renderer-pandoc:
+  - pandoc
+pandoc:
   pandoc_path: "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\pandoc.exe" # 根据你的 Pandoc 安装路径修改
   args: #参数列表
     - "-f"
@@ -107,16 +107,11 @@ hexo-renderer-pandoc:
     - "-t"
     - "html"
     - "--mathjax"
-    - "--toc-title"
-    - "目录"
-    - "--toc-depth"
-    - "6"
-    - "--number-sections"
     - "--highlight-style"
-    - "github"
+    - "tango"
     - "--css"
-    - "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\css\\github.css" # 添加GitHub样式
-    
+    - "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\css\\tango.css" # 添加tango样式
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
