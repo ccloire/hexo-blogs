@@ -100,7 +100,7 @@ theme: anzhiyu
 plugins:
   - hexo-renderer-pandoc
 hexo-renderer-pandoc:
-  pandoc_path: "D:\Program Files\Pandoc插件\pandoc-3.6.4\pandoc.exe" # 根据你的 Pandoc 安装路径修改
+  pandoc_path: "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\pandoc.exe" # 根据你的 Pandoc 安装路径修改
   args: #参数列表
     - "-f"
     - "markdown"
@@ -115,7 +115,7 @@ hexo-renderer-pandoc:
     - "--highlight-style"
     - "github"
     - "--css"
-    - "D:\Program Files\Pandoc插件\pandoc-3.6.4\css\github.css" # 添加GitHub样式
+    - "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\css\\github.css" # 添加GitHub样式
     
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
