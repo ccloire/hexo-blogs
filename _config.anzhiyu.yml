@@ -123,8 +123,9 @@ local_search:
 
 # MathJax
 mathjax:
-  enable: false
-  per_page: false
+  enable: true
+  per_page: true
+  mhchem: false
 
 # KaTeX
 katex:

@@ -41,9 +41,6 @@ external_link:
 filename_case: 0
 render_drafts: true
 post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -100,7 +97,26 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: anzhiyu
-
+plugins:
+  - hexo-renderer-pandoc
+hexo-renderer-pandoc:
+  pandoc_path: "D:\Program Files\Pandoc插件\pandoc-3.6.4\pandoc.exe" # 根据你的 Pandoc 安装路径修改
+  args: #参数列表
+    - "-f"
+    - "markdown"
+    - "-t"
+    - "html"
+    - "--mathjax"
+    - "--toc-title"
+    - "目录"
+    - "--toc-depth"
+    - "6"
+    - "--number-sections"
+    - "--highlight-style"
+    - "github"
+    - "--css"
+    - "D:\Program Files\Pandoc插件\pandoc-3.6.4\css\github.css" # 添加GitHub样式
+    
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
