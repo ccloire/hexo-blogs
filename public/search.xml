@@ -13,17 +13,21 @@ href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-a-new-post">Create a new post</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
 <p>More info: <a
 href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="run-server">Run server</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="generate-static-files">Generate static files</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a
 href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a
 href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
@@ -42,37 +46,43 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
   <entry>
     <title>markdown语法总结</title>
     <url>/2025/02/27/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="markdown语法总结"><span
-style="font-size:0.8em;">Markdown语法总结</span></h1>
+    <content><![CDATA[<h1
+id="markdown语法总结"><span style="font-size:0.8em;">Markdown语法总结</span></h1>
 <p>前置声明：以下大部分语法在Typora中都可以通过右键找到对应的快捷插件，学习语法一方面是方便我们灵活编辑md文本，无须反复腾出手去滑动点击鼠标，一方面是为了在一般的编辑器里也能正确编写md文件。</p>
 <h2 id="标题">标题</h2>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 一级标题  </span></span><br><span class="line"><span class="section">## 二级标题  </span></span><br><span class="line"><span class="section">### 三级标题  </span></span><br><span class="line"><span class="section">#### 四级标题  </span></span><br><span class="line"><span class="section">##### 五级标题  </span></span><br><span class="line"><span class="section">###### 六级标题  </span></span><br><span class="line"></span><br><span class="line">PS：在#后面要添加一个空格再跟标题内容</span><br></pre></td></tr></table></figure>
+
 <h2 id="段落与换行">段落与换行</h2>
 <ol type="1">
 <li>普通换行需要在换行处添加两个空格，如：</li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">这里是第一行（随后跟两个空格 + “enter”，再打出下一行内容即可）  </span><br><span class="line">这里是第二行</span><br></pre></td></tr></table></figure>
-<p>Typora中可以直接shift+enter实现换行。</p>
+
+<p>Typora中可以直接一个enter实现换行。</p>
 <ol start="2" type="1">
 <li>换段落（行与行之间多一空白行）：</li>
 </ol>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">这里是第一段（随后连续打出两个回车enter）</span><br><span class="line"></span><br><span class="line">这里是第二段</span><br></pre></td></tr></table></figure>
-<p>PS：上述规则应该适用于一般的文本编辑器里编写markdown文件的情况。
-在Typora编辑器里，非源码模式可以实现实时渲染，编写文本后直接就可以看到导出后的效果。本人实际体验后发现，在Typora里可以直接一个enter实现换段落，文字超出一行限制后会自动换行，若要实现主动换行，可以切换到源代码模式。
-在源代码模式里，一个enter就是换行，两个enter就是换段落。也可以非源码模式使用shift+enter实现强制换行（后面介绍的列表，每一项内单独换行也可以用这种方法）。</p>
+
+<p>PS：上述规则应该适用于一般的文本编辑器里编写markdown文件的情况。</p>
+<p>但是不同编辑器/网页由于使用的渲染器不同，实际展现出来的效果也可能有所差异，因此建议统一使用一个enter换段落的方式开启新的一段内容。</p>
 <h2 id="文本效果加粗与斜体与中划线">文本效果：加粗与斜体与中划线</h2>
 <p><strong>在一段文本的起始和终止位置分别添加两个星号，如本行文字即是在编辑器中如此操作后的加粗效果。</strong></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="strong">**在一段文本的起始位置和终止位置分别添加两个星号**</span></span><br><span class="line">或者</span><br><span class="line"><span class="strong">__使用下划线也可以实现相同的效果__</span></span><br></pre></td></tr></table></figure>
+
 <p><em>斜体方式与文本加粗同理，但改为使用一个星号或一个下划线。</em></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="emphasis">*这是一行斜体文字*</span></span><br><span class="line"><span class="emphasis">_这也是一行斜体_</span></span><br></pre></td></tr></table></figure>
+
 <p><del>中划线（删除线）则使用两个波浪号</del></p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">~~这是一行删除线文字~~</span><br></pre></td></tr></table></figure>
-<p><del><strong><em>如果要实现同时加粗和斜体和中划线，则将星号或者下划线的数量改成三个，再外加两个波浪号即可（叠加原理）</em></strong></del></p>
+
+<p><del><em><strong>如果要实现同时加粗和斜体和中划线，则将星号或者下划线的数量改成三个，再外加两个波浪号即可（叠加原理）</strong></em></del></p>
 <h2 id="段落间分割线">段落间分割线</h2>
 <p>三个及以上的星号*或者下划线_即可</p>
 <hr />
 <p>如此处所示</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">天青色等烟雨</span><br><span class="line"><span class="strong">____</span>(或者<span class="strong">****</span>) </span><br><span class="line">而我在等你</span><br></pre></td></tr></table></figure>
+
 <h2 id="列表编写">列表编写</h2>
 <h3 id="无序列表">无序列表</h3>
 <ul>
@@ -81,6 +91,7 @@ style="font-size:0.8em;">Markdown语法总结</span></h1>
 <li>Typora中，同一列表里一项末尾直接enter可以产生下一项，再次enter会消除自动添加的列表格式。使用不同的列表符号也不会有换列表效果，只能再加一个enter手动产生行距再添加新列表。（有序列表同理）</li>
 </ul>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项任务</span><br><span class="line"><span class="bullet">*</span> 第二项任务</span><br><span class="line"><span class="bullet">*</span> 第三项任务</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 另一个列表第一项</span><br><span class="line"></span><br><span class="line"><span class="bullet">+</span> 这又是一个新的列表</span><br></pre></td></tr></table></figure>
+
 <h3 id="有序列表">有序列表</h3>
 <ol type="1">
 <li>列表第一项用“数字 + . +空格”</li>
@@ -88,23 +99,34 @@ style="font-size:0.8em;">Markdown语法总结</span></h1>
 <li>顺序是由列表第一项决定的，后面每一项的序号都自动递增。</li>
 </ol>
 <h3 id="列表嵌套">列表嵌套</h3>
-<p>在一级列表里嵌套二级列表的方式：在一级列表的某一项后换行，回车删除自动添加的一级序号，再用“数字
+<ul>
+<li><p>一级列表下直接编写文本的方法：enter换行+回车，再编写文本即可。</p></li>
+<li><p>在一级列表里嵌套二级列表的方式：在一级列表的某一项后换行，回车删除自动添加的一级序号，再用“数字
 + . + 空格”或者“* +
-空格”，即可实现该项下创建二级有序或无序列表（后面介绍的复选框列表也可以这样嵌套）。</p>
-<p>若要跳出二级列表循环，重新创建上一级列表的下一项，则连续按下三次enter即可（连续两次是消除二级列表格式，直接在一级列表的该项下编写普通文本，编写文本后需要再连续按两次enter才能跳出一级列表的该项，新建一级列表的下一项）</p>
+空格”，即可实现该项下创建二级有序或无序列表（后面介绍的复选框列表也可以这样嵌套）。</p></li>
+<li><p>若要跳出二级列表循环，重新创建上一级列表的下一项，则连续按下三次enter即可（连续两次是消除二级列表格式，直接在一级列表的该项下编写普通文本，编写文本后需要再连续按两次enter才能跳出一级列表的该项，新建一级列表的下一项）</p></li>
+</ul>
 <p>示例：</p>
 <ol type="1">
-<li><p>一级列表第一项（然后enter+回车+“1 + . + 空格”）</p>
+<li><p>一级列表第一项（然后enter换行+回车，直接在该项下编写文本）</p>
+<p>一级列表下的一段文本。（一个enter+“1 + . +
+空格”,继续创建二级有序列表）</p>
 <ol type="1">
-<li>二级列表（直接enter）</li>
-<li>二级列表（两次enter）</li>
-</ol>
-<p>一级列表第一项下编写普通文本。（此处再按两次enter）</p></li>
-<li><p>一级列表第二项</p>
-<ol type="1">
-<li>二级列表（三次enter）</li>
+<li><p>二级列表第一项（一个enter创建同级下一项）</p></li>
+<li><p>二级列表第二项（enter换行+回车，直接在该项下编写文本）</p>
+<p>二级列表下编写一段文本。（两次enter消除二级列表下的文本格式，创建二级列表下一项）</p></li>
+<li><p>二级列表第三项</p></li>
 </ol></li>
-<li><p>一级列表第三项</p></li>
+<li><p>一级列表第二项（enter换行+回车+“1 + . + 空格”创建二级列表）</p>
+<ol type="1">
+<li>二级列表第一项（连续三次enter跳出二级列表循环创建一级列表下一项）</li>
+</ol></li>
+<li><p>一级列表第三项</p>
+<ol type="1">
+<li>二级列表第一项（两次enter消除二级列表格式，直接在一级列表该项下编写文本）</li>
+</ol>
+<p>一级列表下的一段文本。（再连续两次enter跳出一级列表该项，新建一级列表下一项）</p></li>
+<li><p>一级列表第四项</p></li>
 </ol>
 <h3 id="勾选框">勾选框</h3>
 <ul class="task-list">
@@ -112,16 +134,18 @@ style="font-size:0.8em;">Markdown语法总结</span></h1>
 checked="" />第一项任务已完成</label></li>
 <li><label><input type="checkbox" />第二项任务未完成</label></li>
 </ul>
-<p>像这样的勾选框列表如何实现呢？(勾选框是否可勾选和html渲染插件有关)
-操作方法是在无序列表符号*后面跟上“空格+[空格填充]+空格”，若[]内用字母x填充则变为选中状态，用空格填充则为非选中状态。</p>
+<p>像这样的勾选框列表如何实现呢？(勾选框是否可勾选和html渲染插件有关)</p>
+<p>操作方法是在无序列表符号*后面跟上“空格+[空格填充]+空格”，若[]内用字母x填充则变为选中状态，用空格填充则为非选中状态。</p>
 <h2 id="代码块">代码块</h2>
 <p>Typora里可以直接右键调用插件插入代码块，一般通用的方法是在需要设置为代码块的段落前一行和后一行分别添加```</p>
 <p>第一行```后面跟代码块格式（c++，java等）</p>
 <p>如下所示</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="code">```c++(在```</span>后面跟代码块格式)</span><br><span class="line">代码段落</span><br><span class="line">代码段落</span><br><span class="line">代码段落</span><br><span class="line"><span class="code">```</span></span><br></pre></td></tr></table></figure>
+
 <p>如果要在行内插入小代码块<code>小代码块</code>，则在要设为小代码块的内容前后分别添加`</p>
 <p>如下所示</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">这是一行<span class="code">`markdown`</span>代码块。</span><br></pre></td></tr></table></figure>
+
 <p>小代码块的使用场景一般有两种：</p>
 <ol type="1">
 <li>需要在行内插入代码辅助解释。</li>
@@ -131,26 +155,31 @@ checked="" />第一项任务已完成</label></li>
 <h2 id="引用">引用</h2>
 <p>在每一行要引用的内容开头加符号&gt;和空格即可，也可以直接右键使用插件</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一段引用的文本，来自某公众号文章</span></span><br><span class="line"><span class="quote">&gt; - 引用里面也可以嵌套其他格式如列表，代码块和二级引用</span></span><br><span class="line"><span class="quote">&gt; - 引用部分内的其他语法都可嵌套，其他格式内也可以嵌套引用，将符号顺序改一下即可。</span></span><br><span class="line"><span class="bullet">-</span> &gt; 比如这里就是在一个列表里插入引用</span><br></pre></td></tr></table></figure>
+
 <h2 id="超链接">超链接</h2>
 <p>普通超链接使用<code>[]()</code>符号，填充规则如下：</p>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">[要跳转的目标名称，如我的个人网站](网站域名)</span><br><span class="line">示例：</span><br><span class="line">[我的博客](ccloire.com)</span><br><span class="line">之后就会渲染为一行可点击跳转的加粗“我的博客”文本，点击即可跳转到ccloire.com网站</span><br></pre></td></tr></table></figure>
+
 <p>域名分离超链接：</p>
 <p>若域名太长且多处需要调用网页超链接，则为了编写时更加简洁高效，也可以采用重命名的方式</p>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">[我的博客][a]里面有我的个人技术文章，欢迎大家光临，也可以去[代码随想录][b]里查找算法练习。</span><br><span class="line">别名还可以反复使用，如[柯北的技术博客][a]渲染后也是跳转到https://ccloire.com的超链接</span><br><span class="line"></span><br><span class="line">[a]: https://ccloire.com</span><br><span class="line">[b]: https://algorithm.com</span><br></pre></td></tr></table></figure>
+
 <h2 id="脚注">脚注</h2>
 <p>感兴趣的读者可以前往我的个人网站<a href="#fn1" class="footnote-ref"
 id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>像这样给一段文本加注释角标，鼠标点击时跳转注释（若有网页链接也可以直接点击跳转）的方式如下：</p>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">个人网站[^1],第二个脚注[^2]</span><br><span class="line"></span><br><span class="line">[^1]:网站有两个https://ccloire.com或https://ccloire2.com</span><br><span class="line">[^2]:随便什么内容</span><br></pre></td></tr></table></figure>
+
 <h2 id="插入图像">插入图像</h2>
-<p><img src="https://caimotu.top/Picgo/微信图片_20250226100519.jpg" style="zoom: 33%;" /></p>
+<img src="https://caimotu.top/Picgo/微信图片_20250226100519.jpg" style="zoom: 33%;" />
+
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>网站有两个<a href="https://ccloire.com"
-class="uri">https://ccloire.com</a>或<a href="https://ccloire2.com"
-class="uri">https://ccloire2.com</a><a href="#fnref1"
+<li id="fn1"><p>网站有两个<a
+href="https://ccloire.com">https://ccloire.com</a>或<a
+href="https://ccloire2.com">https://ccloire2.com</a><a href="#fnref1"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>

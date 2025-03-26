@@ -141,7 +141,7 @@ favicon: /favicon.ico
 
 # Avatar (头像)
 avatar:
-  img: https://bu.dusays.com/2023/04/27/64496e511b09c.jpg
+  img: https://caimotu.top/Picgo/微信图片_20250226100519.jpg
   effect: false
 
 # Disable all banner image
@@ -226,16 +226,16 @@ anchor: false
 # toc (目录)
 toc:
   post: true
-  page: false
+  page: true
   number: true
-  expand: false
+  expand: true
   style_simple: false # for post
 
 post_copyright:
   enable: true
   decode: false
   author_href:
-  location: 长沙
+  location: 珠海
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
   avatarSinks: false # hover时头像下沉
@@ -257,10 +257,10 @@ reward:
 # Post edit
 # Easily browse and edit blog source code online.
 post_edit: # 目前仅可选择一个平台在线编辑
-  enable: false
+  enable: true
   # github: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name/
   # For example: https://github.com/jerryc127/butterfly.js.org/edit/main/source/
-  github: false
+  github: https://github.com/ccloire/hexo-blogs/tree/main/source/_posts
 
   # yuque: https://www.yuque.com/user-name/repo-name/
   # 示例: https://www.yuque.com/yuque/yuque/
@@ -274,7 +274,7 @@ related_post:
   date_type: created # or created or updated 文章日期显示创建日或者更新日
 
 # figcaption (图片描述文字)
-photofigcaption: false
+photofigcaption: true
 
 # post_pagination (分页)
 # value: 1 || 2 || 3 || 4 || false

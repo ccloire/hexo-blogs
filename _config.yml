@@ -96,14 +96,14 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: anzhiyu
 plugins:
   - pandoc
 pandoc:
   pandoc_path: "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\pandoc.exe" # 根据你的 Pandoc 安装路径修改
   args: #参数列表
     - "-f"
-    - "markdown"
+    - "gfm"
     - "-t"
     - "html"
     - "--mathjax"
@@ -111,6 +111,9 @@ pandoc:
     - "tango"
     - "--css"
     - "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\css\\tango.css" # 添加tango样式
+  extensions: #渲染器拓展插件
+    - markdown-auto_identifiers
+    - markdown-implicit_figures
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
