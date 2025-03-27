@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: anzhiyu
+theme: butterfly
 plugins:
   - pandoc
 pandoc:
@@ -107,10 +107,6 @@ pandoc:
     - "-t"
     - "html"
     - "--mathjax"
-    - "--highlight-style"
-    - "tango"
-    - "--css"
-    - "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\css\\tango.css" # 添加tango样式
   extensions: #渲染器拓展插件
     - markdown-auto_identifiers
     - markdown-implicit_figures
