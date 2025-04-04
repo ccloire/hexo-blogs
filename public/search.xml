@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Go语言初阶</title>
-    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
-    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
-<p>Go语言特点：简单，便于管理编写</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2025/01/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -38,6 +30,25 @@ href="https://hexo.io/docs/generating.html">Generating</a></p>
 
 <p>More info: <a
 href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>如何低代码搭建个人博客？</title>
+    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
+<h2 id="方案介绍">方案介绍</h2>
+<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+]]></content>
+      <tags>
+        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go语言初阶</title>
+    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
+<p>Go语言特点：简单，便于管理编写</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -265,9 +276,89 @@ Typora插件支持右键直接修改图片缩放比例，将markdown语法转换
 <li><p>单独一行Latex数学公式用左右各一个<code>$</code>包裹，比如<code>$y = x + 10$</code>，渲染后就是
 <span class="math inline">\(y = x + 10\)</span></p></li>
 <li><p>若要编写一段多行公式，可以在公式段前后添加<code>$$</code>，内部使用<code>\\</code>进行换行，用<code>\tag&#123;1&#125;</code>进行编号，比如：</p>
-<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">  <span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">  y = x + 10</span><br><span class="line">  <span class="keyword">\\</span></span><br><span class="line">  y = x - 10<span class="keyword">\tag</span>&#123;1&#125;</span><br><span class="line">  <span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  渲染后为：</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">y = x + 10 </span><br><span class="line">  <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">  y = x - 10<span class="keyword">\tag</span>&#123;1&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"></span><br><span class="line">- 分式语法：`<span class="keyword">\frac</span>&#123;分子&#125;&#123;分母&#125;`，示例：<span class="built_in">$</span><span class="keyword">\frac</span>&#123;1&#125;&#123;10&#125;<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line">- 上下标：除了上图中`~下标~`和`<span class="built_in">^</span>上标<span class="built_in">^</span>`的写法外，还可以直接在内联公式段里使用单独的下划线<span class="built_in">_</span>表示下标，单独的<span class="built_in">^</span>表示上标。</span><br><span class="line"></span><br><span class="line">  而且Latex语法支持同时使用上下标，如`x<span class="built_in">_</span>2<span class="built_in">^</span>&#123;2x&#125;`，渲染后效果:  <span class="built_in">$</span>x<span class="built_in">_</span>2<span class="built_in">^</span>&#123;2x&#125;<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line">- 开根号：`<span class="keyword">\sqrt</span>[4]&#123;3&#125;`表示给3开四次根：<span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;3&#125;<span class="built_in">$</span> </span><br><span class="line"></span><br><span class="line">  如果要给一串代数式开根，又不想代数式中的某些``&#123;&#125;``符号被解析成语法格式，可以使用转义符`<span class="keyword">\`</span>，如`<span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;<span class="keyword">\&#123;</span>(4+x) - 3<span class="keyword">\&#125;</span>&#125;<span class="built_in">$</span>`，渲染后为：<span class="built_in">$</span><span class="keyword">\sqrt</span>[4]&#123;<span class="keyword">\&#123;</span>4+x)-3<span class="keyword">\&#125;</span>&#125;<span class="built_in">$</span></span><br><span class="line"></span><br><span class="line">- 常见数学符号：</span><br><span class="line"></span><br><span class="line">  1. 不等于：`<span class="keyword">\not</span>=`    <span class="built_in">$</span><span class="keyword">\not</span>=<span class="built_in">$</span></span><br><span class="line">  2. 与等于：`<span class="keyword">\approx</span>`    <span class="built_in">$</span><span class="keyword">\approx</span><span class="built_in">$</span></span><br><span class="line">  3. 小于等于：`<span class="keyword">\leq</span>`    <span class="built_in">$</span><span class="keyword">\leq</span><span class="built_in">$</span></span><br><span class="line">  4. 大于等于：`<span class="keyword">\geq</span>`    <span class="built_in">$</span><span class="keyword">\geq</span><span class="built_in">$</span></span><br><span class="line">  5. 乘号：`<span class="keyword">\times</span>`    <span class="built_in">$</span><span class="keyword">\times</span><span class="built_in">$</span></span><br><span class="line">  6. 除号：`<span class="keyword">\div</span>`或者`<span class="keyword">\textdiv</span>`    <span class="built_in">$</span><span class="keyword">\div</span><span class="built_in">$</span></span><br><span class="line">  7. 正负号：`<span class="keyword">\pm</span>`     <span class="built_in">$</span><span class="keyword">\pm</span><span class="built_in">$</span></span><br><span class="line">  8. 求和符号(配合上下标)：`<span class="keyword">\sum</span><span class="built_in">^</span>2<span class="built_in">_</span>2`    <span class="built_in">$</span><span class="keyword">\sum</span><span class="built_in">^</span>2<span class="built_in">_</span>2<span class="built_in">$</span></span><br><span class="line">  9. 累乘：`<span class="keyword">\prod</span>`    <span class="built_in">$</span><span class="keyword">\prod</span><span class="built_in">$</span></span><br><span class="line">  10. 度数： `90<span class="built_in">^</span><span class="keyword">\circ</span>`    <span class="built_in">$</span>90<span class="built_in">^</span><span class="keyword">\circ</span><span class="built_in">$</span></span><br><span class="line">  11. 三角函数：`<span class="keyword">\sin</span><span class="keyword">\pi</span>`    <span class="built_in">$</span><span class="keyword">\sin</span><span class="keyword">\pi</span><span class="built_in">$</span>   其余同理</span><br><span class="line">  12. 无穷：`<span class="keyword">\infty</span>`    <span class="built_in">$</span><span class="keyword">\infty</span><span class="built_in">$</span></span><br><span class="line">  13. 定积分：`<span class="keyword">\int</span><span class="built_in">^</span>b<span class="built_in">_</span>ax<span class="built_in">^</span>2dx`    <span class="built_in">$</span><span class="keyword">\int</span><span class="built_in">^</span>b<span class="built_in">_</span>ax<span class="built_in">^</span>2dx<span class="built_in">$</span>   (PS： n重积分就用n个i，如三重积分`<span class="keyword">\iiint</span>`<span class="built_in">$</span><span class="keyword">\iiint</span><span class="built_in">$</span>)</span><br><span class="line">  14. 求导符号：`y<span class="keyword">\prime</span>`   <span class="built_in">$</span>y<span class="keyword">\prime</span><span class="built_in">$</span></span><br><span class="line">  15. 元素属于/不属于集合：`x<span class="keyword">\in</span> A`以及`x<span class="keyword">\notin</span> A`    <span class="built_in">$</span>x<span class="keyword">\in</span> A<span class="built_in">$</span>  以及  <span class="built_in">$</span>x<span class="keyword">\notin</span> A<span class="built_in">$</span></span><br><span class="line">  16. 极限：`<span class="keyword">\lim</span><span class="built_in">_</span>&#123;n<span class="keyword">\rightarrow</span>+<span class="keyword">\infty</span>&#125;<span class="keyword">\frac</span>&#123;1&#125;&#123;n&#125;`    <span class="built_in">$</span><span class="keyword">\lim</span><span class="built_in">_</span>&#123;n<span class="keyword">\rightarrow</span>+<span class="keyword">\infty</span>&#125;<span class="keyword">\frac</span>&#123;1&#125;&#123;n&#125;<span class="built_in">$</span>​</span><br><span class="line">  17. 省略号：`<span class="keyword">\frac</span>&#123;1&#125;&#123;2&#125;+<span class="keyword">\frac</span>&#123;1&#125;&#123;3&#125;+<span class="keyword">\cdots</span>+<span class="keyword">\frac</span>&#123;1&#125;&#123;n&#125;`     <span class="built_in">$</span><span class="keyword">\frac</span>&#123;1&#125;&#123;2&#125;+<span class="keyword">\frac</span>&#123;1&#125;&#123;3&#125;+<span class="keyword">\cdots</span>+<span class="keyword">\frac</span>&#123;1&#125;&#123;n&#125;<span class="built_in">$</span>​</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">更多markdown中编写Latex语法的内容可以查看[莱斯大学Latex Math在线手册](https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf)</span><br><span class="line"></span><br><span class="line">还可以翻阅一位up的帖子，介绍的也很全面[来自李东的知乎帖子](https://zhuanlan.zhihu.com/p/59412540)。</span><br><span class="line"></span><br><span class="line"><span class="params">##</span> 使用内置的mermaid插件画图</span><br><span class="line"></span><br><span class="line">markdown格式支持对使用mermaid绘制的图表进行渲染，只要在markdown编辑器中安装mermaid拓展插件即可。Typora本身就集成了mermaid环境，因此可以直接在代码块中声明语法为mermaid并进行绘图。</span><br><span class="line"></span><br><span class="line">&gt; PS： mermaid最新版目前已经更新到11.6以后了，而各大markdown编辑器如Typora不一定有对最新版mermaid插件的支持。且某些Typora破解版也只能激活旧版本，对mermaid插件支持也比较低级。故实际使用时有些mermaid语法可能无法正常渲染，读者有需要可以去[mermaid官网](https://mermaid.js.org/)使用最新版本，官网内也附带非常详细的[mermaid部署，语法以及配置教程](https://mermaid.js.org/ecosystem/tutorials.html)。</span><br><span class="line">&gt;</span><br><span class="line">&gt; </span><br><span class="line">&gt;</span><br><span class="line">&gt; 对于写博客的同志，有可能你的博客配置进行了最新版本mermaid的部署（比如我使用的是hexo-theme-butterfly，主题适配了11.4.1版本的mermaid），这种情况你可以在Typora里用源代码模式编写mermaid，以实际博客网站渲染出来的效果为准。当然如果你更习惯Typora这种即使渲染的效果，且想以Typora里的编辑为准，那就只能接受一些版本局限。</span><br><span class="line"></span><br><span class="line">下面介绍一些常用且通用的mermaid基础语法。</span><br><span class="line"></span><br><span class="line"><span class="params">###</span> 流程图</span><br><span class="line"></span><br><span class="line">Typora中集成了两种绘制流程图的插件，一个就是mermaid，另一个是较为简单的flow（只能绘制流程图）</span><br><span class="line"></span><br><span class="line">下面介绍这两种插件绘制流程图的方法（在代码块中声明语法为mermaid或flow）：</span><br><span class="line"></span><br><span class="line"><span class="params">####</span> flow插件绘制</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;flowchart-0&quot; class=&quot;flow-chart&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">```markdown</span><br><span class="line">st=&gt;start: 开始     //st表示结点命名，“=&gt;start: 开始”表示指结点类型和填充内容</span><br><span class="line">on=&gt;operation: 执行内容</span><br><span class="line">cn=&gt;condition: 执行是否成功</span><br><span class="line">en=&gt;end: 结束</span><br><span class="line">st-&gt;on        //&quot;-&gt;&quot;表示结点之间的有向线段</span><br><span class="line">on-&gt;cn(yes)-&gt;en      //condition类结点可以指定条件为&quot;yes&quot; or &quot;no&quot;</span><br><span class="line">cn(no)-&gt;on</span><br></pre></td></tr></table></figure>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">y = x + 10</span><br><span class="line"><span class="keyword">\\</span></span><br><span class="line">y = x - 10<span class="keyword">\tag</span>&#123;1&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>渲染后为： <span class="math display">\[
+y = x + 10
+\\\\
+y = x - 10\tag{1}
+\]</span></p>
+<ul>
+<li><p>分式语法：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，示例：<span
+class="math inline">\(\frac{1}{10}\)</span></p></li>
+<li><p>上下标：除了上图中<code>~下标~</code>和<code>^上标^</code>的写法外，还可以直接在内联公式段里使用单独的下划线_表示下标，单独的^表示上标。</p>
+<p>而且Latex语法支持同时使用上下标，如<code>x_2^&#123;2x&#125;</code>，渲染后效果:
+<span class="math inline">\(x_2^{2x}\)</span></p></li>
+<li><p>开根号：<code>\sqrt[4]&#123;3&#125;</code>表示给3开四次根：<span
+class="math inline">\(\sqrt[4]{3}\)</span></p>
+<p>如果要给一串代数式开根，又不想代数式中的某些<code>&#123;&#125;</code>符号被解析成语法格式，可以使用转义符<code>\</code>，如<code>$\sqrt[4]&#123;\&#123;(4+x) - 3\&#125;&#125;$</code>，渲染后为：<span
+class="math inline">\(\sqrt[4]{\{4+x)-3\}}\)</span></p></li>
+<li><p>常见数学符号：</p>
+<ol type="1">
+<li>不等于：<code>\not=</code> <span
+class="math inline">\(\not=\)</span></li>
+<li>与等于：<code>\approx</code> <span
+class="math inline">\(\approx\)</span></li>
+<li>小于等于：<code>\leq</code> <span
+class="math inline">\(\leq\)</span></li>
+<li>大于等于：<code>\geq</code> <span
+class="math inline">\(\geq\)</span></li>
+<li>乘号：<code>\times</code> <span
+class="math inline">\(\times\)</span></li>
+<li>除号：<code>\div</code>或者<code>\textdiv</code> <span
+class="math inline">\(\div\)</span></li>
+<li>正负号：<code>\pm</code> <span
+class="math inline">\(\pm\)</span></li>
+<li>求和符号(配合上下标)：<code>\sum^2_2</code> <span
+class="math inline">\(\sum^2_2\)</span></li>
+<li>累乘：<code>\prod</code> <span
+class="math inline">\(\prod\)</span></li>
+<li>度数： <code>90^\circ</code> <span
+class="math inline">\(90^\circ\)</span></li>
+<li>三角函数：<code>\sin\pi</code> <span
+class="math inline">\(\sin\pi\)</span> 其余同理</li>
+<li>无穷：<code>\infty</code> <span
+class="math inline">\(\infty\)</span></li>
+<li>定积分：<code>\int^b_ax^2dx</code> <span
+class="math inline">\(\int^b_ax^2dx\)</span> (PS：
+n重积分就用n个i，如三重积分<code>\iiint</code><span
+class="math inline">\(\iiint\)</span>)</li>
+<li>求导符号：<code>y\prime</code> <span
+class="math inline">\(y\prime\)</span></li>
+<li>元素属于/不属于集合：<code>x\in A</code>以及<code>x\notin A</code>
+<span class="math inline">\(x\in A\)</span> 以及 <span
+class="math inline">\(x\notin A\)</span></li>
+<li>极限：<code>\lim_&#123;n\rightarrow+\infty&#125;\frac&#123;1&#125;&#123;n&#125;</code> <span
+class="math inline">\(\lim_{n\rightarrow+\infty}\frac{1}{n}\)</span>​</li>
+<li>省略号：<code>\frac&#123;1&#125;&#123;2&#125;+\frac&#123;1&#125;&#123;3&#125;+\cdots+\frac&#123;1&#125;&#123;n&#125;</code>
+<span
+class="math inline">\(\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}\)</span>​</li>
+</ol></li>
+</ul>
+<p>更多markdown中编写Latex语法的内容可以查看<a
+href="https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf">莱斯大学Latex
+Math在线手册</a></p>
+<p>还可以翻阅一位up的帖子，介绍的也很全面<a
+href="https://zhuanlan.zhihu.com/p/59412540">来自李东的知乎帖子</a>。</p>
+<h2 id="使用内置的mermaid插件画图">使用内置的mermaid插件画图</h2>
+<p>markdown格式支持对使用mermaid绘制的图表进行渲染，只要在markdown编辑器中安装mermaid拓展插件即可。Typora本身就集成了mermaid环境，因此可以直接在代码块中声明语法为mermaid并进行绘图。</p>
+<blockquote>
+<p>PS：
+mermaid最新版目前已经更新到11.6以后了，而各大markdown编辑器如Typora不一定有对最新版mermaid插件的支持。且某些Typora破解版也只能激活旧版本，对mermaid插件支持也比较低级。故实际使用时有些mermaid语法可能无法正常渲染，读者有需要可以去<a
+href="https://mermaid.js.org/">mermaid官网</a>使用最新版本，官网内也附带非常详细的<a
+href="https://mermaid.js.org/ecosystem/tutorials.html">mermaid部署，语法以及配置教程</a>。</p>
+<p>对于写博客的同志，有可能你的博客配置进行了最新版本mermaid的部署（比如我使用的是hexo-theme-butterfly，主题适配了11.4.1版本的mermaid），这种情况你可以在Typora里用源代码模式编写mermaid，以实际博客网站渲染出来的效果为准。当然如果你更习惯Typora这种即使渲染的效果，且想以Typora里的编辑为准，那就只能接受一些版本局限。</p>
+</blockquote>
+<p>下面介绍一些常用且通用的mermaid基础语法。</p>
+<h3 id="流程图">流程图</h3>
+<p>Typora中集成了两种绘制流程图的插件，一个就是mermaid，另一个是较为简单的flow（只能绘制流程图）</p>
+<p>下面介绍这两种插件绘制流程图的方法（在代码块中声明语法为mermaid或flow）：</p>
+<h4 id="flow插件绘制">flow插件绘制</h4>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">st=&gt;start: 开始     //st表示结点命名，“=&gt;start: 开始”表示指结点类型和填充内容</span><br><span class="line">on=&gt;operation: 执行内容</span><br><span class="line">cn=&gt;condition: 执行是否成功</span><br><span class="line">en=&gt;end: 结束</span><br><span class="line">st-&gt;on        //&quot;-&gt;&quot;表示结点之间的有向线段</span><br><span class="line">on-&gt;cn(yes)-&gt;en      //condition类结点可以指定条件为&quot;yes&quot; or &quot;no&quot;</span><br><span class="line">cn(no)-&gt;on</span><br></pre></td></tr></table></figure>
+
 <h4 id="mermaid插件绘制">mermaid插件绘制</h4>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">  A--&gt;B</span><br><span class="line">  B--&gt;C</span><br><span class="line">  C--&gt;A</span><br></pre></td></tr></table></figure>
 
@@ -488,17 +579,6 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 ]]></content>
       <tags>
         <tag>基础工具使用指南</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何低代码搭建个人博客？</title>
-    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
-<h2 id="方案介绍">方案介绍</h2>
-<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
-]]></content>
-      <tags>
-        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
       </tags>
   </entry>
 </search>
