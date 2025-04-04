@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Go语言初阶</title>
+    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
+<p>Go语言特点：简单，便于管理编写</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2025/01/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -33,17 +41,6 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
-    <title>如何低代码搭建个人博客？</title>
-    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
-<h2 id="方案介绍">方案介绍</h2>
-<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
-]]></content>
-      <tags>
-        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>markdown语法总结</title>
     <url>/2025/02/27/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1
@@ -56,6 +53,8 @@ id="markdown语法总结"><span style="font-size:0.8em;">Markdown语法总结</s
 <ol type="1">
 <li>普通换行需要在换行处添加两个空格，如：</li>
 </ol>
+<p>ojsdjodjfifjfjofofjoa<br />
+啥hi和偶发分具偶家仸</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">这里是第一行（随后跟两个空格 + “enter”，再打出下一行内容即可）  </span><br><span class="line">这里是第二行</span><br></pre></td></tr></table></figure>
 
 <p>Typora中可以直接一个enter实现换行。</p>
@@ -153,9 +152,25 @@ checked="" />第一项任务已完成</label></li>
 </ol>
 <p>PS：如果需要直接插入网页URL，为不被解析为其他符号且能点击跳转，同时避免URL后的文本也被解析为链接的一部分，可以使用<code>&lt;&gt;</code>符号包裹URL，第一个&lt;表示链接开始，第二个&gt;表示链接结束。</p>
 <h2 id="引用">引用</h2>
-<p>在每一行要引用的内容开头加符号&gt;和空格即可，也可以直接右键使用插件</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一段引用的文本，来自某公众号文章</span></span><br><span class="line"><span class="quote">&gt; - 引用里面也可以嵌套其他格式如列表，代码块和二级引用</span></span><br><span class="line"><span class="quote">&gt; - 引用部分内的其他语法都可嵌套，其他格式内也可以嵌套引用，将符号顺序改一下即可。</span></span><br><span class="line"><span class="bullet">-</span> &gt; 比如这里就是在一个列表里插入引用</span><br></pre></td></tr></table></figure>
+<p>在每一行要引用的内容开头加符号&gt;和空格即可</p>
+<p>若要嵌套，使用多个<code>&gt;</code>符号即可</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一段引用的文本，来自某公众号文章</span></span><br><span class="line"><span class="quote">&gt; - 引用里面也可以嵌套其他格式如列表，代码块和二级引用</span></span><br><span class="line"><span class="quote">&gt; - 引用部分内的其他语法都可嵌套，其他格式内也可以嵌套引用，将符号顺序改一下即可。</span></span><br><span class="line"><span class="bullet">-</span> &gt; 比如这里就是在一个列表里插入引用</span><br><span class="line">  &gt;&gt;在引用里嵌套引用</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>这是一段引用的文本，来自某公众号文章</p>
+<ul>
+<li>引用里面也可以嵌套其他格式如列表，代码块和二级引用</li>
+<li>引用部分内的其他语法都可嵌套，其他格式内也可以嵌套引用，将符号顺序改一下即可。</li>
+</ul>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>比如这里就是在一个列表里插入引用</p>
+<blockquote>
+<p>在引用里嵌套引用</p>
+</blockquote>
+</blockquote></li>
+</ul>
 <h2 id="超链接">超链接</h2>
 <p>普通超链接使用<code>[]()</code>符号，填充规则如下：</p>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">[要跳转的目标名称，如我的个人网站](网站域名)</span><br><span class="line">示例：</span><br><span class="line">[我的博客](ccloire.com)</span><br><span class="line">之后就会渲染为一行可点击跳转的加粗“我的博客”文本，点击即可跳转到ccloire.com网站</span><br></pre></td></tr></table></figure>
@@ -171,7 +186,376 @@ id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">个人网站[^1],第二个脚注[^2]</span><br><span class="line"></span><br><span class="line">[^1]:网站有两个https://ccloire.com或https://ccloire2.com</span><br><span class="line">[^2]:随便什么内容</span><br></pre></td></tr></table></figure>
 
 <h2 id="插入图像">插入图像</h2>
-<img src="https://caimotu.top/Picgo/微信图片_20250226100519.jpg" style="zoom: 33%;" />
+<img src="https://caimotu.top/Picgo/微信图片_20250226100519.jpg" alt="样例图" style="zoom:50%;" />
+
+<ul>
+<li><p>常规语法：</p>
+<p>像这样插入图片的常规语法是<code>![图片名称](图片路径)</code>，图片路径可以是本地路径---但只能在本机访问该图片；也可以是URL链接指向网址中的图片---能联网就能访问。</p></li>
+<li><p>快捷方法：</p>
+<p>在Typora中，安装插件即可支持右键选择插入图像功能，自动补充图像语法，用户只需点击文件夹图标在本地选择要上传的图片或者手动输入图片链接即可。插件网盘链接：<a
+href="https://pan.baidu.com/s/1h19j_es-iW4GVrkmUWIL7g?pwd=3251">https://pan.baidu.com/s/1h19j_es-iW4GVrkmUWIL7g?pwd=3251</a>，有需要的读者自取，提取码3251。
+也可以扫码领取：<img
+src="https://caimotu.top/Picgo/image-20250331132048320.png"
+alt="image-20250331132048320" /></p>
+<p>插件安装方法：将插件文件夹下的plugin文件夹复制粘贴到这个目录下：D:\Program
+Files\Typora\resources（D:\Program
+Files是我的Typora安装位置，具体以读者的实际安装位置为准），然后运行<code>plugin\bin\install_windows_amd_x64.exe</code>，这个脚本会修改Typora\resources目录下的windows.html文件，使得插件在Typora中正常运行。</p>
+<p>插件使用说明见官网文档：<a
+href="https://github.com/obgnail/typora_plugin?tab=readme-ov-file#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">https://github.com/obgnail/typora_plugin?tab=readme-ov-file#%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E</a></p></li>
+<li><p>本地图片转化为网页链接的方法---搭建个人图床：详见本站的另一篇文章</p></li>
+<li><p>图片的缩放---使用HTML语法：</p>
+<p>markdown编辑器一般都支持部分HTML格式，因此我们可以用如下语法来插入图片并调整其大小</p>
+<p><code>&lt;img style="width: 500px;height: 300px" src="https://caimotu.top/Picgo/image-20250331132048320.png" alt ="示例图片" /&gt;</code>。</p>
+<p><code>style</code>变量指定了图片的大小风格，<code>src</code>变量指定了图片的URL链接，<code>alt</code>变量指定了渲染后图片下方的注释名称（但不是所有网页和编辑器都会显示这个alt名称）。</p>
+<p>PS:
+Typora插件支持右键直接修改图片缩放比例，将markdown语法转换为HTML语法。</p></li>
+</ul>
+<h2 id="插入视频">插入视频</h2>
+<p>插入外部网站的视频需要使用HTML语法，常用的方式是<code>&lt;iframe&gt;</code>标签，示例如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span></span></span><br><span class="line"><span class="tag">        <span class="attr">src</span>=<span class="string">&quot;https://www.bilibili.com/video/BV1vtoXY9E7v?vd_source=4b639497636747eb9e7ebb76d4d0b7cf&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">style</span>=<span class="string">&quot;width: 100%; height: auto; aspect-ratio: 16/9; border: 20px solid black&quot;</span>   #<span class="attr">视频格式</span></span></span><br><span class="line"><span class="tag">        (<span class="attr">其中border表示边框样式</span>，<span class="attr">aspect-ratio表示视频比例</span>)</span></span><br><span class="line"><span class="tag">        <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span>   #<span class="attr">是否允许滚动</span></span></span><br><span class="line"><span class="tag">        <span class="attr">frameborder</span>=<span class="string">&quot;yes&quot;</span>   #<span class="attr">是否设置边框</span></span></span><br><span class="line"><span class="tag">        <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>   #<span class="attr">允许全屏播放</span></span></span><br><span class="line"><span class="tag">        <span class="attr">title</span>=<span class="string">&quot;bilibili视频&quot;</span>   #<span class="attr">视频标题</span></span></span><br><span class="line"><span class="tag">        &gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以下示例视频展示效果</p>
+<iframe 
+        src="//player.bilibili.com/player.html?isOutside=true&aid=114087434454472&bvid=BV11RXRYuEdL&cid=28640083971&p=1"
+        style="width: 100%; height: auto; aspect-ratio: 16/9; border: 20px solid black" 
+        scrolling="no" 
+        frameborder="no" 
+        framespacing="0"
+        allowfullscreen="true"
+        title="bilibili视频"
+        ></iframe>
+
+<h2 id="插入表格">插入表格</h2>
+<p>markdown中添加表格的方式是很形象的，使用<code>|</code>和<code>-</code>两个符号构成表格的形状即可。</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">|   | 姓名 | 年龄 | 性别 |      </span><br><span class="line">| - | --- | ---- | --- |      </span><br><span class="line">| 1 | 小明 |  18  | 男  |     </span><br><span class="line">| 2 | 小红 |  18  | 女  |                                   </span><br></pre></td></tr></table></figure>
+
+<p>“|”
+后面接一个空格再跟表头内容，“-”表示表头和项之间的分割线，一个“-”即可正常渲染，使用多个“-”是为了编辑上与表格形状尽量贴近，便于查看。</p>
+<p>如果要控制每一列内容的对齐格式，可以在分割线的“-”两边添加“:”</p>
+<p>左边添加表示左对齐，右边添加表示右对齐，两边同时添加表示居中。</p>
+<p>PS： Typora中的插件也可以实现一键插入表格和一键编辑。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">姓名</th>
+<th style="text-align: center;">年龄</th>
+<th style="text-align: center;">性别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">小明</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">男</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">小红</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">女</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他拓展语法">其他拓展语法：</h2>
+<img src="https://caimotu.top/Picgo/image-20250402173231226.png" alt="image-20250402173231226" style="zoom:50%;" />
+
+<p>Typora支持上图展示的几种拓展语法。</p>
+<p>对于内联公式，此处展示一些常用的Latex语法：</p>
+<ul>
+<li><p>单独一行Latex数学公式用左右各一个<code>$</code>包裹，比如<code>$y = x + 10$</code>，渲染后就是
+<span class="math inline">\(y = x + 10\)</span></p></li>
+<li><p>若要编写一段多行公式，可以在公式段前后添加<code>$$</code>，内部使用<code>\\</code>进行换行，用<code>\tag&#123;1&#125;</code>进行编号，比如：</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line">y = x + 10</span><br><span class="line"><span class="keyword">\\</span></span><br><span class="line">y = x - 10<span class="keyword">\tag</span>&#123;1&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br></pre></td></tr></table></figure>
+
+<p>渲染后为： <span class="math display">\[
+y = x + 10
+\\\\
+y = x - 10\tag{1}
+\]</span></p></li>
+<li><p>分式语法：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，示例：<span
+class="math inline">\(\frac{1}{10}\)</span></p></li>
+<li><p>上下标：除了上图中<code>~下标~</code>和<code>^上标^</code>的写法外，还可以直接在内联公式段里使用单独的下划线_表示下标，单独的^表示上标。</p>
+<p>而且Latex语法支持同时使用上下标，如<code>x_2^&#123;2x&#125;</code>，渲染后效果:
+<span class="math inline">\(x_2^{2x}\)</span></p></li>
+<li><p>开根号：<code>\sqrt[4]&#123;3&#125;</code>表示给3开四次根：<span
+class="math inline">\(\sqrt[4]{3}\)</span></p>
+<p>如果要给一串代数式开根，又不想代数式中的某些<code>&#123;&#125;</code>符号被解析成语法格式，可以使用转义符<code>\</code>，如<code>$\sqrt[4]&#123;\&#123;(4+x) - 3\&#125;&#125;$</code>，渲染后为：<span
+class="math inline">\(\sqrt[4]{\{4+x)-3\}}\)</span></p></li>
+<li><p>常见数学符号：</p>
+<ol type="1">
+<li>不等于：<code>\not=</code> <span
+class="math inline">\(\not=\)</span></li>
+<li>与等于：<code>\approx</code> <span
+class="math inline">\(\approx\)</span></li>
+<li>小于等于：<code>\leq</code> <span
+class="math inline">\(\leq\)</span></li>
+<li>大于等于：<code>\geq</code> <span
+class="math inline">\(\geq\)</span></li>
+<li>乘号：<code>\times</code> <span
+class="math inline">\(\times\)</span></li>
+<li>除号：<code>\div</code>或者<code>\textdiv</code> <span
+class="math inline">\(\div\)</span></li>
+<li>正负号：<code>\pm</code> <span
+class="math inline">\(\pm\)</span></li>
+<li>求和符号(配合上下标)：<code>\sum^2_2</code> <span
+class="math inline">\(\sum^2_2\)</span></li>
+<li>累乘：<code>\prod</code> <span
+class="math inline">\(\prod\)</span></li>
+<li>度数： <code>90^\circ</code> <span
+class="math inline">\(90^\circ\)</span></li>
+<li>三角函数：<code>\sin\pi</code> <span
+class="math inline">\(\sin\pi\)</span> 其余同理</li>
+<li>无穷：<code>\infty</code> <span
+class="math inline">\(\infty\)</span></li>
+<li>定积分：<code>\int^b_ax^2dx</code> <span
+class="math inline">\(\int^b_ax^2dx\)</span> (PS：
+n重积分就用n个i，如三重积分<code>\iiint</code><span
+class="math inline">\(\iiint\)</span>)</li>
+<li>求导符号：<code>y\prime</code> <span
+class="math inline">\(y\prime\)</span></li>
+<li>元素属于/不属于集合：<code>x\in A</code>以及<code>x\notin A</code>
+<span class="math inline">\(x\in A\)</span> 以及 <span
+class="math inline">\(x\notin A\)</span></li>
+<li>极限：<code>\lim_&#123;n\rightarrow+\infty&#125;\frac&#123;1&#125;&#123;n&#125;</code> <span
+class="math inline">\(\lim_{n\rightarrow+\infty}\frac{1}{n}\)</span>​</li>
+<li>省略号：<code>\frac&#123;1&#125;&#123;2&#125;+\frac&#123;1&#125;&#123;3&#125;+\cdots+\frac&#123;1&#125;&#123;n&#125;</code>
+<span
+class="math inline">\(\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}\)</span>​</li>
+</ol></li>
+</ul>
+<p>更多markdown中编写Latex语法的内容可以查看<a
+href="https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf">莱斯大学Latex
+Math在线手册</a></p>
+<p>还可以翻阅一位up的帖子，介绍的也很全面<a
+href="https://zhuanlan.zhihu.com/p/59412540">来自李东的知乎帖子</a>。</p>
+<h2 id="使用内置的mermaid插件画图">使用内置的mermaid插件画图</h2>
+<p>markdown格式支持对使用mermaid绘制的图表进行渲染，只要在markdown编辑器中安装mermaid拓展插件即可。Typora本身就集成了mermaid环境，因此可以直接在代码块中声明语法为mermaid并进行绘图。</p>
+<blockquote>
+<p>PS：
+mermaid最新版目前已经更新到11.6以后了，而各大markdown编辑器如Typora不一定有对最新版mermaid插件的支持。且某些Typora破解版也只能激活旧版本，对mermaid插件支持也比较低级。故实际使用时有些mermaid语法可能无法正常渲染，读者有需要可以去<a
+href="https://mermaid.js.org/">mermaid官网</a>使用最新版本，官网内也附带非常详细的<a
+href="https://mermaid.js.org/ecosystem/tutorials.html">mermaid部署，语法以及配置教程</a>。</p>
+</blockquote>
+<blockquote>
+<p>对于写博客的同志，有可能你的博客配置进行了最新版本mermaid的部署（比如我使用的是hexo-theme-butterfly，主题适配了11.4.1版本的mermaid），这种情况你可以在Typora里用源代码模式编写mermaid，以实际博客网站渲染出来的效果为准。当然如果你更习惯Typora这种即使渲染的效果，且想以Typora里的编辑为准，那就只能接受一些版本局限。</p>
+</blockquote>
+<p>下面介绍一些常用且通用的mermaid基础语法。</p>
+<h3 id="流程图">流程图</h3>
+<p>Typora中集成了两种绘制流程图的插件，一个就是mermaid，另一个是较为简单的flow（只能绘制流程图）</p>
+<p>下面介绍这两种插件绘制流程图的方法（在代码块中声明语法为mermaid或flow）：</p>
+<h4 id="flow插件绘制">flow插件绘制</h4>
+<div id="flowchart-0" class="flow-chart"></div>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">st=&gt;start: 开始     //st表示结点命名，“=&gt;start: 开始”表示指结点类型和填充内容</span><br><span class="line">on=&gt;operation: 执行内容</span><br><span class="line">cn=&gt;condition: 执行是否成功</span><br><span class="line">en=&gt;end: 结束</span><br><span class="line">st-&gt;on        //&quot;-&gt;&quot;表示结点之间的有向线段</span><br><span class="line">on-&gt;cn(yes)-&gt;en      //condition类结点可以指定条件为&quot;yes&quot; or &quot;no&quot;</span><br><span class="line">cn(no)-&gt;on</span><br></pre></td></tr></table></figure>
+
+<h4 id="mermaid插件绘制">mermaid插件绘制</h4>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">  A--&gt;B</span><br><span class="line">  B--&gt;C</span><br><span class="line">  C--&gt;A</span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">graph TB;
+  A--&gt;B
+  B--&gt;C
+  C--&gt;A</code></pre>
+
+<p>语法简析：</p>
+<ul>
+<li><p>graph表示流程图的开始，TB表示箭头方向从上到下，A--&gt;B表示A结点指向B结点。</p>
+<p>结点没有声明类型和内容时默认为矩形结点，并以编号填充。</p></li>
+<li><p>其他的箭头方向还有：</p></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>用词</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TB</td>
+<td>从上到下</td>
+</tr>
+<tr>
+<td>BT</td>
+<td>从下到上</td>
+</tr>
+<tr>
+<td>RL</td>
+<td>从右到左</td>
+</tr>
+<tr>
+<td>LR</td>
+<td>从左到右</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>下面是mermaid流程图常见的符号及含义：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>用词</th>
+<th>说明</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node_id[结点内容]</td>
+<td>矩形结点</td>
+<td style="text-align: left;">表示过程，即流程中的某个环节</td>
+</tr>
+<tr>
+<td>node_id(结点内容)</td>
+<td>圆角矩形结点</td>
+<td style="text-align: left;">表示开始或结束</td>
+</tr>
+<tr>
+<td>node_id((结点内容))</td>
+<td>圆形结点</td>
+<td
+style="text-align: left;">表示链接，用于流程过长或有交叉的情形，将流程分成两部分</td>
+</tr>
+<tr>
+<td>node_id{结点内容}</td>
+<td>菱形结点</td>
+<td style="text-align: left;">表示条件判断或决策</td>
+</tr>
+<tr>
+<td>node_id&gt;结点内容]</td>
+<td>右向旗帜状结点</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="highlight mermaid">graph 
+A[矩形结点] 
+B(圆角矩形节点)
+C((圆形结点))
+D&#123;菱形结点&#125;
+E&gt;右向旗帜状结点]</code></pre>
+
+<ul>
+<li><p>下面是常见的连线类型：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB</span><br><span class="line">  A1--&gt;B1</span><br><span class="line">  A2---B2</span><br><span class="line">  A3--text---B3</span><br><span class="line">  A4--text--&gt;B4</span><br><span class="line">  A5-.-B5</span><br><span class="line">  A6-.-&gt;B6</span><br><span class="line">  A7-.text.-B7</span><br><span class="line">  A8-.text.-&gt;B8</span><br><span class="line">  A9===B9</span><br><span class="line">  A10==&gt;B10</span><br><span class="line">  A11==text===B11</span><br><span class="line">  A12==text==&gt;B12</span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">graph TB
+  A1--&gt;B1
+  A2---B2
+  A3--text---B3
+  A4--text--&gt;B4
+  A5-.-B5
+  A6-.-&gt;B6
+  A7-.text.-B7
+  A8-.text.-&gt;B8
+  A9===B9
+  A10==&gt;B10
+  A11==text===B11
+  A12==text==&gt;B12</code></pre>
+</li>
+<li><p>子图表的绘制：</p>
+<p>mermaid画流程图可以在一个图表里嵌套子图表，来实现独立模块的划分和不同方向箭头的混合使用。</p>
+<p>子图表的箭头方向可以单独指定，但如果子图表的结点和外部产生链接，则子图表的箭头方向会失效，取而代之的是继承父类图表的方向。</p>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB</span><br><span class="line"><span class="code">	subgraph 子图表-工作流 </span></span><br><span class="line"><span class="code">		direction LR</span></span><br><span class="line"><span class="code">	    begin(打开电脑)--&gt;work[敲代码干活]</span></span><br><span class="line"><span class="code">	end</span></span><br><span class="line"><span class="code">	stop&#123;休息会&#125;</span></span><br><span class="line"><span class="code">	子图表-工作流--&gt;temp&#123;干活满45分钟没&#125;--&gt;|no| 子图表-工作流</span></span><br><span class="line"><span class="code">	temp --&gt;|yes| stop--&gt;|休息满10分钟| 子图表-工作流</span></span><br><span class="line"><span class="code">	stop--&gt;|没满十分钟| stop</span></span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">graph TB
+	subgraph 子图表-工作流 
+		direction LR
+	    begin(打开电脑)--&gt;work[敲代码干活]
+	end
+	stop&#123;休息会&#125;
+	子图表-工作流--&gt;temp&#123;干活满45分钟没&#125;--&gt;|no| 子图表-工作流
+	temp --&gt;|yes| stop--&gt;|休息满10分钟| 子图表-工作流
+	stop--&gt;|没满十分钟| stop</code></pre>
+</li>
+</ul>
+<h3 id="序列图">序列图</h3>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line"><span class="code">	Title: 谈恋爱</span></span><br><span class="line"><span class="code">	男孩-&gt;&gt;女孩: 我喜欢你</span></span><br><span class="line"><span class="code">	女孩--&gt;&gt;男孩: 你是个好人</span></span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">sequenceDiagram
+	Title: 谈恋爱
+	男孩-&gt;&gt;女孩: 我喜欢你
+	女孩--&gt;&gt;男孩: 你是个好人</code></pre>
+
+<p>语法解析：</p>
+<h4 id="参与者">参与者：</h4>
+<p>参与者表示序列图中一切可以交互的事物，可以是人，类对象或系统。而每个参与者上下之间的竖线表示时间的流逝。</p>
+<p>声明参与者的语法为：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line"><span class="code">    participant 参与者1</span></span><br><span class="line"><span class="code">    participant 参与者2</span></span><br><span class="line"><span class="code">    ...</span></span><br><span class="line"><span class="code">    participant 简称 as 参与者n  //此写法可以在后文用简称代替“参与者n”</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="消息线">消息线</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;</td>
+<td>无箭头的实线</td>
+</tr>
+<tr>
+<td>--&gt;</td>
+<td>无箭头的虚线</td>
+</tr>
+<tr>
+<td>-&gt;&gt;</td>
+<td>带箭头的实线</td>
+</tr>
+<tr>
+<td>--&gt;&gt;</td>
+<td>带箭头的虚线</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>末端为x的实线（表示异步执行）</td>
+</tr>
+<tr>
+<td>--x</td>
+<td>末端为x的虚线（表示异步执行）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="处理中激活框">处理中—激活框</h4>
+<p>在参与者的时间线上标记一个激活框，表示对某一条消息进行处理的时间间隔</p>
+<p>在消息线末尾，消息接收方前添加一个“+”，则消息接收者进入对该消息的“处理中”状态。</p>
+<p>在消息线末尾，消息接收方前添加一个“-”，则消息接收者离开对该消息的“处理中”状态。</p>
+<h4 id="注释">注释</h4>
+<p>注释格式为：<code>Note 位置表述 参与者: 注释内容</code></p>
+<p>位置表述有：</p>
+<ul>
+<li>right of ：右侧</li>
+<li>left of ：左侧</li>
+<li>over ：横跨在多个参与者之中</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line"><span class="code">	Title: 表白</span></span><br><span class="line"><span class="code">	participant A as 男孩</span></span><br><span class="line"><span class="code">	participant B as 女孩</span></span><br><span class="line"><span class="code">	Note left of A: 18岁</span></span><br><span class="line"><span class="code">	Note right of B: 18岁</span></span><br><span class="line"><span class="code">	Note over A,B: 高三的一个午后</span></span><br><span class="line"><span class="code">	A -x +B: 我喜欢你</span></span><br><span class="line"><span class="code">	B --&gt;&gt; -A: 我也喜欢你</span></span><br><span class="line"><span class="code">	A --x +B: 骗你的，今天清明节，我鬼上身了</span></span><br><span class="line"><span class="code">	B --&gt;&gt; -A: 我真的喜欢你</span></span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">sequenceDiagram
+	Title: 表白
+	participant A as 男孩
+	participant B as 女孩
+	Note left of A: 18岁
+	Note right of B: 18岁
+	Note over A,B: 高三的一个午后
+	A -x +B: 我喜欢你
+	B --&gt;&gt; -A: 我也喜欢你
+	A --x +B: 骗你的，今天清明节，我鬼上身了
+	B --&gt;&gt; -A: 我真的喜欢你</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
+on=>operation: 执行内容
+cn=>condition: 执行是否成功
+en=>end: 结束
+st->on
+on->cn(yes)->en
+cn(no)->on</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
 
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
@@ -186,6 +570,17 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 ]]></content>
       <tags>
         <tag>基础工具使用指南</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何低代码搭建个人博客？</title>
+    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
+<h2 id="方案介绍">方案介绍</h2>
+<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+]]></content>
+      <tags>
+        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
       </tags>
   </entry>
 </search>
