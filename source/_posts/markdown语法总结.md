@@ -403,7 +403,9 @@ $$
 markdown格式支持对使用mermaid绘制的图表进行渲染，只要在markdown编辑器中安装mermaid拓展插件即可。Typora本身就集成了mermaid环境，因此可以直接在代码块中声明语法为mermaid并进行绘图。
 
 > PS： mermaid最新版目前已经更新到11.6以后了，而各大markdown编辑器如Typora不一定有对最新版mermaid插件的支持。且某些Typora破解版也只能激活旧版本，对mermaid插件支持也比较低级。故实际使用时有些mermaid语法可能无法正常渲染，读者有需要可以去[mermaid官网](https://mermaid.js.org/)使用最新版本，官网内也附带非常详细的[mermaid部署，语法以及配置教程](https://mermaid.js.org/ecosystem/tutorials.html)。
-
+>
+> 
+>
 > 对于写博客的同志，有可能你的博客配置进行了最新版本mermaid的部署（比如我使用的是hexo-theme-butterfly，主题适配了11.4.1版本的mermaid），这种情况你可以在Typora里用源代码模式编写mermaid，以实际博客网站渲染出来的效果为准。当然如果你更习惯Typora这种即使渲染的效果，且想以Typora里的编辑为准，那就只能接受一些版本局限。
 
 下面介绍一些常用且通用的mermaid基础语法。
