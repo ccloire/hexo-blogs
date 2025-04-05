@@ -2,7 +2,7 @@
 title: markdown语法总结
 date: 2025-02-27 21:10:29
 tags: 基础工具使用指南
-top_img : https://caimotu.top/Picgo/微信图片_20231219001215.jpg
+top_img : https://caimotu.top/Picgo/sunset-7775617_1280.jpg
 ---
 
 # <span style="font-size:0.8em;">Markdown语法总结</span>
@@ -345,21 +345,26 @@ Typora支持上图展示的几种拓展语法。
 
 - 单独一行Latex数学公式用左右各一个`$`包裹，比如`$y = x + 10$`，渲染后就是  $y = x + 10$
 
-- 若要编写一段多行公式，可以在公式段前后添加`$$`，内部使用`\\`进行换行，用`\tag{1}`进行编号，比如：
+- 若要编写一段多行公式，可以在公式段前后添加`$$`，内部使用`\begin{split} A\\B \end{split}`进行换行，`\\`要写在行与行之间，这是因为Mathjax渲染器的局限（无法直接识别单独的`\\`换行）；hexo-filter-mathjax插件会对每个`$$`公式段自动编号。  
+  示例如下：
 
   ```Latex
   $$
+  \begin{split}
   y = x + 10
   \\
-  y = x - 10\tag{1}
+  y = x - 10
+  \end{split}
   $$
   ```
 
-渲染后为：
+​       渲染后为：
 $$
-y = x + 10 
-\\\\
-y = x - 10\tag{1}
+\begin{split}
+y = x + 10
+\\
+y = x - 10
+\end{split}
 $$
 
 - 分式语法：`\frac{分子}{分母}`，示例：$\frac{1}{10}$
