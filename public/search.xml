@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Go语言初阶</title>
-    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
-    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
-<p>Go语言特点：简单，便于管理编写</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>如何低代码搭建个人博客？</title>
-    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
-<h2 id="方案介绍">方案介绍</h2>
-<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
-]]></content>
-      <tags>
-        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2025/01/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -50,6 +31,25 @@ href="https://hexo.io/docs/generating.html">Generating</a></p>
 <p>More info: <a
 href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Go语言初阶</title>
+    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
+<p>Go语言特点：简单，便于管理编写</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>如何低代码搭建个人博客？</title>
+    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
+<h2 id="方案介绍">方案介绍</h2>
+<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+]]></content>
+      <tags>
+        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
+      </tags>
   </entry>
   <entry>
     <title>markdown语法总结</title>
@@ -363,7 +363,7 @@ href="https://mermaid.js.org/ecosystem/tutorials.html">mermaid部署，语法以
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">st=&gt;start: 开始     //st表示结点命名，“=&gt;start: 开始”表示指结点类型和填充内容</span><br><span class="line">on=&gt;operation: 执行内容</span><br><span class="line">cn=&gt;condition: 执行是否成功</span><br><span class="line">en=&gt;end: 结束</span><br><span class="line">st-&gt;on        //&quot;-&gt;&quot;表示结点之间的有向线段</span><br><span class="line">on-&gt;cn(yes)-&gt;en      //condition类结点可以指定条件为&quot;yes&quot; or &quot;no&quot;</span><br><span class="line">cn(no)-&gt;on</span><br></pre></td></tr></table></figure>
 
 <h4 id="mermaid插件绘制">mermaid插件绘制</h4>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">  A--&gt;B</span><br><span class="line">  B--&gt;C</span><br><span class="line">  C--&gt;A</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">  A--&gt;B</span><br><span class="line">  B--&gt;C</span><br><span class="line">  C--&gt;A</span><br><span class="line">%% mermaid注释内容（%%注释不会被识别为图表语法）</span><br></pre></td></tr></table></figure>
 
 <pre><code class="highlight mermaid">graph TB;
   A--&gt;B
@@ -546,20 +546,106 @@ E&gt;右向旗帜状结点]</code></pre>
 <li>left of ：左侧</li>
 <li>over ：横跨在多个参与者之中</li>
 </ul>
+<h4 id="循环">循环</h4>
+<p>满足一定条件时，重复发出消息序列。</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">loop 执行条件</span><br><span class="line"><span class="code">	要执行的消息序列</span></span><br><span class="line"><span class="code">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="选择">选择</h4>
+<p>类似else-if这样的条件判断语句：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">alt 条件1</span><br><span class="line"><span class="code">	执行语句1</span></span><br><span class="line"><span class="code">else 条件2</span></span><br><span class="line"><span class="code">	执行语句2</span></span><br><span class="line"><span class="code">else 条件3</span></span><br><span class="line"><span class="code">	执行语句3</span></span><br><span class="line"><span class="code">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="并行">并行</h4>
+<p>par并行序列表示多个动作同时进行：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">par 并行序列名称</span><br><span class="line"><span class="code">	执行语句1</span></span><br><span class="line"><span class="code">and </span></span><br><span class="line"><span class="code">	执行语句2</span></span><br><span class="line"><span class="code">end</span></span><br></pre></td></tr></table></figure>
+
 <p>示例：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line"><span class="code">	Title: 表白</span></span><br><span class="line"><span class="code">	participant A as 男孩</span></span><br><span class="line"><span class="code">	participant B as 女孩</span></span><br><span class="line"><span class="code">	Note left of A: 18岁</span></span><br><span class="line"><span class="code">	Note right of B: 18岁</span></span><br><span class="line"><span class="code">	Note over A,B: 高三的一个午后</span></span><br><span class="line"><span class="code">	A -x +B: 我喜欢你</span></span><br><span class="line"><span class="code">	B --&gt;&gt; -A: 我也喜欢你</span></span><br><span class="line"><span class="code">	A --x +B: 骗你的，今天清明节，我鬼上身了</span></span><br><span class="line"><span class="code">	B --&gt;&gt; -A: 我真的喜欢你</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line"><span class="code">	Title: 买炸鸡</span></span><br><span class="line"><span class="code">	participant A as Loire</span></span><br><span class="line"><span class="code">	participant B as 炸鸡店老板</span></span><br><span class="line"><span class="code">	Note left of A: 18岁</span></span><br><span class="line"><span class="code">	Note right of B: 38岁</span></span><br><span class="line"><span class="code">	Note over A,B: 人民广场的一个午后</span></span><br><span class="line"><span class="code">	loop 十秒钟一次，执行30秒</span></span><br><span class="line"><span class="code">		A -x +B: 我炸鸡好了吗</span></span><br><span class="line"><span class="code">		B --&gt;&gt; -A: 还在炸</span></span><br><span class="line"><span class="code">	end</span></span><br><span class="line"><span class="code">	A --x +B: 还要炸多久</span></span><br><span class="line"><span class="code">	B --&gt;&gt; -A: 还有x分钟</span></span><br><span class="line"><span class="code">	alt x &gt; 20</span></span><br><span class="line"><span class="code">		A -&gt;&gt; B: 我不要了</span></span><br><span class="line"><span class="code">	else x &lt; 20 &amp;&amp; x &gt; 10</span></span><br><span class="line"><span class="code">		A -&gt;&gt; B: 炸的真慢</span></span><br><span class="line"><span class="code">	else x &lt; 10</span></span><br><span class="line"><span class="code">		A -&gt;&gt; B: 好的</span></span><br><span class="line"><span class="code">	end</span></span><br><span class="line"><span class="code">	par 悠闲地炸鸡</span></span><br><span class="line"><span class="code">		B -&gt;&gt; B: 哼歌</span></span><br><span class="line"><span class="code">	and </span></span><br><span class="line"><span class="code">		B -&gt;&gt; B: 包装炸鸡</span></span><br><span class="line"><span class="code">	end</span></span><br><span class="line"><span class="code">	B --&gt;&gt; A: 炸鸡好了</span></span><br></pre></td></tr></table></figure>
 
 <pre><code class="highlight mermaid">sequenceDiagram
-	Title: 表白
-	participant A as 男孩
-	participant B as 女孩
+	Title: 买炸鸡
+	participant A as Loire
+	participant B as 炸鸡店老板
 	Note left of A: 18岁
-	Note right of B: 18岁
-	Note over A,B: 高三的一个午后
-	A -x +B: 我喜欢你
-	B --&gt;&gt; -A: 我也喜欢你
-	A --x +B: 骗你的，今天清明节，我鬼上身了
-	B --&gt;&gt; -A: 我真的喜欢你</code></pre>
+	Note right of B: 38岁
+	Note over A,B: 人民广场的一个午后
+	loop 十秒钟一次，执行30秒
+		A -x +B: 我炸鸡好了吗
+		B --&gt;&gt; -A: 还在炸
+	end
+	A --x +B: 还要炸多久
+	B --&gt;&gt; -A: 还有x分钟
+	alt x &gt; 20
+		A -&gt;&gt; B: 我不要了
+	else x &lt; 20 &amp;&amp; x &gt; 10
+		A -&gt;&gt; B: 炸的真慢
+	else x &lt; 10
+		A -&gt;&gt; B: 好的
+	end
+	par 悠闲地炸鸡
+		B -&gt;&gt; B: 哼歌
+	and 
+		B -&gt;&gt; B: 包装炸鸡
+	end
+	B --&gt;&gt; A: 炸鸡好了</code></pre>
+
+<h3 id="饼图">饼图</h3>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">pie    //声明饼图</span><br><span class="line"><span class="code">	title 编程语言流行度   //饼图标题</span></span><br><span class="line"><span class="code">	&quot;C++&quot; : 200    //组成部分以及其数量（最多支持两位小数）</span></span><br><span class="line"><span class="code">	&quot;Java&quot; : 120</span></span><br><span class="line"><span class="code">	&quot;Go&quot; : 80</span></span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">pie
+	title 编程语言流行度
+	&quot;C++&quot; : 200
+	&quot;Java&quot; : 120
+	&quot;Go&quot; : 80</code></pre>
+
+<h3 id="甘特图">甘特图</h3>
+<p>甘特图的基本构成如下：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">gantt   //声明甘特图</span><br><span class="line"><span class="code">	title 标题</span></span><br><span class="line"><span class="code">	dataFormat 日期格式（指甘特图下方时间线的日期格式，一般用YYYY-MM-DD）</span></span><br><span class="line"><span class="code">    excludes 不工作的时间段</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    section 任务名</span></span><br><span class="line"><span class="code">    任务名: 参数1，参数2，参数3，参数4，参数5，参数6</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>excludes:
+后跟具体日期（2025-01-01）、星期（sunday）、周末（weekends）或前三个日期格式的组合，表示该日期期间不安排工作。比如某个任务开始时间是周五，持续3天，而excludes限定周末不工作，则任务将持续到下周二才完成。</p></li>
+<li><p>参数1：填crit表示重要事件（红色框效果）或者milestone不填。</p></li>
+<li><p>参数2：done(已完成，灰色效果)、active(正在进行，浅蓝色效果)、不填（待完成状态，深蓝色效果）。</p></li>
+<li><p>参数3：milestone(表示里程碑事件；菱形效果；若任务被声明为里程碑，持续时间应该设为0d，或者开始和结束在同一天)、不填。</p></li>
+<li><p>参数4：别名或者不填。</p></li>
+<li><p>参数5：任务开始时间，可以是具体日期(YYYY-MM-DD)，也可以是after
+task(task为同一个section里的其他任务名或者其别名)。</p></li>
+<li><p>参数6：任务结束时间，可以是具体结束日期，也可以是从开始时间算起的持续时间(如3d，20h)。</p></li>
+<li><p>PS：参数5和参数6是必填的，但是也可以两个参数统一一个参量表示(如3d，20h)，表示默认从上一个任务的结束时间开始，持续多长时间。</p></li>
+</ul>
+<p>甘特图示例如下：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">gantt</span><br><span class="line"><span class="code">    dateFormat  YYYY-MM-DD</span></span><br><span class="line"><span class="code">    title       Adding GANTT diagram functionality to mermaid</span></span><br><span class="line"><span class="code">    excludes    weekends</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">    section A section</span></span><br><span class="line"><span class="code">    Completed task            :done,    des1, 2014-01-06,2014-01-08   </span></span><br><span class="line"><span class="code">    %% 以上任务的参数没有出现crit，说明第一个参数不填，不是重要任务；done表示已完成，des1表示别名，后面是开始和结束时间</span></span><br><span class="line"><span class="code">    Active task               :active,  des2, 2014-01-09, 3d</span></span><br><span class="line"><span class="code">    Future task               :         des3, after des2, 5d</span></span><br><span class="line"><span class="code">    %% 前两个参数不填，表示待完成；after des2表示在Active task结束后开始，5d表示持续5天</span></span><br><span class="line"><span class="code">    Future task2              :         des4, after des3, 5d</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">    section Critical tasks</span></span><br><span class="line"><span class="code">    Completed task in the critical line :crit, done, 2014-01-06,24h</span></span><br><span class="line"><span class="code">    Implement parser and jison          :crit, done, after des1, 2d</span></span><br><span class="line"><span class="code">    Create tests for parser             :crit, active, 3d</span></span><br><span class="line"><span class="code">    Future task in critical line        :crit, 5d</span></span><br><span class="line"><span class="code">    %% 时间参数只有5d，表示默认从“Create tests for parser”任务的结束时间开始，持续5天</span></span><br><span class="line"><span class="code">    Create tests for renderer           :2d</span></span><br><span class="line"><span class="code">    Functionality added                 :milestone, isadded, 2014-01-25, 0d</span></span><br><span class="line"><span class="code">    %% 里程碑事件，起始时间+0d表示一天内发生</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">    section Documentation</span></span><br><span class="line"><span class="code">    Describe gantt syntax               :active, a1, after des1, 3d</span></span><br><span class="line"><span class="code">    Add gantt diagram to demo page      :after a1  , 20h</span></span><br><span class="line"><span class="code">    Add another diagram to demo page    :doc1, after a1  , 48h</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="code">    section Last section</span></span><br><span class="line"><span class="code">    Describe gantt syntax               :after doc1, 3d</span></span><br><span class="line"><span class="code">    Add gantt diagram to demo page      :20h</span></span><br><span class="line"><span class="code">    Add another diagram to demo page    :48h</span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<pre><code class="highlight mermaid">gantt
+    dateFormat  YYYY-MM-DD
+    title       Adding GANTT diagram functionality to mermaid
+    excludes    weekends
+    %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week (&quot;sunday&quot;) or &quot;weekends&quot;, but not the word &quot;weekdays&quot;.)
+
+    section A section
+    Completed task            :done,    des1, 2014-01-06,2014-01-08
+    Active task               :active,  des2, 2014-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    Future task2              :         des4, after des3, 5d
+
+    section Critical tasks
+    Completed task in the critical line :crit, done, 2014-01-06,24h
+    Implement parser and jison          :crit, done, after des1, 2d
+    Create tests for parser             :crit, active, 3d
+    Future task in critical line        :crit, 5d
+    Create tests for renderer           :2d
+    Functionality added                 :milestone, isadded, 2014-01-25, 0d
+
+    section Documentation
+    Describe gantt syntax               :active, a1, after des1, 3d
+    Add gantt diagram to demo page      :after a1  , 20h
+    Add another diagram to demo page    :doc1, after a1  , 48h
+
+    section Last section
+    Describe gantt syntax               :after doc1, 3d
+    Add gantt diagram to demo page      :20h
+    Add another diagram to demo page    :48h
+</code></pre>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始
 on=>operation: 执行内容

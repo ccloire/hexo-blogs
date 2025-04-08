@@ -450,6 +450,7 @@ graph TB;
   A-->B
   B-->C
   C-->A
+%% mermaid注释内容（%%注释不会被识别为图表语法）
 ```
 
 ```mermaid
@@ -624,33 +625,216 @@ sequenceDiagram
 - left of ：左侧
 - over ：横跨在多个参与者之中
 
+#### 循环
+
+满足一定条件时，重复发出消息序列。
+
+```markdown
+loop 执行条件
+	要执行的消息序列
+end
+```
+
+#### 选择
+
+类似else-if这样的条件判断语句：
+
+```markdown
+alt 条件1
+	执行语句1
+else 条件2
+	执行语句2
+else 条件3
+	执行语句3
+end
+```
+
+#### 并行
+
+par并行序列表示多个动作同时进行：
+
+```markdown
+par 并行序列名称
+	执行语句1
+and 
+	执行语句2
+end
+```
+
 示例：
 
 ```markdown
 sequenceDiagram
-	Title: 表白
-	participant A as 男孩
-	participant B as 女孩
+	Title: 买炸鸡
+	participant A as Loire
+	participant B as 炸鸡店老板
 	Note left of A: 18岁
-	Note right of B: 18岁
-	Note over A,B: 高三的一个午后
-	A -x +B: 我喜欢你
-	B -->> -A: 我也喜欢你
-	A --x +B: 骗你的，今天清明节，我鬼上身了
-	B -->> -A: 我真的喜欢你
+	Note right of B: 38岁
+	Note over A,B: 人民广场的一个午后
+	loop 十秒钟一次，执行30秒
+		A -x +B: 我炸鸡好了吗
+		B -->> -A: 还在炸
+	end
+	A --x +B: 还要炸多久
+	B -->> -A: 还有x分钟
+	alt x > 20
+		A ->> B: 我不要了
+	else x < 20 && x > 10
+		A ->> B: 炸的真慢
+	else x < 10
+		A ->> B: 好的
+	end
+	par 悠闲地炸鸡
+		B ->> B: 哼歌
+	and 
+		B ->> B: 包装炸鸡
+	end
+	B -->> A: 炸鸡好了
 ```
 
 ```mermaid
 sequenceDiagram
-	Title: 表白
-	participant A as 男孩
-	participant B as 女孩
+	Title: 买炸鸡
+	participant A as Loire
+	participant B as 炸鸡店老板
 	Note left of A: 18岁
-	Note right of B: 18岁
-	Note over A,B: 高三的一个午后
-	A -x +B: 我喜欢你
-	B -->> -A: 我也喜欢你
-	A --x +B: 骗你的，今天清明节，我鬼上身了
-	B -->> -A: 我真的喜欢你
+	Note right of B: 38岁
+	Note over A,B: 人民广场的一个午后
+	loop 十秒钟一次，执行30秒
+		A -x +B: 我炸鸡好了吗
+		B -->> -A: 还在炸
+	end
+	A --x +B: 还要炸多久
+	B -->> -A: 还有x分钟
+	alt x > 20
+		A ->> B: 我不要了
+	else x < 20 && x > 10
+		A ->> B: 炸的真慢
+	else x < 10
+		A ->> B: 好的
+	end
+	par 悠闲地炸鸡
+		B ->> B: 哼歌
+	and 
+		B ->> B: 包装炸鸡
+	end
+	B -->> A: 炸鸡好了
 ```
+
+### 饼图
+
+```markdown
+pie    //声明饼图
+	title 编程语言流行度   //饼图标题
+	"C++" : 200    //组成部分以及其数量（最多支持两位小数）
+	"Java" : 120
+	"Go" : 80
+```
+
+```mermaid
+pie
+	title 编程语言流行度
+	"C++" : 200
+	"Java" : 120
+	"Go" : 80
+```
+
+### 甘特图
+
+甘特图的基本构成如下：
+
+```markdown
+gantt   //声明甘特图
+	title 标题
+	dataFormat 日期格式（指甘特图下方时间线的日期格式，一般用YYYY-MM-DD）
+    excludes 不工作的时间段
+    
+    section 任务名
+    任务名: 参数1，参数2，参数3，参数4，参数5，参数6
+```
+
+- excludes: 后跟具体日期（2025-01-01）、星期（sunday）、周末（weekends）或前三个日期格式的组合，表示该日期期间不安排工作。比如某个任务开始时间是周五，持续3天，而excludes限定周末不工作，则任务将持续到下周二才完成。
+
+- 参数1：填crit表示重要事件（红色框效果）或者milestone不填。
+- 参数2：done(已完成，灰色效果)、active(正在进行，浅蓝色效果)、不填（待完成状态，深蓝色效果）。
+- 参数3：milestone(表示里程碑事件；菱形效果；若任务被声明为里程碑，持续时间应该设为0d，或者开始和结束在同一天)、不填。
+- 参数4：别名或者不填。
+- 参数5：任务开始时间，可以是具体日期(YYYY-MM-DD)，也可以是after  task(task为同一个section里的其他任务名或者其别名)。
+- 参数6：任务结束时间，可以是具体结束日期，也可以是从开始时间算起的持续时间(如3d，20h)。
+- PS：参数5和参数6是必填的，但是也可以两个参数统一一个参量表示(如3d，20h)，表示默认从上一个任务的结束时间开始，持续多长时间。
+
+甘特图示例如下：
+
+```markdown
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Adding GANTT diagram functionality to mermaid
+    excludes    weekends
+
+    section A section
+    Completed task            :done,    des1, 2014-01-06,2014-01-08   
+    %% 以上任务的参数没有出现crit，说明第一个参数不填，不是重要任务；done表示已完成，des1表示别名，后面是开始和结束时间
+    Active task               :active,  des2, 2014-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    %% 前两个参数不填，表示待完成；after des2表示在Active task结束后开始，5d表示持续5天
+    Future task2              :         des4, after des3, 5d
+
+    section Critical tasks
+    Completed task in the critical line :crit, done, 2014-01-06,24h
+    Implement parser and jison          :crit, done, after des1, 2d
+    Create tests for parser             :crit, active, 3d
+    Future task in critical line        :crit, 5d
+    %% 时间参数只有5d，表示默认从“Create tests for parser”任务的结束时间开始，持续5天
+    Create tests for renderer           :2d
+    Functionality added                 :milestone, isadded, 2014-01-25, 0d
+    %% 里程碑事件，起始时间+0d表示一天内发生
+
+    section Documentation
+    Describe gantt syntax               :active, a1, after des1, 3d
+    Add gantt diagram to demo page      :after a1  , 20h
+    Add another diagram to demo page    :doc1, after a1  , 48h
+
+    section Last section
+    Describe gantt syntax               :after doc1, 3d
+    Add gantt diagram to demo page      :20h
+    Add another diagram to demo page    :48h
+
+```
+
+```mermaid
+gantt
+    dateFormat  YYYY-MM-DD
+    title       Adding GANTT diagram functionality to mermaid
+    excludes    weekends
+    %% (`excludes` accepts specific dates in YYYY-MM-DD format, days of the week ("sunday") or "weekends", but not the word "weekdays".)
+
+    section A section
+    Completed task            :done,    des1, 2014-01-06,2014-01-08
+    Active task               :active,  des2, 2014-01-09, 3d
+    Future task               :         des3, after des2, 5d
+    Future task2              :         des4, after des3, 5d
+
+    section Critical tasks
+    Completed task in the critical line :crit, done, 2014-01-06,24h
+    Implement parser and jison          :crit, done, after des1, 2d
+    Create tests for parser             :crit, active, 3d
+    Future task in critical line        :crit, 5d
+    Create tests for renderer           :2d
+    Functionality added                 :milestone, isadded, 2014-01-25, 0d
+
+    section Documentation
+    Describe gantt syntax               :active, a1, after des1, 3d
+    Add gantt diagram to demo page      :after a1  , 20h
+    Add another diagram to demo page    :doc1, after a1  , 48h
+
+    section Last section
+    Describe gantt syntax               :after doc1, 3d
+    Add gantt diagram to demo page      :20h
+    Add another diagram to demo page    :48h
+
+```
+
+
+
+
 
