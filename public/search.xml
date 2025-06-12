@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/01/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a
-href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a
-href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a
-href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Go语言初阶</title>
     <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
     <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
@@ -41,14 +9,108 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
-    <title>如何低代码搭建个人博客？</title>
-    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
-<h2 id="方案介绍">方案介绍</h2>
-<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+    <title>RNN简介</title>
+    <url>/2025/04/25/RNN%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="rnn循环神经网络简要介绍">RNN(循环神经网络)简要介绍</h1>
+<h2 id="简介">简介</h2>
+<p>循环神经网络模型以序列数据为输入（数据内部的元素是有顺序关系的），如文章、语句、一周的天气信息、三个月的股市指数等。与传统的前馈网络不同的是，RNN模型处理序列数据能够获取更多的语义信息，时序信息等。</p>
+<p>处理任务示例：</p>
+<p>以NER（命名实体识别）为例，从自然语言文本中识别真实世界中的实体名及其类别。如：</p>
+<p>句子1：I like eating apple!——其中的apple指的是苹果食物</p>
+<p>句子2：The Apple is a great company！——其中的Apple指的是苹果公司</p>
+<p>而如果是传统的DNN（深度神经网络）模型，由于输入方式为逐元素输入，无法有效获取上下文信息，则若训练集中的apple一词大部分被标记为苹果食物，那么对测试集中的apple处理也将全部标记为苹果食物而非根据实际上下文推断。</p>
+<h2 id="模型提出">模型提出</h2>
+<h3 id="基本rnn结构">基本RNN结构</h3>
+<p>为了解决普通DNN（深度神经网络）逐元素输入而无法有效获取上下文信息的问题。RNN最基本的改良点在于增加一个模块用于储存上下文信息，下图即是一个典型的RNN结构示意：</p>
+<img src="https://caimotu.top/Picgo/image-20250417165208064.png" alt="image-20250417165208064" style="zoom:33%;" />
+
+<p>其中I（输入序列）到O（输出序列）的过程增加了一个保存上下文信息的权重矩阵W，也就是每次输出O不仅要考虑当前的输入数据I，还要考虑上一次输出的隐藏序列W（保存上下文）。RNN就是一个循环递归地处理上述输入输出的过程。</p>
+<h3 id="rnn展开结构">RNN展开结构</h3>
+<p>将上图的基本结构展开，就成为了下图展示的模型计算过程：</p>
+<img src="https://caimotu.top/Picgo/ebe46967a3e80dab4c04635a2c6785f.jpg" alt="ebe46967a3e80dab4c04635a2c6785f" style="zoom:33%;" />
+
+<p>其中 <span class="math inline">\(x_i\)</span>
+表示i时刻的模型输入，<span class="math inline">\(y_i\)</span>表示<span
+class="math inline">\(x_i\)</span>对应的输出结果，模型计算公式如下：
+<span class="math display">\[
+\begin{split}
+y_i = g(Vh_i)
+\\
+\\
+h_i = f(Ux_i + Wh_{i-1})
+\end{split}
+\]</span>
+U表示当前输入数据的权重因子，W表示决定上下文信息影响程度的参数矩阵，<span
+class="math inline">\(h_i\)</span>则表示当前隐藏层的输出隐变量。可以看出决定当前输出<span
+class="math inline">\(y_i\)</span>的隐变量<span
+class="math inline">\(h_i\)</span>不仅由当前输入<span
+class="math inline">\(x_i\)</span>决定，也与上一时刻的隐变量<span
+class="math inline">\(h_{i-1}\)</span>有关。（PS：整个模型计算过程里用的参数矩阵W是一定的）</p>
+<h2 id="rnn模型结构变化">RNN模型结构变化</h2>
+<p>上述展开结构会根据输入长度和输出长度的变化而产生不同的结构</p>
+<h3 id="n-to-n结构">N to N结构</h3>
+<p>这类结构的输入长度与输出长度相同，也即每一个输入值都会对应一个输出值。通常用于逐序列判断或分类任务（如序列标注，NER，视频帧分类等）。示例图与计算模型如2.2所述。</p>
+<h3 id="n-to-1结构">N to 1结构</h3>
+<p>这类结构只有一个输出值，表示输出结果包含了整个输入序列的语义信息和上下文信息。结构示意图：</p>
+<img src="https://caimotu.top/Picgo/8606007dd425e9195f0c11d4719656f.jpg" alt="8606007dd425e9195f0c11d4719656f" style="zoom: 50%;" />
+
+<p>计算模型： <span class="math display">\[
+\begin{split}
+Y = y_N = g(Vh_N)
+\\
+h_i = f(Ux_i+ Wh_{i-1})
+\end{split}
+\]</span> 这类结构通常用于文字分类、文章分类以及图像分类任务。</p>
+<h3 id="1-to-n结构">1 to N结构</h3>
+<p>一个输入数据对应一系列输出，其意义是一个起始状态或种子数据会随时间变化生成一个序列的输出结果。</p>
+<p>若输入数据只在首个时刻输入，则计算示意图如下所示：</p>
+<img src="https://caimotu.top/Picgo/112ce7e4cbc3de28915ec314a82fdba.jpg" alt="112ce7e4cbc3de28915ec314a82fdba" style="zoom:50%;" />
+
+<p>而若输入数据在每个时刻都作为输入，则示意图如下：</p>
+<img src="https://caimotu.top/Picgo/bd9767d63cc2fd88b9b265d80777250.jpg" alt="bd9767d63cc2fd88b9b265d80777250" style="zoom:50%;" />
+
+<p>该结构通常用于由图像自动生成文章、类别生成音乐、文章、代码等由种子数据生成序列的任务。</p>
+<h3 id="n-to-m结构encoder-decoder模型seq2seq模型">N to
+M结构（encoder-decoder模型、seq2seq模型）</h3>
+<p>最后一类是输入输出序列长度不相等的结构。通常采用一个N to 1结构和一个1
+to M结构组合来实现，如下图：</p>
+<img src="https://caimotu.top/Picgo/f529bf34ed1f0a34e98af6cd3b390b2.jpg" alt="f529bf34ed1f0a34e98af6cd3b390b2" style="zoom:50%;" />
+
+<img src="https://caimotu.top/Picgo/6355d703227ac85b3ac67a61c52bd84.jpg" alt="6355d703227ac85b3ac67a61c52bd84" style="zoom: 33%;" />
+
+<p>由上图可以看出，两个不同长度的RNN模型组合可以控制输出序列长度。两个模型之间通过一个上下文向量C来链接，其中C可作为第二个RNN模型的输入数据并对初始隐藏变量<span
+class="math inline">\(h_0^{&#39;}\)</span>​进行初始化（如第一个图），也可以直接被用来初始化第二个RNN模型的隐藏变量（如第二个图）。</p>
+<p>常用的上下文向量C的求解方法有： <span class="math display">\[
+\begin{split}
+c = h_N
+\\
+c = g(h_N)
+\\
+c = g(h_1 :: h_N)
+\end{split}
+\]</span>
+第一种方法直接将encoder的输出作为上下文向量；第二种方法则需要先对encoder输出进行变换；第三种方法则将encoder的一个输出序列进行变换，而非单一选取最后一个输出。</p>
+<p>通常将第一个RNN模型作为encoder（编码器），第二个RNN模型成为decoder（解码器）。通过这样N
+to
+M的RNN模型，我们可以处理各类序列处理任务，如语音识别，文本摘要，机器翻译，图像描述生成等。</p>
+<h2 id="梯度消失与梯度爆炸">梯度消失与梯度爆炸</h2>
+<h3 id="概念">概念</h3>
+<p>由于RNN中的上下文参数矩阵是权重共享的，即当进行梯度更新时，对该矩阵求偏导数时需要加入时序影响，将导致存在基于时序数量的权重“连乘”。若某一阶段权重值过小，结合“连乘”将导致最终权重趋于“无穷小”（即等于0），此现象称为“梯度消失”。相反地，若权重值过大，经连乘后将导致权重值变得过大，称为“梯度爆炸”。</p>
+<p>与普通NN的梯度消失及梯度爆炸不同，RNN的梯度爆炸（或消失）是根本原因是“连乘”，是在反向传播的某一阶段出现的，在此之前的反向传播不受影响。</p>
+<h3 id="如何解决">如何解决</h3>
+<p><strong>1. 梯度爆炸的解决</strong></p>
+<p>1）梯度裁剪</p>
+<p>​
+梯度裁剪即为梯度更新时的梯度设置上限，当超过阈值将强制裁剪，避免出现过高阈值。</p>
+<p><strong>2. 梯度消失的解决</strong></p>
+<p>1）使用Relu激活函数</p>
+<p>​
+使用Relu激活函数解决梯度消失的原理是，Relu函数在自变量大于0是，因变量恒为1，由此避免梯度过小。</p>
+<p>2）变更RNN结构</p>
+<p>​ 改用变种版本的RNN结构，常见的包括LSTM模型及GRU模型。</p>
 ]]></content>
       <tags>
-        <tag>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</tag>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -668,6 +730,516 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 ]]></content>
       <tags>
         <tag>基础工具使用指南</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何低代码搭建个人博客？</title>
+    <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
+<h2 id="方案介绍">方案介绍</h2>
+<p>搭建博客可以使用现成的博客框架，也可以自行开发前后端。这里我们介绍对新手/非计算机专业学生友好的博客框架方案，可以实现低代码搭建个人博客网站。</p>
+<p>基于hexo框架+github托管仓库+netlify提供站点部署、DNS、CDN服务搭建个人博客网站</p>
+]]></content>
+      <tags>
+        <tag>技术分享</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/01/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a
+href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a
+href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a
+href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>计算机网络--第一章：计算机网络和因特网</title>
+    <url>/2025/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/</url>
+    <content><![CDATA[<h1 id="计算机网络和因特网">计算机网络和因特网</h1>
+<p>章节导读：</p>
+<ul>
+<li>在这个章节，我们需要先了解什么是因特网（Internet），什么是协议（protocol）。</li>
+<li>之后了解什么是网络边缘(network edge)：主机hosts，接入网access
+network以及物理媒介physical media。</li>
+<li>边缘之后便是网络核心(network
+core)的概念：主要了解两种网络技术——分组交换packet
+switching以及电路交换circuit
+switching，这是互联网的技术基础，会涉及到包(packet）、路由器(router)和链路层交换机(link-layer
+switch)这些概念；以及互联网的结构。</li>
+<li>再往下是网络性能（performance）：了解数据从源端发送到目的地时数据包是如何丢失(loss)或者延迟(delay)的。这一部分内容会将吞吐量(throughput)作为一种性能指标，衡量字节信号从源转发到目的地的速率。</li>
+<li>之后我们需要了解互联网中的协议层(protocol layers)和服务模型(services
+models)相关内容</li>
+<li>最后便是关于互联网中的安全问题和发展历史介绍。</li>
+</ul>
+<p>PS：这一章只是计算机网络的整体概述，各部分的具体理论实现会在后面的章节详细展开。</p>
+<h2 id="什么是因特网">什么是因特网</h2>
+<h3 id="具体构成角度描述">具体构成角度描述</h3>
+<img src="https://caimotu.top/Picgo/image-20250409212415280.png" alt="image-20250409212415280" style="zoom:50%;" />
+
+<p>因特网中一个与我们密切相关的组成部分就是主机(hosts)或端系统(end
+system)，像我们使用的电脑，手机就属于端系统。<strong>端系统</strong>又通过**通信链路(communication
+link)<strong>和</strong>分组交换机(packet
+switch)**连接到一起，组成我们熟知的因特网。</p>
+<p>通信链路属于网络边缘，实际上由不同类型的物理媒介组成，不同的链路有不同的传输速率（以bit/s或bps）度量。</p>
+<p>分组交换机属于网络核心。发送端发送数据时会先将数据分段，每段加上首部字节，这样形成的信息就是<strong>分组</strong>。而分组交换机则负责从一条入通信链路接收到达的分组，向它的一条出通信链路发送该分组（接收和发送分组时如何选择路径在本文“3.网络核心”中的分组交换部分会详细展开）。分组交换机有两种主要类型：路由器和链路层交换机。</p>
+<p>**因特网服务提供商(Internet Service
+Provider,ISP)**就是通过各种链路互联的分组交换机给端系统提供接入互联网的服务，像住宅区ISP，大学ISP等等。每个ISP本身就是一个由多台分组交换机和多段通信链路以及它的客户端系统组成的网络。</p>
+<p>因特网中每个部件在实际运行的时候依赖的其实是一系列互联网<strong>协议(protocol)</strong>，这些协议控制信息的接收和发送。TCP(Transformer
+Control Protocol，传输控制协议)和IP(Internet
+Protocol，网际协议)就是因特网中两个最重要的协议。这些协议是由因特网工程任务组(Internet
+Engineering Task
+Force，IETF)来制定研发的，他们的标准文档被称为请求评论(Request For
+Comment，RFC)。</p>
+<p>因此计算机网络这门课实际上就是在研究这些网络协议的构成，原理和工作方式。</p>
+<h3 id="服务角度描述">服务角度描述</h3>
+<p>除了上面用具体构成角度来解读互联网以外，我们还可以从服务角度描述互联网，也就是为应用程序提供服务的基础设施(infrastructure)。我们在互联网获取和发送信息都是通过一些网络应用程序实现的，这些应用程序会涉及到多个相互链接的端系统，因此也被称为<strong>分布式应用程序(distributed
+application)</strong>。而互联网中的通信基础设施就为这些应用提供了可以用于向另一个端系统发送信息的编程接口，也叫<strong>套接字接口(socket
+interface)</strong>，这个接口不仅规定了发送方应用应该遵循的规则，也提供了多种因特网服务，这些内容将在第二章应用层中详细展开。</p>
+<h3 id="网络协议">网络协议</h3>
+<p>协议定义了在两个或多个通信实体之间交换的报文的格式和顺序，以及发送或接收一条报文或者进行其他事件时通信实体所采取的动作。</p>
+<p>下面介绍一个简单的TCP协议例子：当我们在计算机中输入一个网页的URL时，我们的计算机会先向网页的web服务器发送一条连接请求报文，web服务器收到请求后会返回一条连接响应报文。计算机得知能正常请求web的文档后，便会发送一条GET报文，声明要从该web服务器请求访问的页面域名。最后，web服务器便向计算机发送该web网页文件。</p>
+<img src="https://caimotu.top/Picgo/image-20250409214625582.png" alt="image-20250409214625582" style="zoom:50%;" />
+
+<h2 id="网络边缘">网络边缘</h2>
+<p>网络边缘的组成部分有主机，接入网和物理媒介。</p>
+<h3 id="主机">主机：</h3>
+<p>运行分布式应用程序，主机之间的通信模式主要有两种：</p>
+<ul>
+<li>客户/服务器模式 Client-Server (C/S) • 客户端向服务器请求、接收服务 •
+比如：蓝牙外设 Bluetooth Peripheral (Slave) -Master</li>
+<li>对等模式 Peer-to-Peer (P2P) • 无服务器端 No server-side •
+比如：Blockchain/BitTorrent/迅雷/网盘</li>
+</ul>
+<h3 id="接入网access-network">接入网(access network)：</h3>
+<p>接入网指的是端系统在物理上连接到边缘路由器(edge
+route)的网络；边缘路由器是端系统连接到远程端系统的路径上的第一台分组交换机。接入网根据使用环境可以分为三种类型：</p>
+<ul>
+<li>住宅接入 residential access
+network(数字用户线，电缆，FTTH，拨号和卫星)</li>
+<li>单位接入 institutional access networks(school,
+company中常见，以太网和WiFi)</li>
+<li>移动接入 mobile access networks (4G/5G和LTE)</li>
+</ul>
+<p>研究这三种接入网，我们需要重点了解的是它们的传输速率(bits per
+second,bps)以及它们的用户在多大程度上和其他用户共享该接入网。</p>
+<p>下面就这三种接入网详细展开描述：</p>
+<h4 id="住宅接入">住宅接入</h4>
+<p>当今的住宅接入有两种比较主流的方式：数字用户线（Digital Subscribe
+Line，交换数字数据和语音信息）和电缆（cable，交换数字数据和广播视频信息）。</p>
+<ul>
+<li><p>数字用户线（DSL）：</p>
+<img src="https://caimotu.top/Picgo/image-20250411114800845.png" alt="image-20250411114800845" style="zoom:50%;" />
+
+<p>住宅通过本地电话公司（也即用户的ISP）提供的本地电话接入来获取因特网接入服务。本地电话接入就是用户主机通过现有的电话线（双绞铜线，后面物理媒介部分会详细介绍）来和本地中心局(center
+office，CO)中的数字用户线接入复用器(DSLAM)交换数据，交换数据这一动作就意味着主机成功接入互联网。</p>
+<p>我们知道家庭电话线只能以模拟信号的形式（也即高频音）传输信息，所以为了同时承载两种信号——数据信号（如因特网接入）和语音信号（如电话呼叫），让它们共享DSL链路，需要采用频分复用技术（frequency
+division multiplexing
+，FDM，后面的分组交换部分内容会详细介绍），对不同的信号使用不同频率进行编码：</p>
+<p>高速下行信道：50kHz~1MHz频段（端系统接收来自基站的数据信号）</p>
+<p>中速上行信道：4kHz~50kHz频段（端系统向基站发送数据信号）</p>
+<p>普通双向电话信道：0~4kHz频段（端系统和基站双向交换电话信号）</p>
+<p>而且为了将数字数据信号以模拟信号的形式进入电话线，DSL接入网还使用了一种叫DSL调制解调器的部件，负责家庭端的信号转换；而信号通过电话线传输给CO端后，会经过数字用户线接入复用器（DSLAM）将上行信道中的模拟信号转化回数字数据信号。</p>
+<p>那么不同的信号在端系统和基站又是怎么划分到不同信道并被分别解调的呢？这就又涉及到一种叫<strong>分配器</strong>的部件。</p>
+<ul>
+<li>当信号从用户端系统发送到基站时：语音信号会经分配器的分隔进入普通双向电话信道；而数据信号则会先由家庭的DSL调制解调器划分进入上行信道（DSL调制解调器在这里不仅起到将数据信号转化为模拟形式的作用，还有将信道分为上行与下行信道的作用），再进入分配器和语音信号一起通过电话线DSL传输。在到达基站也就是CO一侧后，上行信道中的模拟信号又会经DSLAM转化回数字数据信号，并在DSLAM作用下和普通双向电话信道中的语音信号分隔开，分别送往互联网和电话网。</li>
+<li>当信号从基站发送到用户端系统时：传输过程与上述反向同理，但数据信号要经下行信道传输。</li>
+</ul>
+<p>（PS：成百上千个家庭的数字用户线接入的是同一个DSLAM，但DSL接入网在传输时容量和带宽是不共享的，每个家庭都拥有独享的数字用户线）</p>
+<p>在不同的信道，由于编码频率不同，信号传输的速率也会有所不同。DSL标准定义了多个传输速率(随技术变革会越来越高)，下行传输速率一般为24—52Mbps，上行传播速率一般为3.5—16Mbps（下行比上行快，因此这种接入也被称为不对称接入）。而在实际的传输服务中，传输速率可能会比上述标准低，这是因为本地电话公司会提供分等级的服务，低级服务的传输速率可能会比较低；以及实际的住宅和中心局距离，双绞线的规范等因素都会影响传输速率。（PS：DSL接入网一般只能在住宅与中心局距离5~10英里内的情况下使用）</p></li>
+<li><p>电缆因特网接入：</p>
+<img src="https://caimotu.top/Picgo/image-20250411115649973.png" alt="image-20250411115649973" style="zoom: 33%;" />
+
+<p>住宅利用有线电视公司提供的有线电视基础设施（光纤和同轴电缆）来获取因特网接入服务。由于整个系统使用的是光纤和同轴电缆，因此也被称为混合光纤同轴系统（Hybrid
+Fiber Coax，HFC）。</p>
+<ul>
+<li><p>与DSL接入使用DSL调制解调器不同，电缆因特网接入需要使用电缆调制解调器（cable
+modem），将数字信号转为模拟信号并将HFC网络划分为上行和下行信道（没有像DSL接入网那样的电话双向信道）；而在电缆头端，则使用电缆调制解调器终端系统（CMTS）来把下行信道中的模拟信号转回数字信号（功能相当于DSLAM）。</p>
+<p>另一个不同之处是电缆因特网接入的用户共享广播媒体，也就是共享上行和下行信道，因此多个用户同时经下行信道下载电缆头端发送的视频文件时，传输速率会大大降低甚至发生碰撞问题（第6章会更加详细描述）。</p></li>
+<li><p>与DSL接入相同的是，电缆因特网接入也属于不对称接入，即下行信道的传播速率要比上行信道的高。电缆因特网接入可提供40Mbps—1.2Gbps的下行传输速率和30—100Mbps的上行传输速率。</p></li>
+</ul></li>
+<li><p>DSL和电缆是以往大多数家庭使用的接入网形式，但一种更高速率的新兴技术——光纤到户（Fiber
+To The Home，FTTH）逐渐在各个国家的家庭里普及。</p>
+<img src="C:\Users\15458\AppData\Roaming\Typora\typora-user-images\image-20250411150817230.png" alt="image-20250411150817230" style="zoom:33%;" />
+
+<p>这种技术是从本地中心局直接提供一条到家庭的光线路径，最简单的光纤分布网络就是直接网络（中心局发出一根多个家庭共享的光纤，在接近住户处再由分配器分成每户一根光纤），它分为两种体系结构：有源光纤网络（Active
+Optical Network，AON，第六章详细讨论）和无源光纤网络（Passive Optical
+Network，PON）。</p>
+<p>如图是PON体系的示意图，这里我们可以简单解释以下其传输过程：每个家庭都配有一个光纤网络接收器（ONT），并由专门的光纤接到光纤分配器上，多个家庭通过分配器集结到一根共享的光纤上，该光纤再和中心局中的光纤线路端接器（OLT）相连。</p></li>
+<li><p>在以上三种接入网形式无法提供时（如偏远乡村环境），家庭有时也会使用卫星链路或者拨号接入（类似DSL，但速率极低）。</p></li>
+</ul>
+<h4 id="单位接入">单位接入</h4>
+<img src="https://caimotu.top/Picgo/image-20250411201727538.png" alt="image-20250411201727538" style="zoom:50%;" />
+
+<p>在公司，大学或者如今越来越多的家庭里，通常会使用**局域网（LAN）**来将端系统接入边缘路由器。</p>
+<p>有线局域网接入最流行的技术就是<strong>以太网</strong>；而无线局域网接入最流行的技术则是我们当今无处不在的<strong>WiFi</strong>。以太网接入中，用户和web服务器使用双绞铜线与一台以太网交换机相连（第六章将详细介绍），这些以太网交换机或者他们相连形成的网络再去连接到更大的因特网核心。WiFi接入中，用户会向一个无线基站接入点发送或接收分组，这个接入点再和企业网相连接（通常就是通过以太网交换机接入有线因特网，因此也是无线局域网和有线局域网的结合）。</p>
+<p>以太网的传输速率通常有1Gbps，10Gbps，最高可达100Gbps；而WiFi传输速率则比较慢，如今的WiFi
+5可提供3.5Gbps速率，WiFi 6可提供9.6Gbps的速率，WiFi
+7可提供高达30Gbps的速率。</p>
+<h4 id="移动接入">移动接入</h4>
+<p>在局域网接入中，往往端系统都需要在接入点或以太网交换机的附近一定范围内；而如今4G/5G的通信方式允许我们在大范围内移动的同时也保持接入因特网，在这种接入网中，端系统通过蜂窝网提供商运营的基站来发送和接收分组的，允许用户在基站的数万米内依然保持连接。</p>
+<p>下图是一个经典的家庭网络示意图，包含了一个家庭可能使用的每一种接入网方式。PS：电缆接入网/DSL接入网中的调制解调器和有线局域网/无线局域网的以太网交换机以及互联了移动通信基站的路由器往往是装在一个盒子里的，统称为家庭路由器。</p>
+<img src="https://caimotu.top/Picgo/image-20250411142347759.png" style="zoom: 33%;" />
+
+<h3 id="物理媒介physical-media">物理媒介(physical media)：</h3>
+<p>物理媒介分为两种类型：导引型媒体和非导引型媒体。</p>
+<h4 id="双绞铜线">双绞铜线</h4>
+<p>最便宜且最常用的导引型传输媒体就是双绞铜线。DSL技术和局域网接入都会使用到双绞铜线这种材料。</p>
+<img src="https://caimotu.top/Picgo/image-20250412122442735.png" alt="image-20250412122442735" style="zoom:33%;" />
+
+<h4 id="同轴电缆">同轴电缆</h4>
+<p>同轴电缆和双绞铜线类似都由两个铜导体组成，不同的是同轴电缆中这两个导体同心而非并行。由于这种结构以及它特殊的绝缘层和保护层，同轴电缆能达到较高的数据传输速率，常被用作共享媒体，充当前面所述的电缆因特网接入/电视系统的物理媒介。</p>
+<img src="https://caimotu.top/Picgo/image-20250412124318439.png" alt="image-20250412124318439" style="zoom:33%;" />
+
+<h4 id="光纤">光纤</h4>
+<ul>
+<li><p>导引光脉冲，每个脉冲表示一个bit，在玻璃纤维中传输</p></li>
+<li><p>高速:</p>
+<ul>
+<li>如10 Gbps-100Gbps传输速率</li>
+</ul></li>
+<li><p>低误码率:</p></li>
+<li><p>中继器相隔很远</p></li>
+<li><p>不受电磁噪声影响</p></li>
+<li><p>光信号衰减极低</p></li>
+<li><p>光设备成本高，因此光纤多用于长途运输而非短途传输（如家庭接入网或者LAN局域网就很少用光纤）</p></li>
+</ul>
+<h4 id="无线电">无线电</h4>
+<img src="https://caimotu.top/Picgo/image-20250412125530083.png" alt="image-20250412125530083" style="zoom:33%;" />
+
+<h2 id="网络核心">网络核心</h2>
+<p>讨论完网络边缘，我们便开始讨论网络核心部分——链接因特网端系统的分组交换机和通信链路构成的网状网络。</p>
+<p>在本文一开始我们介绍过分组的概念，也就是端系统发送出来的数据分段后加上首部字节后形成的数据段。那么这些数据段是如何在端系统之间交换的呢。方式有两种——分组交换和电路交换。下面我们分别简要讨论这两种</p>
+]]></content>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>南京4天3夜攻略</title>
+    <url>/2025/06/12/%E5%8D%97%E4%BA%AC4%E5%A4%A93%E5%A4%9C%E6%94%BB%E7%95%A5/</url>
+    <content><![CDATA[<p><img src="https://caimotu.top/Picgo/image-20250612162816123.png"
+alt="image-20250612162816123" /></p>
+<h1 id="73">7.3</h1>
+<h2 id="下午13301800">下午（13：30~18：00）：</h2>
+<ul>
+<li><p>（公寓打车17分钟）鸡鸣寺（提前一天预约，从山门进）（1.5h）</p></li>
+<li><p>→步行15分钟到明城墙（0.5h）</p></li>
+<li><p>→步行十分钟进玄武湖公园（2.5h）</p></li>
+<li><p>→先锋书店分店＆寻魏金陵十二菜、鸭血粉丝汤（晚饭备选）</p></li>
+</ul>
+<img src="https://caimotu.top/Picgo/wps1.png" alt="img" style="zoom: 33%;" />
+
+<img src="https://caimotu.top/Picgo/wps2.png" alt="img" style="zoom:33%;" />
+
+<h2 id="晚上18302300">晚上：（18：30~23：00）</h2>
+<ul>
+<li><p>岗子村地铁站到夫子庙地铁站</p></li>
+<li><p>→再步行十分钟到秦淮河夫子庙（小吃＋夜景），夫子庙内部门票30r</p></li>
+<li><p>文德桥蓝调时刻：18：00~18：30左右</p></li>
+<li><p>游船路线：携程搜“秦淮河画舫”，夜游游船票价120r，码头--&gt;白鹭洲--&gt;七彩水街—&gt;东水关—&gt;中华门—&gt;返程</p></li>
+<li><p>避雷：夫子庙里的吃的；附近可去：小厨娘昆音雅宴、韩复兴老字号</p></li>
+<li><p>老东门：金陵美术馆、陆式梅花糕、蒋友记、朱记小郑……</p></li>
+</ul>
+<p><img src="https://caimotu.top/Picgo/image-20250612171319927.png"
+alt="image-20250612171319927" /></p>
+<h1 id="74">7.4</h1>
+<h2 id="钟山风景区6301500-南博15001700">钟山风景区（6：30~15：00）+
+南博（15：00~17：00）</h2>
+<ul>
+<li>钟山风景区（中山陵提前七天预约，免费；明孝陵，灵谷寺，美龄宫，音乐台都提前1天预约，套票100r，美团直接搜）</li>
+<li>景区观光车10r/人次，或者租电动/景区黑车（备选）</li>
+</ul>
+<p><img src="https://caimotu.top/Picgo/image-20250612191224381.png"
+alt="image-20250612191224381" /></p>
+<ul>
+<li><p>南博提前7天预约，攻略参考：<a
+href="http://xhslink.com/a/xIvJtxrbsCMeb">http://xhslink.com/a/xIvJtxrbsCMeb</a></p>
+<p>两小时速通路线：</p>
+<img src="https://caimotu.top/Picgo/fe5861d2d7cf63c04d1dbf5e56c65c0.jpg" alt="fe5861d2d7cf63c04d1dbf5e56c65c0" style="zoom: 50%;" />
+</li>
+</ul>
+<h2 id="晚上新街口">晚上新街口</h2>
+<ul>
+<li>4号口孙中山铜像，7号口德基广场（7个厕所，8楼美术馆）</li>
+<li>15号口对面石鼓路美食街</li>
+<li>寻裕记现炒浇头、小潘记鸭血粉丝、澳挞……</li>
+</ul>
+<h1 id="75">7.5</h1>
+<h2 id="上午">上午</h2>
+<ul>
+<li><p>总统府（提前三天预约，35r，用学生证可半价，8：30开，可考虑租讲解）</p></li>
+<li><p>南博（前一天赶不及可以等7.5去）</p>
+<img src="https://caimotu.top/Picgo/3dba4c3a094ff2700005bb3b714bda5.jpg" alt="3dba4c3a094ff2700005bb3b714bda5" style="zoom: 50%;" />
+</li>
+</ul>
+<h2 id="下午">下午</h2>
+<ul>
+<li><p>牛首山（门票学生证80r），打车到东门即可。</p></li>
+<li><p>🏞️参观路线
+1️⃣走到山顶的观光车站后，乘坐扶手梯，再步行一小段便可以看到📍“佛顶圣境”四个大字，旁边的入口处就是网红打卡机位啦！
+2️⃣再坐扶手梯往上+走过一小段楼梯，就可以看到📍“水池和大榴莲”了！水池和大榴莲的长廊都是很出片的地方！
+3️⃣“大榴莲”的第一层可以看📍“卧佛”
+4️⃣看完“卧佛”后，从大榴莲左边按照指示牌方向去参观📍“地宫”，进入地宫前门口就有免费的鞋套更换的噢
+5️⃣先坐扶手梯下到“佛五层”也就是最深的一层，参观“千佛殿”，接着可以坐电梯上到“佛四层”的小阳台，拍网红推门视频
+6️⃣看完之后坐电梯回到一层就好啦，中途会有一些文创店，也有很多佛像和雕刻可以观看
+7️⃣出来后有时间可以去佛顶塔参观</p>
+<p><img src="https://caimotu.top/Picgo/image-20250612203244755.png"
+alt="image-20250612203244755" /></p></li>
+</ul>
+<h2 id="晚上">晚上</h2>
+<p>金陵小镇，夜宵君陵紫金。</p>
+<p>开放时间：到晚上九点半，学生票25，线上购票即可。</p>
+<ul>
+<li>游玩路线 桃蹊→文心馆→邻曲巷→满庭芳（客栈）→临霄台→绿筱园</li>
+<li>演出信息 1️⃣解音台 ▪️金陵微笑（舞蹈表演，下午2点和4点两场，5min）
+▪️云织箴言（舞蹈表演，晚上7点和8点两场，5min） 2️⃣文心馆
+▪️流转时空（裸眼3D展示，循环播放）
+▪️天下文枢（文心馆广场，迎宾仪式，上午10点半和下午3点、6点三场，5min）
+▪️千里仁风（艺术装置，上午10：35和下午15：05、18：05三场，5min）
+▪️古风漫步（古装巡游，文心馆广场至解音台，下午3点一场，10min） 3️⃣邻曲巷
+▪️欢喜市集（氛围互动，下午4点一场，1h） 4️⃣临霄台
+▪️瑞雪金陵（场景造雪，上午11点半一场，10min）
+▪️梦雪樱飞（舞蹈表演，下午1点和5点两场，10min）
+▪️琴笛引梅（灯光秀，晚上7：10和8：10两场，4min） 5️⃣绿筱园
+▪️长相知（灯光秀，晚上7：20和8：20两场，5min）</li>
+<li>园内娱乐 ✅汉服妆造 ✅漆扇制作（文心馆） ✅围炉煮茶 ✅盖章
+1️⃣文心馆出口×5枚 （服务台1枚，漆扇制作处4枚）
+2️⃣前于记×1枚（墨不太足）</li>
+</ul>
+<h1 id="76">7.6</h1>
+<h2 id="上午-1">上午</h2>
+<ul>
+<li><p>先导航到先锋书店（颐和路店）
+从这一端的颐和路开始Citywalk不用走回头路！</p>
+<p>🚶路线：颐和路—西桥—金银街—南秀村—陶谷新村—先锋书店（五台山店）</p>
+<p>👣一路的风景都很好看，还有很多咖啡店、古着店、文创店、特色餐厅等等，拍照打卡，闲逛聊天都很适合～</p>
+<p>🍛逛完后去吃了科巷的石锅轩，锅巴很香，温泉蛋嫩滑，拌饭好吃！</p>
+<p>📍颐和路： 一条颐和路，半部民国史
+晴天阳光透过树叶缝隙，斑驳的光影洒在黄墙上，歪脖子树依然浪漫。很多人在网红歪脖子树前打卡，可以提前规划好时间</p>
+<p>📍西桥： 抬头是时代，低头是市井
+沿着颐和路走经过颐和公馆就可以到网红机位打卡（宁海中学北门可打卡紫峰大厦拍照机位）</p>
+<p>📍金银街： 南大旁边的小街，有一些小摊、店铺和涂鸦墙
+可以打卡“我们如此热爱南京”的涂鸦！</p>
+<p>📍南秀村、陶谷新村：
+咖啡店、古着店、文创店和特色餐厅聚集区，走累了可以停下来休息休息，小店和居民区完美融合，既年轻又充满生活气息
+真的很羡慕南大的同学，学校周围有那么多有意思的小店和舒适的社区🥹</p>
+<p>推荐👍
+-朱氏梅花糕：陶谷新村巷口上过电视的梅花糕！尝了豆沙味道很好吃，外皮脆脆的，内馅香甜但有点烫</p>
+<p>-学人书店：在陶谷新村里面。很多旧书，唱片，各种国内外旧物件，中古装饰品，很有氛围，可以慢慢看，慢慢淘</p>
+<p>📍先锋书店（五台山店）：
+书店的风格、陈列都很有特色，拍照出片所以人比较多。可以静下心来阅读，看看明信片墙上别人的故事，也写下自己的故事，感受文字的温度</p>
+<img src="C:\Users\15458\Documents\WeChat Files\wxid_jy7sqq5gztjd22\FileStorage\Temp\8aafcf0006c51f3c641b66eb5492ee6.jpg" alt="8aafcf0006c51f3c641b66eb5492ee6" style="zoom:33%;" />
+</li>
+</ul>
+<h2 id="下午-1">下午</h2>
+<p>南京大屠杀死难者纪念馆（提前7天预约）</p>
+<p>PS：吃滴</p>
+<img src="https://caimotu.top/Picgo/c0c964fca484bd8464f4dc44fea9c80.jpg" alt="c0c964fca484bd8464f4dc44fea9c80" style="zoom:33%;" />
+]]></content>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计网实验--基本网络指令</title>
+    <url>/2025/04/30/%E8%AE%A1%E7%BD%91%E5%AE%9E%E9%AA%8C-%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
+    <title>《Attention is all your need》论文笔记</title>
+    <url>/2025/04/25/%E3%80%8AAttention%20is%20all%20your%20need%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="论文逐步分解读">论文逐步分解读</h1>
+<p>论文网址：</p>
+<p><a
+href="https://paperswithcode.com/paper/attention-is-all-you-need">https://paperswithcode.com/paper/attention-is-all-you-need</a></p>
+<p><a
+href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+<h2 id="transformer模型论文摘要解读">Transformer模型论文摘要解读</h2>
+<p>这篇论文是著名的"Attention Is All You
+Need"论文的摘要，介绍了Transformer模型，这是深度学习和自然语言处理领域的一个里程碑式创新。以下是主要内容解读：</p>
+<h3 id="研究背景与创新">研究背景与创新</h3>
+<ul>
+<li><p>之前的主流序列转导模型都基于复杂的循环神经网络(RNN)或卷积神经网络(CNN)，包含编码器和解码器结构</p></li>
+<li><p>性能最好的模型还通过注意力机制连接编码器和解码器</p></li>
+<li><p>论文提出了全新的网络架构"Transformer"，完全基于注意力机制，彻底摒弃了循环和卷积结构</p></li>
+</ul>
+<h3 id="实验结果">实验结果</h3>
+<ul>
+<li><p>在两个机器翻译任务上的实验表明，Transformer模型质量更优，同时更易于并行化，训练时间显著缩短</p></li>
+<li><p>在WMT 2014英德翻译任务上达到28.4
+BLEU分，比当时最好的结果(包括集成模型)高出2个BLEU以上</p></li>
+<li><p>在WMT 2014英法翻译任务上，单模型达到41.8
+BLEU的最新水平，仅用8个GPU训练3.5天，训练成本只是文献中最佳模型的一小部分</p></li>
+</ul>
+<h3 id="泛化能力">泛化能力</h3>
+<ul>
+<li>Transformer在其他任务上表现良好，成功应用于英语句法分析，无论是大规模还是有限的训练数据环境</li>
+</ul>
+<h2 id="研究背景">研究背景</h2>
+<p>论文开篇指出：</p>
+<ul>
+<li><p>循环神经网络(RNN)特别是LSTM和GRU已成为序列建模和转导问题(如语言建模和机器翻译)的最先进方法</p></li>
+<li><p>许多研究不断推动循环语言模型和编码器-解码器架构的边界</p></li>
+</ul>
+<h3 id="现有方法的局限性">现有方法的局限性</h3>
+<p>RNN的关键局限：</p>
+<ul>
+<li><p>循环模型通常沿着输入和输出序列的符号位置进行计算</p></li>
+<li><p>这种本质上的顺序性质阻碍了训练样例内的并行化，在更长序列长度下尤为关键</p></li>
+<li><p>虽然一些工作通过分解技巧和条件计算提高了计算效率，但顺序计算的基本约束仍然存在</p></li>
+</ul>
+<h3 id="注意力机制的重要性">注意力机制的重要性</h3>
+<ul>
+<li><p>注意力机制已成为序列建模和转导模型的重要组成部分，允许在不考虑输入或输出序列中距离的情况下建模依赖关系</p></li>
+<li><p>然而，大多数情况下，此类注意力机制与循环网络结合使用</p></li>
+</ul>
+<h3 id="transformer模型的提出">Transformer模型的提出</h3>
+<ul>
+<li><p>作者提出Transformer，一种完全放弃循环结构，而是完全依赖注意力机制来获取输入和输出间全局依赖关系的架构</p></li>
+<li><p>Transformer允许更多并行化，在8个P100
+GPU上训练仅12小时就达到机器翻译的新水平</p></li>
+</ul>
+<h3 id="相关工作比较">相关工作比较</h3>
+<p>论文讨论了其他减少顺序计算的模型：</p>
+<ul>
+<li><p>Extended Neural
+GPU、ByteNet和ConvS2S都使用CNN作为基本构建块</p></li>
+<li><p>这些模型中，关联两个任意输入或输出位置的操作数随距离增长(ConvS2S线性增长，ByteNet对数增长)</p></li>
+<li><p>Transformer将此减少为常数级别的操作，尽管以注意力加权位置平均导致的有效分辨率降低为代价，但后续通过多头注意力机制进行了补偿（具体方法在3.2节）</p></li>
+</ul>
+<p>论文特别提到自注意力(self-attention)机制：</p>
+<ul>
+<li><p>用于关联单个序列中的不同位置以计算序列表示</p></li>
+<li><p>已成功应用于阅读理解、摘要生成、文本蕴含和学习任务无关的句子表示</p></li>
+</ul>
+<h2 id="模型架构">模型架构</h2>
+<h3
+id="二编码器encoder细节"><strong>二、编码器（Encoder）细节</strong></h3>
+<h4 id="1-单层结构"><strong>1. 单层结构</strong></h4>
+<p>每层编码器包含两个子层：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 多头自注意力 → 残差连接+层归一化 → 前馈网络 → 残差连接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-关键技术解析"><strong>2. 关键技术解析</strong></h4>
+<ul>
+<li><strong>多头自注意力 (Multi-Head Self-Attention)</strong>
+<ul>
+<li><strong>作用</strong>：让每个词查看全句其他词，动态计算关联权重
+例：句子"Animal didn't cross the street because it was too
+tired"中，"it"通过自注意力定位到"Animal"</li>
+<li><strong>多头机制</strong>：将512维向量拆分为8个64维头，并行计算后拼接（类似8组不同滤镜观察句子）</li>
+</ul></li>
+<li><strong>前馈网络 (Position-wise FFN)</strong>
+<ul>
+<li><strong>结构</strong>：线性层→ReLU→线性层（公式：FFN(x)=max(0,xW1+b1)W2+b2）</li>
+<li><strong>特性</strong>：对每个词独立处理，无位置交互（与自注意力互补）</li>
+</ul></li>
+<li><strong>残差连接 + 层归一化</strong>
+<ul>
+<li><strong>操作</strong>：输出 = LayerNorm(原始x + 计算后的x)</li>
+<li><strong>目的</strong>：缓解梯度消失，加速深层网络训练</li>
+<li><strong>维度保持</strong>：所有子层输出保持d_model=512，便于叠加</li>
+</ul></li>
+</ul>
+<h4 id="3-6层堆叠的意义"><strong>3. 6层堆叠的意义</strong></h4>
+<ul>
+<li>底层：学习局部语法（如名词短语结构）</li>
+<li>中层：捕捉句间逻辑关系（因果、转折）</li>
+<li>高层：整合全局语义（篇章级信息）</li>
+</ul>
+<hr />
+<h3
+id="三解码器decoder细节"><strong>三、解码器（Decoder）细节</strong></h3>
+<h4 id="1-单层结构-1"><strong>1. 单层结构</strong></h4>
+<p>每层解码器包含三个子层：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 掩码自注意力 → 残差连接+层归一化 → 编码器-解码器注意力 → 残差连接+层归一化 → 前馈网络 → 残接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-核心差异点"><strong>2. 核心差异点</strong></h4>
+<ul>
+<li><strong>掩码自注意力 (Masked Self-Attention)</strong>
+<ul>
+<li><strong>实现方式</strong>：在softmax前将未来位置权重设为-∞</li>
+<li><strong>作用</strong>：确保预测第t个词时仅依赖前t-1个词 例：生成"I
+love"时，第三个词只能基于前两个词预测</li>
+</ul></li>
+<li><strong>编码器-解码器注意力</strong>
+<ul>
+<li><strong>Query来源</strong>：解码器当前状态</li>
+<li><strong>Key/Value来源</strong>：编码器最终输出</li>
+<li><strong>功能</strong>：实现源语言与目标语言的词对齐
+可视化案例：翻译"knowledge"时可能重点关注"知识"</li>
+</ul></li>
+</ul>
+<h4 id="3-位置偏移技巧"><strong>3. 位置偏移技巧</strong></h4>
+<ul>
+<li><strong>输出嵌入右移一位</strong>：
+训练时解码器输入是目标序列右移后的结果，确保当前位置预测仅依赖历史信息</li>
+</ul>
+<hr />
+<h3 id="q---a">Q---A</h3>
+<h4 id="q1-为什么每层都要残差连接"><strong>Q1:
+为什么每层都要残差连接？</strong></h4>
+<ul>
+<li>深层网络信号传递容易衰减，残差结构保留原始信息（类似高速公路）</li>
+<li>实验证明：无残差连接时6层网络难以收敛</li>
+</ul>
+<h4 id="q2-层归一化-vs-批归一化"><strong>Q2: 层归一化 vs
+批归一化</strong></h4>
+<ul>
+<li>批归一化：对同一批次内所有样本的同一特征做归一化（适合CV）</li>
+<li><strong>层归一化</strong>：对单个样本的所有特征做归一化（更适合NLP变长序列）</li>
+</ul>
+<h4 id="q3-为什么用6层而不是更多"><strong>Q3:
+为什么用6层而不是更多？</strong></h4>
+<ul>
+<li>论文实验表明：6层在翻译任务上达到效率与效果的平衡
+（后续研究如BERT使用12/24层，需更多数据与算力支持）</li>
+</ul>
+<hr />
+<h3 id="五实例演算流程"><strong>五、实例演算流程</strong></h3>
+<p>以英译中为例：</p>
+<ol type="1">
+<li><strong>编码过程</strong> 输入："The cat sat on the mat"
+经过6层编码器后，每个词被转换为包含上下文信息的512维向量</li>
+<li><strong>解码过程</strong> 生成："猫坐在垫子上"
+<ul>
+<li>第1步：接收起始符，通过掩码自注意力初始化状态</li>
+<li>第2步：生成"猫"时，编码器-解码器注意力聚焦"cat"</li>
+<li>第3步：生成"坐"时，自注意力关联"sat"，编码器注意力保持对"cat"关注</li>
+<li>后续步骤同理，直至生成终止符</li>
+</ul></li>
+</ol>
+<hr />
+<p><strong>关键结论</strong>：Transformer通过<strong>堆叠自注意力层+位置感知前馈网络</strong>，实现了：
+① 完全并行化计算 ② 长距离依赖捕捉 ③
+端到端对齐能力。这种设计成为后续GPT、BERT等模型的基石。</p>
+]]></content>
+      <tags>
+        <tag>多模态大模型论文学习</tag>
       </tags>
   </entry>
 </search>
