@@ -1,5 +1,4 @@
 ---
-layout: posts
 title: 《Attention is all your need》论文笔记
 date: 2025-04-25 13:10:05
 tags: 多模态大模型论文学习

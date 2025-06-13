@@ -1,5 +1,4 @@
 ---
-layout: posts
 title: RNN简介
 date: 2025-04-25 13:05:09
 tags: 深度学习
