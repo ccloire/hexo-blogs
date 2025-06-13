@@ -102,6 +102,7 @@ theme: butterfly
 plugins:
   - pandoc
 pandoc:
+  pandoc_path: "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\pandoc.exe" # 根据你的 Pandoc 安装路径修改
   args: #参数列表
     - "-f"
     - "gfm"
