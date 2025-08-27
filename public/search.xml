@@ -1,291 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Go语言初阶</title>
-    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
-    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
-<p>Go语言特点：简单，便于管理编写</p>
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>RNN简介</title>
-    <url>/2025/04/25/RNN%E7%AE%80%E4%BB%8B/</url>
-    <content><![CDATA[<h1 id="rnn循环神经网络简要介绍">RNN(循环神经网络)简要介绍</h1>
-<h2 id="简介">简介</h2>
-<p>循环神经网络模型以序列数据为输入（数据内部的元素是有顺序关系的），如文章、语句、一周的天气信息、三个月的股市指数等。与传统的前馈网络不同的是，RNN模型处理序列数据能够获取更多的语义信息，时序信息等。</p>
-<p>处理任务示例：</p>
-<p>以NER（命名实体识别）为例，从自然语言文本中识别真实世界中的实体名及其类别。如：</p>
-<p>句子1：I like eating apple!——其中的apple指的是苹果食物</p>
-<p>句子2：The Apple is a great company！——其中的Apple指的是苹果公司</p>
-<p>而如果是传统的DNN（深度神经网络）模型，由于输入方式为逐元素输入，无法有效获取上下文信息，则若训练集中的apple一词大部分被标记为苹果食物，那么对测试集中的apple处理也将全部标记为苹果食物而非根据实际上下文推断。</p>
-<h2 id="模型提出">模型提出</h2>
-<h3 id="基本rnn结构">基本RNN结构</h3>
-<p>为了解决普通DNN（深度神经网络）逐元素输入而无法有效获取上下文信息的问题。RNN最基本的改良点在于增加一个模块用于储存上下文信息，下图即是一个典型的RNN结构示意：</p>
-<img src="https://caimotu.top/Picgo/image-20250417165208064.png" alt="image-20250417165208064" style="zoom:33%;" />
-
-<p>其中I（输入序列）到O（输出序列）的过程增加了一个保存上下文信息的权重矩阵W，也就是每次输出O不仅要考虑当前的输入数据I，还要考虑上一次输出的隐藏序列W（保存上下文）。RNN就是一个循环递归地处理上述输入输出的过程。</p>
-<h3 id="rnn展开结构">RNN展开结构</h3>
-<p>将上图的基本结构展开，就成为了下图展示的模型计算过程：</p>
-<img src="https://caimotu.top/Picgo/ebe46967a3e80dab4c04635a2c6785f.jpg" alt="ebe46967a3e80dab4c04635a2c6785f" style="zoom:33%;" />
-
-<p>其中 <span class="math inline">\(x_i\)</span>
-表示i时刻的模型输入，<span class="math inline">\(y_i\)</span>表示<span
-class="math inline">\(x_i\)</span>对应的输出结果，模型计算公式如下：
-<span class="math display">\[
-\begin{split}
-y_i = g(Vh_i)
-\\
-\\
-h_i = f(Ux_i + Wh_{i-1})
-\end{split}
-\]</span>
-U表示当前输入数据的权重因子，W表示决定上下文信息影响程度的参数矩阵，<span
-class="math inline">\(h_i\)</span>则表示当前隐藏层的输出隐变量。可以看出决定当前输出<span
-class="math inline">\(y_i\)</span>的隐变量<span
-class="math inline">\(h_i\)</span>不仅由当前输入<span
-class="math inline">\(x_i\)</span>决定，也与上一时刻的隐变量<span
-class="math inline">\(h_{i-1}\)</span>有关。（PS：整个模型计算过程里用的参数矩阵W是一定的）</p>
-<h2 id="rnn模型结构变化">RNN模型结构变化</h2>
-<p>上述展开结构会根据输入长度和输出长度的变化而产生不同的结构</p>
-<h3 id="n-to-n结构">N to N结构</h3>
-<p>这类结构的输入长度与输出长度相同，也即每一个输入值都会对应一个输出值。通常用于逐序列判断或分类任务（如序列标注，NER，视频帧分类等）。示例图与计算模型如2.2所述。</p>
-<h3 id="n-to-1结构">N to 1结构</h3>
-<p>这类结构只有一个输出值，表示输出结果包含了整个输入序列的语义信息和上下文信息。结构示意图：</p>
-<img src="https://caimotu.top/Picgo/8606007dd425e9195f0c11d4719656f.jpg" alt="8606007dd425e9195f0c11d4719656f" style="zoom: 50%;" />
-
-<p>计算模型： <span class="math display">\[
-\begin{split}
-Y = y_N = g(Vh_N)
-\\
-h_i = f(Ux_i+ Wh_{i-1})
-\end{split}
-\]</span> 这类结构通常用于文字分类、文章分类以及图像分类任务。</p>
-<h3 id="1-to-n结构">1 to N结构</h3>
-<p>一个输入数据对应一系列输出，其意义是一个起始状态或种子数据会随时间变化生成一个序列的输出结果。</p>
-<p>若输入数据只在首个时刻输入，则计算示意图如下所示：</p>
-<img src="https://caimotu.top/Picgo/112ce7e4cbc3de28915ec314a82fdba.jpg" alt="112ce7e4cbc3de28915ec314a82fdba" style="zoom:50%;" />
-
-<p>而若输入数据在每个时刻都作为输入，则示意图如下：</p>
-<img src="https://caimotu.top/Picgo/bd9767d63cc2fd88b9b265d80777250.jpg" alt="bd9767d63cc2fd88b9b265d80777250" style="zoom:50%;" />
-
-<p>该结构通常用于由图像自动生成文章、类别生成音乐、文章、代码等由种子数据生成序列的任务。</p>
-<h3 id="n-to-m结构encoder-decoder模型seq2seq模型">N to
-M结构（encoder-decoder模型、seq2seq模型）</h3>
-<p>最后一类是输入输出序列长度不相等的结构。通常采用一个N to 1结构和一个1
-to M结构组合来实现，如下图：</p>
-<img src="https://caimotu.top/Picgo/f529bf34ed1f0a34e98af6cd3b390b2.jpg" alt="f529bf34ed1f0a34e98af6cd3b390b2" style="zoom:50%;" />
-
-<img src="https://caimotu.top/Picgo/6355d703227ac85b3ac67a61c52bd84.jpg" alt="6355d703227ac85b3ac67a61c52bd84" style="zoom: 33%;" />
-
-<p>由上图可以看出，两个不同长度的RNN模型组合可以控制输出序列长度。两个模型之间通过一个上下文向量C来链接，其中C可作为第二个RNN模型的输入数据并对初始隐藏变量<span
-class="math inline">\(h_0^{&#39;}\)</span>​进行初始化（如第一个图），也可以直接被用来初始化第二个RNN模型的隐藏变量（如第二个图）。</p>
-<p>常用的上下文向量C的求解方法有： <span class="math display">\[
-\begin{split}
-c = h_N
-\\
-c = g(h_N)
-\\
-c = g(h_1 :: h_N)
-\end{split}
-\]</span>
-第一种方法直接将encoder的输出作为上下文向量；第二种方法则需要先对encoder输出进行变换；第三种方法则将encoder的一个输出序列进行变换，而非单一选取最后一个输出。</p>
-<p>通常将第一个RNN模型作为encoder（编码器），第二个RNN模型成为decoder（解码器）。通过这样N
-to
-M的RNN模型，我们可以处理各类序列处理任务，如语音识别，文本摘要，机器翻译，图像描述生成等。</p>
-<h2 id="梯度消失与梯度爆炸">梯度消失与梯度爆炸</h2>
-<h3 id="概念">概念</h3>
-<p>由于RNN中的上下文参数矩阵是权重共享的，即当进行梯度更新时，对该矩阵求偏导数时需要加入时序影响，将导致存在基于时序数量的权重“连乘”。若某一阶段权重值过小，结合“连乘”将导致最终权重趋于“无穷小”（即等于0），此现象称为“梯度消失”。相反地，若权重值过大，经连乘后将导致权重值变得过大，称为“梯度爆炸”。</p>
-<p>与普通NN的梯度消失及梯度爆炸不同，RNN的梯度爆炸（或消失）是根本原因是“连乘”，是在反向传播的某一阶段出现的，在此之前的反向传播不受影响。</p>
-<h3 id="如何解决">如何解决</h3>
-<p><strong>1. 梯度爆炸的解决</strong></p>
-<p>1）梯度裁剪</p>
-<p>​
-梯度裁剪即为梯度更新时的梯度设置上限，当超过阈值将强制裁剪，避免出现过高阈值。</p>
-<p><strong>2. 梯度消失的解决</strong></p>
-<p>1）使用Relu激活函数</p>
-<p>​
-使用Relu激活函数解决梯度消失的原理是，Relu函数在自变量大于0是，因变量恒为1，由此避免梯度过小。</p>
-<p>2）变更RNN结构</p>
-<p>​ 改用变种版本的RNN结构，常见的包括LSTM模型及GRU模型。</p>
-]]></content>
-      <tags>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《Attention is all your need》论文笔记</title>
-    <url>/2025/04/25/%E3%80%8AAttention%20is%20all%20your%20need%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="论文逐步分解读">论文逐步分解读</h1>
-<p>论文网址：</p>
-<p><a
-href="https://paperswithcode.com/paper/attention-is-all-you-need">https://paperswithcode.com/paper/attention-is-all-you-need</a></p>
-<p><a
-href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
-<h2 id="transformer模型论文摘要解读">Transformer模型论文摘要解读</h2>
-<p>这篇论文是著名的"Attention Is All You
-Need"论文的摘要，介绍了Transformer模型，这是深度学习和自然语言处理领域的一个里程碑式创新。以下是主要内容解读：</p>
-<h3 id="研究背景与创新">研究背景与创新</h3>
-<ul>
-<li><p>之前的主流序列转导模型都基于复杂的循环神经网络(RNN)或卷积神经网络(CNN)，包含编码器和解码器结构</p></li>
-<li><p>性能最好的模型还通过注意力机制连接编码器和解码器</p></li>
-<li><p>论文提出了全新的网络架构"Transformer"，完全基于注意力机制，彻底摒弃了循环和卷积结构</p></li>
-</ul>
-<h3 id="实验结果">实验结果</h3>
-<ul>
-<li><p>在两个机器翻译任务上的实验表明，Transformer模型质量更优，同时更易于并行化，训练时间显著缩短</p></li>
-<li><p>在WMT 2014英德翻译任务上达到28.4
-BLEU分，比当时最好的结果(包括集成模型)高出2个BLEU以上</p></li>
-<li><p>在WMT 2014英法翻译任务上，单模型达到41.8
-BLEU的最新水平，仅用8个GPU训练3.5天，训练成本只是文献中最佳模型的一小部分</p></li>
-</ul>
-<h3 id="泛化能力">泛化能力</h3>
-<ul>
-<li>Transformer在其他任务上表现良好，成功应用于英语句法分析，无论是大规模还是有限的训练数据环境</li>
-</ul>
-<h2 id="研究背景">研究背景</h2>
-<p>论文开篇指出：</p>
-<ul>
-<li><p>循环神经网络(RNN)特别是LSTM和GRU已成为序列建模和转导问题(如语言建模和机器翻译)的最先进方法</p></li>
-<li><p>许多研究不断推动循环语言模型和编码器-解码器架构的边界</p></li>
-</ul>
-<h3 id="现有方法的局限性">现有方法的局限性</h3>
-<p>RNN的关键局限：</p>
-<ul>
-<li><p>循环模型通常沿着输入和输出序列的符号位置进行计算</p></li>
-<li><p>这种本质上的顺序性质阻碍了训练样例内的并行化，在更长序列长度下尤为关键</p></li>
-<li><p>虽然一些工作通过分解技巧和条件计算提高了计算效率，但顺序计算的基本约束仍然存在</p></li>
-</ul>
-<h3 id="注意力机制的重要性">注意力机制的重要性</h3>
-<ul>
-<li><p>注意力机制已成为序列建模和转导模型的重要组成部分，允许在不考虑输入或输出序列中距离的情况下建模依赖关系</p></li>
-<li><p>然而，大多数情况下，此类注意力机制与循环网络结合使用</p></li>
-</ul>
-<h3 id="transformer模型的提出">Transformer模型的提出</h3>
-<ul>
-<li><p>作者提出Transformer，一种完全放弃循环结构，而是完全依赖注意力机制来获取输入和输出间全局依赖关系的架构</p></li>
-<li><p>Transformer允许更多并行化，在8个P100
-GPU上训练仅12小时就达到机器翻译的新水平</p></li>
-</ul>
-<h3 id="相关工作比较">相关工作比较</h3>
-<p>论文讨论了其他减少顺序计算的模型：</p>
-<ul>
-<li><p>Extended Neural
-GPU、ByteNet和ConvS2S都使用CNN作为基本构建块</p></li>
-<li><p>这些模型中，关联两个任意输入或输出位置的操作数随距离增长(ConvS2S线性增长，ByteNet对数增长)</p></li>
-<li><p>Transformer将此减少为常数级别的操作，尽管以注意力加权位置平均导致的有效分辨率降低为代价，但后续通过多头注意力机制进行了补偿（具体方法在3.2节）</p></li>
-</ul>
-<p>论文特别提到自注意力(self-attention)机制：</p>
-<ul>
-<li><p>用于关联单个序列中的不同位置以计算序列表示</p></li>
-<li><p>已成功应用于阅读理解、摘要生成、文本蕴含和学习任务无关的句子表示</p></li>
-</ul>
-<h2 id="模型架构">模型架构</h2>
-<h3
-id="二编码器encoder细节"><strong>二、编码器（Encoder）细节</strong></h3>
-<h4 id="1-单层结构"><strong>1. 单层结构</strong></h4>
-<p>每层编码器包含两个子层：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 多头自注意力 → 残差连接+层归一化 → 前馈网络 → 残差连接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-关键技术解析"><strong>2. 关键技术解析</strong></h4>
-<ul>
-<li><strong>多头自注意力 (Multi-Head Self-Attention)</strong>
-<ul>
-<li><strong>作用</strong>：让每个词查看全句其他词，动态计算关联权重
-例：句子"Animal didn't cross the street because it was too
-tired"中，"it"通过自注意力定位到"Animal"</li>
-<li><strong>多头机制</strong>：将512维向量拆分为8个64维头，并行计算后拼接（类似8组不同滤镜观察句子）</li>
-</ul></li>
-<li><strong>前馈网络 (Position-wise FFN)</strong>
-<ul>
-<li><strong>结构</strong>：线性层→ReLU→线性层（公式：FFN(x)=max(0,xW1+b1)W2+b2）</li>
-<li><strong>特性</strong>：对每个词独立处理，无位置交互（与自注意力互补）</li>
-</ul></li>
-<li><strong>残差连接 + 层归一化</strong>
-<ul>
-<li><strong>操作</strong>：输出 = LayerNorm(原始x + 计算后的x)</li>
-<li><strong>目的</strong>：缓解梯度消失，加速深层网络训练</li>
-<li><strong>维度保持</strong>：所有子层输出保持d_model=512，便于叠加</li>
-</ul></li>
-</ul>
-<h4 id="3-6层堆叠的意义"><strong>3. 6层堆叠的意义</strong></h4>
-<ul>
-<li>底层：学习局部语法（如名词短语结构）</li>
-<li>中层：捕捉句间逻辑关系（因果、转折）</li>
-<li>高层：整合全局语义（篇章级信息）</li>
-</ul>
-<hr />
-<h3
-id="三解码器decoder细节"><strong>三、解码器（Decoder）细节</strong></h3>
-<h4 id="1-单层结构-1"><strong>1. 单层结构</strong></h4>
-<p>每层解码器包含三个子层：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 掩码自注意力 → 残差连接+层归一化 → 编码器-解码器注意力 → 残差连接+层归一化 → 前馈网络 → 残接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-核心差异点"><strong>2. 核心差异点</strong></h4>
-<ul>
-<li><strong>掩码自注意力 (Masked Self-Attention)</strong>
-<ul>
-<li><strong>实现方式</strong>：在softmax前将未来位置权重设为-∞</li>
-<li><strong>作用</strong>：确保预测第t个词时仅依赖前t-1个词 例：生成"I
-love"时，第三个词只能基于前两个词预测</li>
-</ul></li>
-<li><strong>编码器-解码器注意力</strong>
-<ul>
-<li><strong>Query来源</strong>：解码器当前状态</li>
-<li><strong>Key/Value来源</strong>：编码器最终输出</li>
-<li><strong>功能</strong>：实现源语言与目标语言的词对齐
-可视化案例：翻译"knowledge"时可能重点关注"知识"</li>
-</ul></li>
-</ul>
-<h4 id="3-位置偏移技巧"><strong>3. 位置偏移技巧</strong></h4>
-<ul>
-<li><strong>输出嵌入右移一位</strong>：
-训练时解码器输入是目标序列右移后的结果，确保当前位置预测仅依赖历史信息</li>
-</ul>
-<hr />
-<h3 id="q---a">Q---A</h3>
-<h4 id="q1-为什么每层都要残差连接"><strong>Q1:
-为什么每层都要残差连接？</strong></h4>
-<ul>
-<li>深层网络信号传递容易衰减，残差结构保留原始信息（类似高速公路）</li>
-<li>实验证明：无残差连接时6层网络难以收敛</li>
-</ul>
-<h4 id="q2-层归一化-vs-批归一化"><strong>Q2: 层归一化 vs
-批归一化</strong></h4>
-<ul>
-<li>批归一化：对同一批次内所有样本的同一特征做归一化（适合CV）</li>
-<li><strong>层归一化</strong>：对单个样本的所有特征做归一化（更适合NLP变长序列）</li>
-</ul>
-<h4 id="q3-为什么用6层而不是更多"><strong>Q3:
-为什么用6层而不是更多？</strong></h4>
-<ul>
-<li>论文实验表明：6层在翻译任务上达到效率与效果的平衡
-（后续研究如BERT使用12/24层，需更多数据与算力支持）</li>
-</ul>
-<hr />
-<h3 id="五实例演算流程"><strong>五、实例演算流程</strong></h3>
-<p>以英译中为例：</p>
-<ol type="1">
-<li><strong>编码过程</strong> 输入："The cat sat on the mat"
-经过6层编码器后，每个词被转换为包含上下文信息的512维向量</li>
-<li><strong>解码过程</strong> 生成："猫坐在垫子上"
-<ul>
-<li>第1步：接收起始符，通过掩码自注意力初始化状态</li>
-<li>第2步：生成"猫"时，编码器-解码器注意力聚焦"cat"</li>
-<li>第3步：生成"坐"时，自注意力关联"sat"，编码器注意力保持对"cat"关注</li>
-<li>后续步骤同理，直至生成终止符</li>
-</ul></li>
-</ol>
-<hr />
-<p><strong>关键结论</strong>：Transformer通过<strong>堆叠自注意力层+位置感知前馈网络</strong>，实现了：
-① 完全并行化计算 ② 长距离依赖捕捉 ③
-端到端对齐能力。这种设计成为后续GPT、BERT等模型的基石。</p>
-]]></content>
-      <tags>
-        <tag>多模态大模型论文学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2025/01/02/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -318,6 +33,14 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
+    <title>Go语言初阶</title>
+    <url>/2025/03/31/Go%E8%AF%AD%E8%A8%80%E5%88%9D%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="go第一印象">Go第一印象</h1>
+<p>Go语言特点：简单，便于管理编写</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 定义一个struct类</span></span><br><span class="line"><span class="keyword">type</span> Class <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    PublicVariable <span class="type">string</span> <span class="comment">//公共变量的声明--变量类型首字母大写即可</span></span><br><span class="line">    privateVariable <span class="type">string</span> <span class="comment">//私有变量的声明--变量类型首字母小写即可</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//公共方法（函数）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *SomeClass)</span></span> PublicMethod() (result )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>如何低代码搭建个人博客？</title>
     <url>/2025/02/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="网站搭建基本理论">网站搭建基本理论</h1>
@@ -330,8 +53,246 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
       </tags>
   </entry>
   <entry>
+    <title>C&amp;C++基础语法-命令行参数</title>
+    <url>/2025/08/12/C++%E5%90%88%E9%9B%86/C&amp;C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[<h2
+id="第一部分什么是命令行参数-command-line-arguments">第一部分：什么是命令行参数
+(Command-line Arguments)？</h2>
+<p><strong>命令行参数</strong>是在您从终端（命令行界面）启动一个程序时，跟在程序名称后面传递给该程序的一系列字符串。它们是<strong>一种让用户从外部控制程序行为、向程序传递初始数据的主要方式</strong>。</p>
+<p>想象一下，程序本身是一个函数，而命令行参数就是您传递给这个函数的“参数”。</p>
+<p><strong>一个直观的例子：</strong> 当您在 Linux 终端输入这个命令时：
+<code>ls -l /home</code></p>
+<ul>
+<li><code>ls</code>：这是您要执行的<strong>程序名</strong>。</li>
+<li><code>-l</code>：这是传递给 <code>ls</code>
+程序的<strong>第一个参数</strong>。它告诉 <code>ls</code>
+程序使用“长列表格式”来显示文件。</li>
+<li><code>/home</code>：这是传递给 <code>ls</code>
+程序的<strong>第二个参数</strong>。它告诉 <code>ls</code> 程序去列出
+<code>/home</code> 目录下的内容。</li>
+</ul>
+<p>通过 <code>-l</code> 和 <code>/home</code> 这两个参数，我们控制了
+<code>ls</code> 程序的输出格式和目标路径，而无需修改 <code>ls</code>
+程序本身的任何代码。</p>
+<h3 id="在-cc-中如何接收命令行参数">在 C/C++ 中如何接收命令行参数？</h3>
+<p>C/C++ 程序通过 <code>main</code>
+函数的两个特殊形参来接收命令行参数：<code>argc</code> 和
+<code>argv</code>。</p>
+<p>C++</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>int argc</code> (Argument Count):
+这是一个整数，表示<strong>命令行参数的总数量</strong>。这个计数<strong>总是至少为
+1</strong>，因为它把程序自身的名字也算作第一个参数。</li>
+<li><code>char *argv[]</code> (Argument Vector):
+这是一个“指向字符指针的指针数组”，简单理解就是一个<strong>字符串数组</strong>。它包含了所有的参数字符串。
+<ul>
+<li><code>argv[0]</code>：永远是<strong>程序本身的名字</strong>（例如
+<code>"./my_program"</code>）。</li>
+<li><code>argv[1]</code>：是第一个实际的参数（例如
+<code>"-l"</code>）。</li>
+<li><code>argv[2]</code>：是第二个实际的参数（例如
+<code>"/home"</code>）。</li>
+<li>...</li>
+<li><code>argv[argc-1]</code>：是最后一个参数。</li>
+<li><code>argv[argc]</code>：标准保证这一定是一个<strong>空指针
+(<code>nullptr</code>)</strong>，可以作为数组结束的标记。</li>
+</ul></li>
+</ul>
+<p><strong>示例代码：</strong> 将以下代码保存为
+<code>test.cpp</code>，并编译 (<code>g++ test.cpp -o test</code>)。</p>
+<p>C++</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    std::cout &lt;&lt; &quot;收到了 &quot; &lt;&lt; argc &lt;&lt; &quot; 个命令行参数。&quot; &lt;&lt; std::endl;</span><br><span class="line">    for (int i = 0; i &lt; argc; ++i) &#123;</span><br><span class="line">        std::cout &lt;&lt; &quot;argv[&quot; &lt;&lt; i &lt;&lt; &quot;]: &quot; &lt;&lt; argv[i] &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，在终端中这样运行它： <code>./test hello world 123</code></p>
+<p><strong>输出将会是：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">收到了 4 个命令行参数。</span><br><span class="line">argv[0]: ./test</span><br><span class="line">argv[1]: hello</span><br><span class="line">argv[2]: world</span><br><span class="line">argv[3]: 123</span><br></pre></td></tr></table></figure>
+
+<hr />
+<h2
+id="第二部分命令行参数和环境变量存放在哪里">第二部分：命令行参数和环境变量存放在哪里？</h2>
+<p>这是个更深入的问题，它涉及到程序启动时内存的布局。</p>
+<p>回顾我们之前讨论的内存布局图。命令行参数和环境变量都存放在一个非常特殊的位置：<strong>位于栈的顶部之上，属于进程用户空间的最高地址部分。</strong></p>
+<p><strong>详细的启动过程和内存存放：</strong></p>
+<ol type="1">
+<li><strong>准备阶段 (在 Shell 中)</strong>：当您在 shell (如
+<code>bash</code>) 中输入 <code>./test hello</code> 并按回车时，shell
+进程会负责启动 <code>test</code> 程序。shell
+本身知道您给出的参数（<code>"hello"</code>）和它自己的所有环境变量（如
+<code>PATH</code>, <code>HOME</code> 等）。</li>
+<li><strong><code>execve</code> 系统调用</strong>：shell 通过
+<code>execve()</code> 这个系统调用来加载并执行 <code>test</code>
+程序。这是最关键的一步。内核（Kernel）在处理 <code>execve</code>
+时，会为 <code>test</code> 程序创建一个全新的虚拟地址空间。</li>
+<li><strong>内核填充数据</strong>：在新的地址空间准备好后，内核会做一件事：<strong>将命令行参数和环境变量的字符串本身，从旧的
+shell 进程复制到新进程用户空间地址的最高处</strong>。</li>
+<li><strong>设置栈顶</strong>：紧接着在这些字符串的下方，内核会构建
+<code>argv</code> 和 <code>envp</code> (环境变量指针数组)
+这两个指针数组。数组中的每个指针分别指向刚才复制过来的那些字符串。<code>argc</code>
+的值也会被放在这里。</li>
+<li><strong>启动程序</strong>：最后，内核将栈指针 <code>esp</code>
+设置在这些数据结构的下方，然后将CPU的控制权交给程序的启动代码（<code>_start</code>），<code>_start</code>
+会进一步调用我们的 <code>main</code> 函数，并将 <code>argc</code> 和
+<code>argv</code> 的地址作为参数传递给 <code>main</code>。</li>
+</ol>
+<p><strong>内存布局示意图（用户空间顶部）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+-----------------------+ 0xC0000000 (内核空间起始)</span><br><span class="line">|                       |</span><br><span class="line">| &quot;HOME=/home/user&quot;     | \</span><br><span class="line">| &quot;USER=myuser&quot;         |  &gt; 环境变量字符串</span><br><span class="line">| ...                   | /</span><br><span class="line">+-----------------------+</span><br><span class="line">| &quot;world&quot;               | \</span><br><span class="line">| &quot;hello&quot;               |  &gt; 命令行参数字符串</span><br><span class="line">| &quot;./test&quot;              | /</span><br><span class="line">+-----------------------+</span><br><span class="line">| nullptr               | \</span><br><span class="line">| 指向 &quot;HOME=...&quot; 的指针 |  &gt; envp[] 数组</span><br><span class="line">| 指向 &quot;USER=...&quot; 的指针 | /</span><br><span class="line">+-----------------------+</span><br><span class="line">| nullptr               | \</span><br><span class="line">| 指向 &quot;world&quot; 的指针   |  &gt; argv[] 数组</span><br><span class="line">| 指向 &quot;hello&quot; 的指针   |</span><br><span class="line">| 指向 &quot;./test&quot; 的指针  | /</span><br><span class="line">+-----------------------+</span><br><span class="line">| 4 (argc 的值)         |</span><br><span class="line">+-----------------------+ &lt;--- 栈顶指针(esp)初始指向这里</span><br><span class="line">|                       |</span><br><span class="line">|          栈           |</span><br><span class="line">|  (Stack grows down)   | &lt;--- 后续函数调用将在这里创建栈帧</span><br><span class="line">|           |           |</span><br><span class="line">|           v           |</span><br><span class="line">|                       |</span><br><span class="line">+-----------------------+</span><br><span class="line">|          ...          | (mmap, heap, .data, etc.)</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<ul>
+<li><strong>什么是命令行参数？</strong>
+<ul>
+<li>它们是在程序启动时从外部传入的字符串，用于控制程序行为。</li>
+<li>在C/C++中通过 <code>main(int argc, char *argv[])</code>
+接收。<code>argc</code> 是数量，<code>argv</code> 是字符串数组。</li>
+</ul></li>
+<li><strong>它们存放在哪里？</strong>
+<ul>
+<li>存放在<strong>进程用户空间内存的最高地址区域，位于栈的初始位置之上</strong>。</li>
+<li>这个区域由<strong>操作系统内核</strong>在程序启动执行
+<code>execve</code>
+系统调用时负责创建和填充，然后将指向这片区域的指针作为参数传递给程序的
+<code>main</code> 函数。</li>
+</ul></li>
+</ul>
+<h1 id="命令行参数作用">命令行参数作用</h1>
+<p>命令行参数的用处极其广泛，可以说是程序员和系统管理员工具箱中最重要的工具之一。</p>
+<p>它的核心作用是：<strong>让一个程序变得灵活、可配置、可自动化，而无需修改程序源代码。</strong></p>
+<p>想象一下，如果没有命令行参数，<code>ls</code>
+命令就只能用一种方式列出文件；<code>cp</code>
+命令就不知道要拷贝哪个文件到哪里。我们必须为每一种细微的需求都编写一个全新的程序。而命令行参数允许我们用同一个程序来处理无数种不同的场景。</p>
+<p>下面通过几个真实且经典的例子，来展示它的具体用途。</p>
+<h2
+id="指定输入和输出告诉程序对谁操作结果放哪">指定输入和输出：告诉程序“对谁操作，结果放哪”</h2>
+<p>这是最基本、最常见的用途。</p>
+<p><strong>示例：<code>g++</code> 编译器</strong></p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">g++ main.cpp -o my_app</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>g++</code></strong>: 要执行的程序（C++编译器）。</li>
+<li><strong><code>main.cpp</code></strong>:
+第一个参数，是<strong>输入文件</strong>。它告诉 <code>g++</code>
+去编译哪个源代码文件。</li>
+<li><strong><code>-o</code></strong>:
+第二个参数，是一个<strong>选项（Flag）</strong>，意思是“我要指定输出文件名”。</li>
+<li><strong><code>my_app</code></strong>: 第三个参数，是 <code>-o</code>
+选项的值，即<strong>输出文件</strong>的名字。</li>
+</ul>
+<p><strong>作用</strong>：如果没有这些参数，<code>g++</code>
+根本不知道要编译哪个文件，编译后的程序叫什么名字。通过参数，我们精确地指导了编译器的工作流程。</p>
+<h2 id="控制程序行为告诉程序怎么做">控制程序行为：告诉程序“怎么做”</h2>
+<p>通过“选项”或“标志”（Flags），我们可以像拨动开关一样改变程序的内部行为。</p>
+<p><strong>示例：<code>ls</code> (列出目录内容)</strong></p>
+<ul>
+<li><p>只执行 <code>ls</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ls</span><br><span class="line">Desktop  Documents  Downloads  Music  Pictures</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加入参数 <code>ls -l</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">drwxr-xr-x 2 user user 4096 Aug 10 10:20 Desktop</span><br><span class="line">drwxr-xr-x 3 user user 4096 Aug 11 15:30 Documents</span><br><span class="line">drwxr-xr-x 2 user user 4096 Jul 29 09:00 Downloads</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><code>-l</code> 参数就像一个开关，它告诉
+<code>ls</code>：“请使用**长列表格式（long
+format）**显示，包含权限、所有者、大小等详细信息。”</p></li>
+<li><p>加入更多参数 <code>ls -l -a -h</code> (或者合并为
+<code>ls -lah</code>):</p>
+<ul>
+<li><code>-a</code> (all): “请显示所有文件，<strong>包括以
+<code>.</code> 开头的隐藏文件</strong>。”</li>
+<li><code>-h</code> (human-readable):
+“请以<strong>人类易读的格式</strong>（如 <code>4.0K</code>,
+<code>1.2M</code>）显示文件大小，而不是显示字节数。”</li>
+</ul></li>
+</ul>
+<p><strong>作用</strong>：同一个 <code>ls</code>
+程序，通过不同的参数组合，可以实现完全不同的显示效果，满足了用户从“快速浏览”到“详细审查”的各种需求。</p>
+<h2
+id="提供运行所需的数据给程序提供原料">提供运行所需的数据：给程序“提供原料”</h2>
+<p>有些程序必须要有外部数据才能运行。</p>
+<p><strong>示例：<code>ping</code> (网络诊断工具)</strong></p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping -c 5 google.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>ping</code></strong>: 程序名。</li>
+<li><strong><code>-c 5</code></strong>: 一个带值的选项，告诉
+<code>ping</code> 程序：“总共只<strong>发送 5 次</strong>请求就停止。”
+(<code>c</code> 代表 count)。</li>
+<li><strong><code>google.com</code></strong>: 一个必需的参数，告诉
+<code>ping</code> 程序：“你要测试的目标主机是 **<a
+href="https://www.google.com/url?sa=E&amp;source=gmail&amp;q=google.com**。”">https://www.google.com/url?sa=E&amp;source=gmail&amp;q=google.com**。”</a></li>
+</ul>
+<p><strong>作用</strong>：如果没有 <code>google.com</code>
+这个参数，<code>ping</code> 程序就失去了目标，完全无法工作。而
+<code>-c 5</code> 则进一步配置了它的具体行为。</p>
+<h2
+id="实现自动化和批处理让程序在脚本中被重复使用">实现自动化和批处理：让程序在脚本中被重复使用</h2>
+<p>这是命令行参数最强大的地方，是所有自动化脚本（Shell Script, Python
+Script 等）的基石。</p>
+<p><strong>场景</strong>：假设你写了一个 Python 脚本
+<code>process_log.py</code>，用来分析服务器日志文件并生成报告。</p>
+<p><strong>不使用参数的糟糕做法</strong>：
+每次要分析不同的日志文件（比如 <code>nginx.log</code> 或
+<code>apache.log</code>），你都必须<strong>打开
+<code>process_log.py</code>
+文件，手动修改里面的文件名变量</strong>。这非常低效且容易出错。</p>
+<p><strong>使用命令行参数的优秀做法</strong>：
+你的脚本可以这样写（伪代码）：</p>
+<p>Python</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># process_log.py</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line"># 从命令行参数获取文件名</span><br><span class="line">log_file_name = sys.argv[1] </span><br><span class="line">output_report_name = sys.argv[2]</span><br><span class="line"></span><br><span class="line"># ... 打开 log_file_name 进行分析 ...</span><br><span class="line"># ... 将结果保存到 output_report_name ...</span><br></pre></td></tr></table></figure>
+
+<p>现在，你可以这样使用它，并且可以轻松地把它写进一个自动执行的脚本里：</p>
+<p>Bash</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 分析昨天的 Nginx 日志，并生成报告</span><br><span class="line">python process_log.py /var/log/nginx/access.log.1 report-yesterday.txt</span><br><span class="line"></span><br><span class="line"># 分析上周的 Apache 日志</span><br><span class="line">python process_log.py /var/log/apache/access.log.week32 report-week32.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>作用</strong>：你的 <code>process_log.py</code>
+脚本变成了一个通用的、可重用的工具。你可以用它处理任何日志文件，而无需改动代码。这使得自动化任务（例如：每天凌晨自动分析前一天的日志）成为可能。</p>
+<h2
+id="执行不同的子命令组织复杂的功能">执行不同的子命令：组织复杂的功能</h2>
+<p>现代很多复杂的工具（如 <code>git</code>, <code>docker</code>,
+<code>kubectl</code>）都使用这种模式。第一个参数不是选项或文件名，而是一个<strong>子命令</strong>。</p>
+<p><strong>示例：<code>git</code> (版本控制系统)</strong></p>
+<ul>
+<li><code>git clone &lt;url&gt;</code>: <code>clone</code>
+是一个子命令，告诉 <code>git</code> 你要做“克隆仓库”这个大类操作。</li>
+<li><code>git pull</code>: <code>pull</code>
+是另一个子命令，执行“拉取更新”操作。</li>
+<li><code>git commit -m "Fix bug"</code>: <code>commit</code>
+是子命令，执行“提交更改”操作。而 <code>-m "..."</code> 则是专属于
+<code>commit</code> 子命令的参数。</li>
+</ul>
+<p><strong>作用</strong>：这种方式极大地增强了程序的组织性，使得一个程序（<code>git</code>）可以包含成百上千种功能，但用户可以通过逻辑清晰的子命令来使用它们。</p>
+<h2 id="总结-1">总结</h2>
+<p>总而言之，命令行参数是连接用户和程序的桥梁，它的用处体现在：</p>
+<ul>
+<li><strong>灵活性
+(Flexibility)</strong>：让同一个程序适应不同场景。</li>
+<li><strong>自动化
+(Automation)</strong>：让程序可以被脚本调用，实现无人值守的任务。</li>
+<li><strong>可组合性 (Composability)</strong>
+ta：可以将多个简单的命令行工具组合起来，完成复杂的任务（这是 Unix/Linux
+的核心哲学）。</li>
+<li><strong>效率
+(Efficiency)</strong>：对于熟练的用户来说，使用命令行参数远比在图形界面中点击鼠标要快得多。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构与算法---线性表</title>
+    <url>/2025/07/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[
+]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>markdown语法总结</title>
-    <url>/2025/02/27/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <url>/2025/02/27/%E5%B7%A5%E5%85%B7%E6%9D%82%E6%96%87/markdown%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h1
 id="markdown语法总结"><span style="font-size:0.8em;">Markdown语法总结</span></h1>
 <p>前置声明：以下大部分语法在Typora中都可以通过右键找到对应的快捷插件，学习语法一方面是方便我们灵活编辑md文本，无须反复腾出手去滑动点击鼠标，一方面是为了在一般的编辑器里也能正确编写md文件。</p>
@@ -949,8 +910,239 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
       </tags>
   </entry>
   <entry>
+    <title>C&amp;C++基础语法--静态变量总结</title>
+    <url>/2025/08/11/C++%E5%90%88%E9%9B%86/C&amp;C++%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p><code>static</code>
+是一个非常关键的修饰符，但它的含义并不是单一的，而是根据其使用的<strong>位置</strong>而有所不同。它的核心作用可以归结为两点：<strong>改变变量的生命周期</strong>和<strong>改变变量或函数的链接属性（可见性）</strong>。</p>
+<p>我们将分三个场景来讨论 <code>static</code>：</p>
+<ol type="1">
+<li>在函数内部使用（局部静态变量）</li>
+<li>在函数外部使用（全局静态变量/函数）</li>
+<li>在类（Class）内部使用（静态成员变量/函数）</li>
+</ol>
+<h2
+id="在函数内部局部静态变量-local-static-variable">在函数内部：局部静态变量
+(Local Static Variable)</h2>
+<p>当 <code>static</code>
+用于修饰函数内部的局部变量时，它彻底改变了这个变量的“生存方式”。</p>
+<p><strong>核心作用：延长生命周期。</strong></p>
+<p>一个普通的局部变量是存放在<strong>栈</strong>上的，它会随着函数的调用而被创建，随着函数的返回而被销毁。而一个局部静态变量则完全不同。</p>
+<p><strong>特性：</strong></p>
+<ol type="1">
+<li><strong>存储位置</strong>：它不再存储于栈上，而是和全局变量一样，存放在程序的<strong>静态存储区</strong>（<code>.data</code>
+或 <code>.bss</code> 段）。</li>
+<li><strong>生命周期</strong>：它的生命周期是<strong>整个程序的运行期间</strong>，而不是函数的调用期间。从程序开始到结束，它都存在。</li>
+<li><strong>初始化</strong>：它只在程序<strong>第一次执行到其声明语句时被初始化，且仅初始化一次</strong>。后续再次调用该函数时，会跳过这条初始化语句，变量会保持上一次调用结束时的值。</li>
+<li><strong>作用域</strong>：尽管它的生命周期是全局的，但它的<strong>作用域（可见性）</strong>
+仍然是局部的，即只能在声明它的那个函数内部访问。</li>
+</ol>
+<p><strong>经典示例：函数调用计数器</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">count_calls</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> counter = <span class="number">0</span>; <span class="comment">// 局部静态变量</span></span><br><span class="line">    counter++;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;这个函数被调用了 &quot;</span> &lt;&lt; counter &lt;&lt; <span class="string">&quot; 次。&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">count_calls</span>(); <span class="comment">// 第一次调用，counter 从 0 变成 1。输出 &quot;1 次&quot;</span></span><br><span class="line">    <span class="built_in">count_calls</span>(); <span class="comment">// 第二次调用，counter 从 1 变成 2。输出 &quot;2 次&quot;</span></span><br><span class="line">    <span class="built_in">count_calls</span>(); <span class="comment">// 第三次调用，counter 从 2 变成 3。输出 &quot;3 次&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，<code>counter</code> 变量就像是
+<code>count_calls</code>
+函数的“私人记忆”，函数调用结束后它的值依然保留，但外界完全无法访问它。</p>
+<hr />
+<h2
+id="在函数外部全局静态变量与静态函数">在函数外部：全局静态变量与静态函数</h2>
+<p>当 <code>static</code>
+用于修饰函数外部的全局变量或函数时，它的作用与生命周期无关（因为全局变量的生命周期本来就是整个程序），而是改变了它们的<strong>链接属性（Linkage）</strong>。</p>
+<p><strong>核心作用：限制作用域于当前文件。</strong></p>
+<p>默认情况下，一个全局变量或函数具有<strong>外部链接 (External
+Linkage)</strong>，这意味着其他源文件（<code>.cpp</code>文件）可以通过
+<code>extern</code> 关键字来访问和使用它。</p>
+<p>而一旦用 <code>static</code>
+修饰，它的链接属性就从“外部”变成了<strong>内部链接 (Internal
+Linkage)</strong>。</p>
+<p><strong>特性：</strong></p>
+<ol type="1">
+<li><strong>可见性</strong>：被 <code>static</code>
+修饰的全局变量或函数，其可见性被限制在<strong>它所定义的那个源文件内部</strong>。其他源文件即使使用
+<code>extern</code> 也无法访问到它。</li>
+<li><strong>避免命名冲突</strong>：这是它最重要的用途。当你在一个大型项目中，不同的人在不同的源文件中可能无意中定义了同名的全局变量或辅助函数。如果这些变量/函数不是
+<code>static</code>
+的，链接器（Linker）在链接时就会发现多个同名符号，导致“多重定义
+(multiple definition)”错误。而将它们声明为
+<code>static</code>，就相当于告诉链接器：“这个变量/函数是本文件私有的，与其他文件无关”，从而避免了冲突。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<p><strong><code>file1.cpp</code></strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个变量只在 file1.cpp 中可见</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> secret_counter = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个函数也只在 file1.cpp 中可见</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">private_helper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;这是 file1 的私有辅助函数。&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">public_function_in_file1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    secret_counter++;</span><br><span class="line">    <span class="built_in">private_helper</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;file1 中的 secret_counter 是: &quot;</span> &lt;&lt; secret_counter &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>file2.cpp</code></strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 声明一个函数，它在别处定义</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">public_function_in_file1</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 尝试访问 file1 中的静态变量和函数</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> secret_counter; <span class="comment">// 尝试引用</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="type">void</span> <span class="title">private_helper</span><span class="params">()</span></span>; <span class="comment">// 尝试引用</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">public_function_in_file1</span>(); <span class="comment">// 这个调用是合法的</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下面这两行会导致链接错误 (Linker Error)!</span></span><br><span class="line">    <span class="comment">// 因为 secret_counter 和 private_helper 对 file2.cpp 是不可见的。</span></span><br><span class="line">    <span class="comment">// secret_counter = 0; </span></span><br><span class="line">    <span class="comment">// private_helper();</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>现代C++建议</strong>：对于限制文件作用域的需求，更推荐使用<strong>匿名命名空间
+(Anonymous Namespace)</strong>，它提供了比 <code>static</code>
+更强大和清晰的功能。</p>
+<hr />
+<h2
+id="在类class内部静态成员变量与静态成员函数">在类（Class）内部：静态成员变量与静态成员函数</h2>
+<p>当 <code>static</code>
+用于类的成员时，它表示这个成员<strong>属于类本身，而不是类的任何一个具体实例（对象）</strong>。</p>
+<h3 id="静态成员变量-static-member-variable">静态成员变量 (Static Member
+Variable)</h3>
+<ol type="1">
+<li><strong>共享性</strong>：一个类的所有对象<strong>共享同一个</strong>静态成员变量。无论创建了多少个对象，内存中该变量都只有一个副本。</li>
+<li><strong>存储位置</strong>：它同样存储在静态存储区（<code>.data</code>
+或 <code>.bss</code>），不占用任何对象的内存空间。</li>
+<li><strong>生命周期</strong>：它的生命周期也是整个程序的运行期间。</li>
+<li><strong>初始化</strong>：必须在<strong>类定义的外部</strong>进行定义和初始化（<code>const static int</code>
+等少数情况除外）。</li>
+</ol>
+<p><strong>示例：对象计数器</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apple</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Apple</span>() &#123;</span><br><span class="line">        apple_count++; <span class="comment">// 每创建一个对象，计数器加1</span></span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Apple</span>() &#123;</span><br><span class="line">        apple_count--; <span class="comment">// 每销毁一个对象，计数器减1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 普通成员函数</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print_count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;当前有 &quot;</span> &lt;&lt; apple_count &lt;&lt; <span class="string">&quot; 个苹果对象。&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> apple_count; <span class="comment">// 声明一个静态成员变量</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在类外对静态成员变量进行定义和初始化</span></span><br><span class="line"><span class="type">int</span> Apple::apple_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Apple a1;</span><br><span class="line">    a<span class="number">1.</span><span class="built_in">print_count</span>(); <span class="comment">// 输出：当前有 1 个苹果对象。</span></span><br><span class="line"></span><br><span class="line">    Apple a2;</span><br><span class="line">    a<span class="number">1.</span><span class="built_in">print_count</span>(); <span class="comment">// a1 和 a2 共享同一个 apple_count，输出：当前有 2 个苹果对象。</span></span><br><span class="line">    a<span class="number">2.</span><span class="built_in">print_count</span>(); <span class="comment">// 输出：当前有 2 个苹果对象。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态成员函数-static-member-function">静态成员函数 (Static Member
+Function)</h3>
+<ol type="1">
+<li><strong>归属性</strong>：它也属于类本身，不属于任何特定对象。</li>
+<li><strong>调用方式</strong>：可以通过类名直接调用
+(<code>ClassName::function()</code>)，也可以通过对象调用
+(<code>object.function()</code>)，但本质上没有区别。</li>
+<li><strong>无 <code>this</code>
+指针</strong>：这是最关键的区别。静态成员函数内部<strong>没有
+<code>this</code>
+指针</strong>，因此它<strong>不能</strong>直接访问非静态成员（变量或函数），因为它不知道该访问“哪个对象”的成员。它只能访问静态成员。</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MathHelper</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="comment">// 静态成员函数</span></span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 它不能访问非静态成员，比如：</span></span><br><span class="line">    <span class="comment">// void set_value(int v) &#123; non_static_value = v; &#125;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// int non_static_value;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 直接通过类名调用，无需创建对象</span></span><br><span class="line">    <span class="type">int</span> sum = MathHelper::<span class="built_in">add</span>(<span class="number">5</span>, <span class="number">3</span>); <span class="comment">// sum is 8</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;5 + 3 = &quot;</span> &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结">总结</h2>
+<table>
+<thead>
+<tr>
+<th>使用位置</th>
+<th>主要作用</th>
+<th>核心特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>函数内部</strong></td>
+<td><strong>延长生命周期</strong></td>
+<td>值在函数调用间保持，只初始化一次，作用域仍为局部。</td>
+</tr>
+<tr>
+<td><strong>函数外部（全局）</strong></td>
+<td><strong>限制链接属性（可见性）</strong></td>
+<td>变量或函数只在当前源文件内可见，避免命名冲突。</td>
+</tr>
+<tr>
+<td><strong>类内部</strong></td>
+<td><strong>属于类，而非对象</strong></td>
+<td>所有对象共享同一份数据（静态变量），函数无<code>this</code>指针（静态函数）。</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++初——1内存空间与编译原理</title>
+    <url>/2025/08/07/C++%E5%90%88%E9%9B%86/C++%E5%88%9D%E7%BA%A7%E2%80%94%E2%80%94%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p>PS：本C++进阶讲解基于x86 32位linux环境</p>
+<h2
+id="进程的虚拟地址空间内存划分和布局">进程的虚拟地址空间内存划分和布局</h2>
+<p>我们知道，任何的编程语言，在编译文件后都会产生的两种东西是指令和数据，并以可执行文件.exe的形式存储在磁盘里，而每次运行可执行文件时，都需要将磁盘上的.exe加载到内存当中，由CPU读取指令并对数据进行操作。</p>
+<p>那么磁盘上的文件加载到内存（虚拟内存，而非直接加载到物理内存）后，如何为数据分配内存空间，内存空间的结构划分是什么样的，就需要我们详细了解。</p>
+<p>首先，linux系统给每一个进程会分配一个<span
+class="math inline">\(2^{32}\)</span> =
+4G大小的一块虚拟内存空间（地址范围0x00000000<code>~~</code>0xFFFFFFFF）。这块空间大体分为两部分：用户空间（0x00000000<code>~~</code>0xC0000000，占3G）和内核空间（0xC0000001<code>~~</code>0xFFFFFFF，占1G）。</p>
+<p>内存空间按地址从低到高，更具体的划分如下：</p>
+<ol type="1">
+<li><p>整个内存空间的前一小块（0x00000000—0x08048000，低地址空间）是不可访问的，这片区域在现代linux操作系统中是故意留空用于保护的，防止空指针访问导致程序崩溃。如果程序试图访问虚拟地址0x0，cpu的内存管理单元会查询页表中的虚拟到物理地址映射，发现这片低地址并没有有效映射（无对应物理地址），就会发生异常中断程序进程。</p>
+<p>e.g.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> *p = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="built_in">strlen</span>(p); <span class="comment">//strlen()函数试图访问指针p指向的内存空间存放的数据并求长度，但p是指向nullptr也即零地址0x0的空指针，程序运行时会报错。</span></span><br><span class="line"><span class="type">char</span> *src = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="built_in">strcpy</span>(p,src); <span class="comment">//同理，strcpy()函数试图访问空指针src指向的内存，将其存放的数据拷贝给p，将会报错。注意p和src都是指向零地址的，但是实际内存中的低地址空间并不会真的分配给这些指针用于存放数据，只是cpu在按照nullptr查询这片低地址空间的映射并取数据或写数据时会发现查询没有结果从而报出异常。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户空间从0x08048000开始的第一块有效区域是**.text和.rodata段**。.text段也叫代码段，用于存放实际代码内容编译后对应的汇编指令。.rodata段即只读数据段，用于存放字符串字面量，其中的数据都是只能读取不能修改的。</p>
+<p>e.g.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//c风格操作，使用字符类型指针直接指向一个字符串字面量</span></span><br><span class="line"><span class="type">char</span> *p = <span class="string">&quot;abcd&quot;</span>; <span class="comment">//&quot;abcd&quot;这个字符串字面量存储在.rodata段。</span></span><br><span class="line">*p = <span class="string">&quot;a&quot;</span>; <span class="comment">//修改指针指向的内存空间里的数据，就是直接修改.rodata段里的&quot;abcd&quot;，这样做是不允许的，会在运行阶段报错。</span></span><br><span class="line"><span class="comment">//PS：目前许多高级语言已经规定普通指针不能直接指向字符串字面量，只有声明为const类型的指针才可以。这样就在编译阶段避免了修改.rodata段的数据这种错误操作。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//C++风格操作，创建string类对象并将其赋值为一个字符串字面量</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">string s = <span class="string">&quot;abcd&quot;</span>; </span><br><span class="line"><span class="comment">//这一行代码做了三件事情，一个是在内存的栈stack上（下面有解释）创建string类对象s（这个对象内部通常包含了一些控制信息，比如一个指向字符数据的指针、字符串的当前长度和已分配内存的容量等），因为s是一个局部变量（PS：这行代码编译时会转化为汇编指令，储存在.text段）。</span></span><br><span class="line"><span class="comment">//第二个是在.rodata段创建&quot;abcd&quot;这个字符串字面量。</span></span><br><span class="line"><span class="comment">//最后一件事情是将&quot;abcd&quot;赋值给s，这步操作由string类的赋值构造函数完成，它首先会在内存的堆heap上动态分类一块大小足以容下&quot;abcd&quot;的内存，然后将.rodata段中的&quot;abcd&quot;拷贝到堆上分配的新内存里，再将对象s的内部指针指向这块堆上的新内存。</span></span><br><span class="line">s = <span class="string">&quot;a&quot;</span>;</span><br><span class="line"><span class="comment">//跟c风格直接更改指针指向的.rodata段数据不同，这里的操作首先在.rodata段重新创建一块内存存放字符串&quot;a&quot;，然后触发string类的赋值操作(operator=)，释放对象s原本分配在堆上存放&quot;abcd&quot;的动态内存（并不会对.rodata段里的&quot;abcd&quot;产生实际影响），然后重新在堆上分配一块内存，将.rodata段新创建的&quot;a&quot;拷贝过来，并将s内部指针指向这块内存，同时更新s长度状态。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再往上走，就是<strong>静态区（低到高依次为.data段和.bss段）</strong>：静态区用于存放可读可写的全局/静态变量，只要程序编译好，就会在.data段存放，一直到程序结束内存清空。.data和.bss的区别在于.data存放已经初始化且不为0的数据，而.bss段存放初始化为0或者未初始化的数据（程序编译时操作系统将其自动置为0）</p>
+<blockquote>
+<p>PS：<strong>为什么需要 <code>.bss</code> 段？</strong>
+这是一种<strong>优化</strong>。对于一个很大的、未初始化的全局数组
+<code>int big_array[10000];</code>，如果把它存放在 <code>.data</code>
+段，那么在可执行文件（如 ELF 文件）中就需要实实在在地占用
+<code>10000 * 4</code> 字节的空间来存储这些零。而如果放在
+<code>.bss</code> 段，可执行文件中<strong>只需要记录“需要分配 40000
+字节，并全部置为零”这个信息</strong>，而不需要存储那些零本身。这大大减小了可执行文件的大小。</p>
+</blockquote></li>
+<li><p><strong>堆（heap）</strong>，用于存放动态分配的内存。</p></li>
+<li><p><strong>加载共享库</strong>，用于存放一些动态链接库的映射（windows下为*.dll库，linux下为*so库）。</p></li>
+<li><p><strong>栈（stack）</strong>，一个程序进程运行时可能会产生多个不同的线程（如一道程序由多个函数构成，每个函数就是一个小线程），那么每个函数在内存上占有的私有空间就是栈。也就是说，函数内部的非静态局部变量都在栈上存储。</p>
+<blockquote>
+<h4 id="局部变量与栈-stack">局部变量与栈 (Stack)</h4>
+<ul>
+<li><strong>生命周期</strong>：局部变量的生命周期与它所在的函数或代码块绑定。<strong>函数开始执行时，它被创建；函数执行结束时，它必须被销毁。</strong></li>
+<li><strong>栈的特性</strong>：栈是一种<strong>后进先出 (LIFO)</strong>
+的数据结构，这与函数的调用/返回机制完美契合。
+<ul>
+<li><strong>函数调用</strong>：当一个函数被调用时，系统会在栈顶“压入”一个新的<strong>栈帧
+(Stack
+Frame)</strong>。这个栈帧里包含了函数的参数、返回地址以及<strong>所有局部变量</strong>。</li>
+<li><strong>函数返回</strong>：当函数执行完毕返回时，它的整个栈帧会被“弹出”，相当于瞬间释放了所有局部变量占用的空间。</li>
+<li>对于虚拟内存的栈，地址是从高到低分配的。我们设栈顶指针esp，栈底指针ebp。当数据被压栈的时候，栈顶指针esp会向下移动一个数据大小的位置，而栈底指针不动，每次压栈都是在栈顶处（低地址）分配空间，并让栈顶指针下移。</li>
+</ul></li>
+<li><strong>为什么用栈？</strong>
+<ul>
+<li><strong>高效</strong>：栈的分配和释放只是移动一下栈顶指针
+(<code>esp</code>)，这是一个极快的操作，远比在堆上动态分配内存要快。</li>
+<li><strong>自动管理</strong>：程序员无需关心局部变量的内存释放，它随着函数返回自动完成，避免了内存泄漏。</li>
+</ul></li>
+</ul>
+</blockquote></li>
+<li><p><strong>命令行参数和环境变量</strong>（环境变量即程序调用外部库的指定路径）</p></li>
+<li><p>内存最高的1G大小的空间就是<strong>内核空间</strong>了，主要分为ZONE_DMA、ZONE_NORMAL、ZONE_HIGHMEM三块区域，其中ZONE_NORMAL用于存放进程的PCB（进程控制块，存储进程相关信息）以及内部线程私有的栈空间信息等，而ZONE_MEM为高端内存，用于映射高地址物理内存（此处不详细展开）。</p>
+<p>需要注意的是，内存上的内核空间是进程间共享的（进程间通过匿名管道通信），用户空间才是各个进程私有的，相互无法访问。</p></li>
+</ol>
+<img src="https://caimotu.top/Picgo/image-20250814174159721.png" alt="image-20250814174159721" style="zoom: 67%;" />
+
+<p>以上就是一个进程的虚拟内存空间划分情况，接下来我们以一个简单的代码例子具体说明：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> gdata1 = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> gdata2 = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> gdata3;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> gdata4 = <span class="number">11</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> gdata5 = <span class="number">0</span>;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> gdata6;</span><br><span class="line"><span class="comment">//以上六个变量都是全局变量，编译后会在可执行文件里的符号表里产符号映射，将变量名映射到运行时分配的内存地址。这些变量就称为数据，存放在虚拟内存的数据段里，具体的：gdata1和gdata4初始化不为零，存放在.data段；其余的初始化为零或未初始化，放在.bss段</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">12</span>;</span><br><span class="line">    <span class="comment">//在函数里声明的局部变量则不会在符号表里产生符号，这行代码编译后对应的是一个汇编指令:mov dword ptr[a],0Ch</span></span><br><span class="line">    <span class="comment">//表示将12这个值放到a这个变量在栈上的内存中（运行时指令本身放在.text段，12这个值被存放在栈上开辟好的4字节内存里）</span></span><br><span class="line">    <span class="comment">//PS:a这个字母并不会被CPU理解，实际的汇编指令里a应该是直接指向内存地址的一个指针，如ebp-4（ebp栈底是高地址），a只是编译器产生的方便程序员阅读的形式。因此只要程序运行到函数结束，栈上分配的线程对应的内存自动弹出销毁，进程就识别不到int a = 12这个信息了。</span></span><br><span class="line">    <span class="type">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="comment">//b,c与a同理，但是注意变量c没有初始化，所以是栈上的无效值，打印时会出现乱码。</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> e = <span class="number">13</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> f = <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> g;</span><br><span class="line">    <span class="comment">//以上局部静态变量生命周期为整个程序运行过程，因次存放在静态数据段.data和.bss，但注意作用域还是局限于main函数</span></span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; c &lt;&lt; <span class="string">&quot;+&quot;</span> &lt;&lt; g &lt;&lt; endl;<span class="comment">//打印结果是乱码+0，因为g会被加载器自动置零</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="指令角度详解函数调用堆栈过程">指令角度详解函数调用堆栈过程</h2>
+<p>观察以下代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据结构与算法---算法分析绪论</title>
+    <url>/2025/07/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<p><img src="https://caimotu.top/Picgo/image-20250723160942140.png"
+alt="image-20250723160942140" /></p>
+<p><img src="https://caimotu.top/Picgo/image-20250723161127459.png"
+alt="image-20250723161127459" /></p>
+<img src="https://caimotu.top/Picgo/image-20250723161319758.png" alt="image-20250723161319758" style="zoom: 67%;" />
+
+<h1 id="三算法概述">三、算法概述</h1>
+<h2 id="算法的五个特性">算法的五个特性：</h2>
+<p>确定性、可行性、输入、输出、<strong>有穷性</strong>（一个算法一定是能终止的计算过程）</p>
+<h2 id="评价算法的标准">评价算法的标准：</h2>
+<img src="C:\Users\15458\Desktop\myblog\hexo\blog\source\_posts\数据结构与算法-算法分析绪论.assets\image-20250724220824467.png" alt="image-20250724220824467" style="zoom:50%;" />
+
+<h2 id="算法分析">算法分析：</h2>
+<h3 id="时间复杂度">时间复杂度：</h3>
+]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计网实验--基本网络指令</title>
+    <url>/2025/04/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E5%AE%9E%E9%AA%8C-%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>南京4天3夜攻略</title>
-    <url>/2025/06/12/%E5%8D%97%E4%BA%AC4%E5%A4%A93%E5%A4%9C%E6%94%BB%E7%95%A5/</url>
+    <url>/2025/06/12/%E5%B7%A5%E5%85%B7%E6%9D%82%E6%96%87/%E5%8D%97%E4%BA%AC4%E5%A4%A93%E5%A4%9C%E6%94%BB%E7%95%A5/</url>
     <content><![CDATA[<p><img src="https://caimotu.top/Picgo/image-20250612162816123.png"
 alt="image-20250612162816123" /></p>
 <h1 id="73">7.3</h1>
@@ -1106,7 +1298,7 @@ alt="image-20250612203244755" /></p></li>
   </entry>
   <entry>
     <title>计算机网络--第一章：计算机网络和因特网</title>
-    <url>/2025/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/</url>
+    <url>/2025/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%9B%A0%E7%89%B9%E7%BD%91/</url>
     <content><![CDATA[<h1 id="计算机网络和因特网">计算机网络和因特网</h1>
 <p>章节导读：</p>
 <ul>
@@ -1273,9 +1465,280 @@ Network，PON）。</p>
       </tags>
   </entry>
   <entry>
-    <title>计网实验--基本网络指令</title>
-    <url>/2025/04/30/%E8%AE%A1%E7%BD%91%E5%AE%9E%E9%AA%8C-%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[
+    <title>RNN简介</title>
+    <url>/2025/04/25/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/RNN%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="rnn循环神经网络简要介绍">RNN(循环神经网络)简要介绍</h1>
+<h2 id="简介">简介</h2>
+<p>循环神经网络模型以序列数据为输入（数据内部的元素是有顺序关系的），如文章、语句、一周的天气信息、三个月的股市指数等。与传统的前馈网络不同的是，RNN模型处理序列数据能够获取更多的语义信息，时序信息等。</p>
+<p>处理任务示例：</p>
+<p>以NER（命名实体识别）为例，从自然语言文本中识别真实世界中的实体名及其类别。如：</p>
+<p>句子1：I like eating apple!——其中的apple指的是苹果食物</p>
+<p>句子2：The Apple is a great company！——其中的Apple指的是苹果公司</p>
+<p>而如果是传统的DNN（深度神经网络）模型，由于输入方式为逐元素输入，无法有效获取上下文信息，则若训练集中的apple一词大部分被标记为苹果食物，那么对测试集中的apple处理也将全部标记为苹果食物而非根据实际上下文推断。</p>
+<h2 id="模型提出">模型提出</h2>
+<h3 id="基本rnn结构">基本RNN结构</h3>
+<p>为了解决普通DNN（深度神经网络）逐元素输入而无法有效获取上下文信息的问题。RNN最基本的改良点在于增加一个模块用于储存上下文信息，下图即是一个典型的RNN结构示意：</p>
+<img src="https://caimotu.top/Picgo/image-20250417165208064.png" alt="image-20250417165208064" style="zoom:33%;" />
+
+<p>其中I（输入序列）到O（输出序列）的过程增加了一个保存上下文信息的权重矩阵W，也就是每次输出O不仅要考虑当前的输入数据I，还要考虑上一次输出的隐藏序列W（保存上下文）。RNN就是一个循环递归地处理上述输入输出的过程。</p>
+<h3 id="rnn展开结构">RNN展开结构</h3>
+<p>将上图的基本结构展开，就成为了下图展示的模型计算过程：</p>
+<img src="https://caimotu.top/Picgo/ebe46967a3e80dab4c04635a2c6785f.jpg" alt="ebe46967a3e80dab4c04635a2c6785f" style="zoom:33%;" />
+
+<p>其中 <span class="math inline">\(x_i\)</span>
+表示i时刻的模型输入，<span class="math inline">\(y_i\)</span>表示<span
+class="math inline">\(x_i\)</span>对应的输出结果，模型计算公式如下：
+<span class="math display">\[
+\begin{split}
+y_i = g(Vh_i)
+\\
+\\
+h_i = f(Ux_i + Wh_{i-1})
+\end{split}
+\]</span>
+U表示当前输入数据的权重因子，W表示决定上下文信息影响程度的参数矩阵，<span
+class="math inline">\(h_i\)</span>则表示当前隐藏层的输出隐变量。可以看出决定当前输出<span
+class="math inline">\(y_i\)</span>的隐变量<span
+class="math inline">\(h_i\)</span>不仅由当前输入<span
+class="math inline">\(x_i\)</span>决定，也与上一时刻的隐变量<span
+class="math inline">\(h_{i-1}\)</span>有关。（PS：整个模型计算过程里用的参数矩阵W是一定的）</p>
+<h2 id="rnn模型结构变化">RNN模型结构变化</h2>
+<p>上述展开结构会根据输入长度和输出长度的变化而产生不同的结构</p>
+<h3 id="n-to-n结构">N to N结构</h3>
+<p>这类结构的输入长度与输出长度相同，也即每一个输入值都会对应一个输出值。通常用于逐序列判断或分类任务（如序列标注，NER，视频帧分类等）。示例图与计算模型如2.2所述。</p>
+<h3 id="n-to-1结构">N to 1结构</h3>
+<p>这类结构只有一个输出值，表示输出结果包含了整个输入序列的语义信息和上下文信息。结构示意图：</p>
+<img src="https://caimotu.top/Picgo/8606007dd425e9195f0c11d4719656f.jpg" alt="8606007dd425e9195f0c11d4719656f" style="zoom: 50%;" />
+
+<p>计算模型： <span class="math display">\[
+\begin{split}
+Y = y_N = g(Vh_N)
+\\
+h_i = f(Ux_i+ Wh_{i-1})
+\end{split}
+\]</span> 这类结构通常用于文字分类、文章分类以及图像分类任务。</p>
+<h3 id="1-to-n结构">1 to N结构</h3>
+<p>一个输入数据对应一系列输出，其意义是一个起始状态或种子数据会随时间变化生成一个序列的输出结果。</p>
+<p>若输入数据只在首个时刻输入，则计算示意图如下所示：</p>
+<img src="https://caimotu.top/Picgo/112ce7e4cbc3de28915ec314a82fdba.jpg" alt="112ce7e4cbc3de28915ec314a82fdba" style="zoom:50%;" />
+
+<p>而若输入数据在每个时刻都作为输入，则示意图如下：</p>
+<img src="https://caimotu.top/Picgo/bd9767d63cc2fd88b9b265d80777250.jpg" alt="bd9767d63cc2fd88b9b265d80777250" style="zoom:50%;" />
+
+<p>该结构通常用于由图像自动生成文章、类别生成音乐、文章、代码等由种子数据生成序列的任务。</p>
+<h3 id="n-to-m结构encoder-decoder模型seq2seq模型">N to
+M结构（encoder-decoder模型、seq2seq模型）</h3>
+<p>最后一类是输入输出序列长度不相等的结构。通常采用一个N to 1结构和一个1
+to M结构组合来实现，如下图：</p>
+<img src="https://caimotu.top/Picgo/f529bf34ed1f0a34e98af6cd3b390b2.jpg" alt="f529bf34ed1f0a34e98af6cd3b390b2" style="zoom:50%;" />
+
+<img src="https://caimotu.top/Picgo/6355d703227ac85b3ac67a61c52bd84.jpg" alt="6355d703227ac85b3ac67a61c52bd84" style="zoom: 33%;" />
+
+<p>由上图可以看出，两个不同长度的RNN模型组合可以控制输出序列长度。两个模型之间通过一个上下文向量C来链接，其中C可作为第二个RNN模型的输入数据并对初始隐藏变量<span
+class="math inline">\(h_0^{&#39;}\)</span>​进行初始化（如第一个图），也可以直接被用来初始化第二个RNN模型的隐藏变量（如第二个图）。</p>
+<p>常用的上下文向量C的求解方法有： <span class="math display">\[
+\begin{split}
+c = h_N
+\\
+c = g(h_N)
+\\
+c = g(h_1 :: h_N)
+\end{split}
+\]</span>
+第一种方法直接将encoder的输出作为上下文向量；第二种方法则需要先对encoder输出进行变换；第三种方法则将encoder的一个输出序列进行变换，而非单一选取最后一个输出。</p>
+<p>通常将第一个RNN模型作为encoder（编码器），第二个RNN模型成为decoder（解码器）。通过这样N
+to
+M的RNN模型，我们可以处理各类序列处理任务，如语音识别，文本摘要，机器翻译，图像描述生成等。</p>
+<h2 id="梯度消失与梯度爆炸">梯度消失与梯度爆炸</h2>
+<h3 id="概念">概念</h3>
+<p>由于RNN中的上下文参数矩阵是权重共享的，即当进行梯度更新时，对该矩阵求偏导数时需要加入时序影响，将导致存在基于时序数量的权重“连乘”。若某一阶段权重值过小，结合“连乘”将导致最终权重趋于“无穷小”（即等于0），此现象称为“梯度消失”。相反地，若权重值过大，经连乘后将导致权重值变得过大，称为“梯度爆炸”。</p>
+<p>与普通NN的梯度消失及梯度爆炸不同，RNN的梯度爆炸（或消失）是根本原因是“连乘”，是在反向传播的某一阶段出现的，在此之前的反向传播不受影响。</p>
+<h3 id="如何解决">如何解决</h3>
+<p><strong>1. 梯度爆炸的解决</strong></p>
+<p>1）梯度裁剪</p>
+<p>​
+梯度裁剪即为梯度更新时的梯度设置上限，当超过阈值将强制裁剪，避免出现过高阈值。</p>
+<p><strong>2. 梯度消失的解决</strong></p>
+<p>1）使用Relu激活函数</p>
+<p>​
+使用Relu激活函数解决梯度消失的原理是，Relu函数在自变量大于0是，因变量恒为1，由此避免梯度过小。</p>
+<p>2）变更RNN结构</p>
+<p>​ 改用变种版本的RNN结构，常见的包括LSTM模型及GRU模型。</p>
 ]]></content>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Attention is all your need》论文笔记</title>
+    <url>/2025/04/25/%E7%A7%91%E7%A0%94%E7%AC%94%E8%AE%B0/%E3%80%8AAttention%20is%20all%20your%20need%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="论文逐步分解读">论文逐步分解读</h1>
+<p>论文网址：</p>
+<p><a
+href="https://paperswithcode.com/paper/attention-is-all-you-need">https://paperswithcode.com/paper/attention-is-all-you-need</a></p>
+<p><a
+href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+<h2 id="transformer模型论文摘要解读">Transformer模型论文摘要解读</h2>
+<p>这篇论文是著名的"Attention Is All You
+Need"论文的摘要，介绍了Transformer模型，这是深度学习和自然语言处理领域的一个里程碑式创新。以下是主要内容解读：</p>
+<h3 id="研究背景与创新">研究背景与创新</h3>
+<ul>
+<li><p>之前的主流序列转导模型都基于复杂的循环神经网络(RNN)或卷积神经网络(CNN)，包含编码器和解码器结构</p></li>
+<li><p>性能最好的模型还通过注意力机制连接编码器和解码器</p></li>
+<li><p>论文提出了全新的网络架构"Transformer"，完全基于注意力机制，彻底摒弃了循环和卷积结构</p></li>
+</ul>
+<h3 id="实验结果">实验结果</h3>
+<ul>
+<li><p>在两个机器翻译任务上的实验表明，Transformer模型质量更优，同时更易于并行化，训练时间显著缩短</p></li>
+<li><p>在WMT 2014英德翻译任务上达到28.4
+BLEU分，比当时最好的结果(包括集成模型)高出2个BLEU以上</p></li>
+<li><p>在WMT 2014英法翻译任务上，单模型达到41.8
+BLEU的最新水平，仅用8个GPU训练3.5天，训练成本只是文献中最佳模型的一小部分</p></li>
+</ul>
+<h3 id="泛化能力">泛化能力</h3>
+<ul>
+<li>Transformer在其他任务上表现良好，成功应用于英语句法分析，无论是大规模还是有限的训练数据环境</li>
+</ul>
+<h2 id="研究背景">研究背景</h2>
+<p>论文开篇指出：</p>
+<ul>
+<li><p>循环神经网络(RNN)特别是LSTM和GRU已成为序列建模和转导问题(如语言建模和机器翻译)的最先进方法</p></li>
+<li><p>许多研究不断推动循环语言模型和编码器-解码器架构的边界</p></li>
+</ul>
+<h3 id="现有方法的局限性">现有方法的局限性</h3>
+<p>RNN的关键局限：</p>
+<ul>
+<li><p>循环模型通常沿着输入和输出序列的符号位置进行计算</p></li>
+<li><p>这种本质上的顺序性质阻碍了训练样例内的并行化，在更长序列长度下尤为关键</p></li>
+<li><p>虽然一些工作通过分解技巧和条件计算提高了计算效率，但顺序计算的基本约束仍然存在</p></li>
+</ul>
+<h3 id="注意力机制的重要性">注意力机制的重要性</h3>
+<ul>
+<li><p>注意力机制已成为序列建模和转导模型的重要组成部分，允许在不考虑输入或输出序列中距离的情况下建模依赖关系</p></li>
+<li><p>然而，大多数情况下，此类注意力机制与循环网络结合使用</p></li>
+</ul>
+<h3 id="transformer模型的提出">Transformer模型的提出</h3>
+<ul>
+<li><p>作者提出Transformer，一种完全放弃循环结构，而是完全依赖注意力机制来获取输入和输出间全局依赖关系的架构</p></li>
+<li><p>Transformer允许更多并行化，在8个P100
+GPU上训练仅12小时就达到机器翻译的新水平</p></li>
+</ul>
+<h3 id="相关工作比较">相关工作比较</h3>
+<p>论文讨论了其他减少顺序计算的模型：</p>
+<ul>
+<li><p>Extended Neural
+GPU、ByteNet和ConvS2S都使用CNN作为基本构建块</p></li>
+<li><p>这些模型中，关联两个任意输入或输出位置的操作数随距离增长(ConvS2S线性增长，ByteNet对数增长)</p></li>
+<li><p>Transformer将此减少为常数级别的操作，尽管以注意力加权位置平均导致的有效分辨率降低为代价，但后续通过多头注意力机制进行了补偿（具体方法在3.2节）</p></li>
+</ul>
+<p>论文特别提到自注意力(self-attention)机制：</p>
+<ul>
+<li><p>用于关联单个序列中的不同位置以计算序列表示</p></li>
+<li><p>已成功应用于阅读理解、摘要生成、文本蕴含和学习任务无关的句子表示</p></li>
+</ul>
+<h2 id="模型架构">模型架构</h2>
+<h3
+id="二编码器encoder细节"><strong>二、编码器（Encoder）细节</strong></h3>
+<h4 id="1-单层结构"><strong>1. 单层结构</strong></h4>
+<p>每层编码器包含两个子层：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 多头自注意力 → 残差连接+层归一化 → 前馈网络 → 残差连接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-关键技术解析"><strong>2. 关键技术解析</strong></h4>
+<ul>
+<li><strong>多头自注意力 (Multi-Head Self-Attention)</strong>
+<ul>
+<li><strong>作用</strong>：让每个词查看全句其他词，动态计算关联权重
+例：句子"Animal didn't cross the street because it was too
+tired"中，"it"通过自注意力定位到"Animal"</li>
+<li><strong>多头机制</strong>：将512维向量拆分为8个64维头，并行计算后拼接（类似8组不同滤镜观察句子）</li>
+</ul></li>
+<li><strong>前馈网络 (Position-wise FFN)</strong>
+<ul>
+<li><strong>结构</strong>：线性层→ReLU→线性层（公式：FFN(x)=max(0,xW1+b1)W2+b2）</li>
+<li><strong>特性</strong>：对每个词独立处理，无位置交互（与自注意力互补）</li>
+</ul></li>
+<li><strong>残差连接 + 层归一化</strong>
+<ul>
+<li><strong>操作</strong>：输出 = LayerNorm(原始x + 计算后的x)</li>
+<li><strong>目的</strong>：缓解梯度消失，加速深层网络训练</li>
+<li><strong>维度保持</strong>：所有子层输出保持d_model=512，便于叠加</li>
+</ul></li>
+</ul>
+<h4 id="3-6层堆叠的意义"><strong>3. 6层堆叠的意义</strong></h4>
+<ul>
+<li>底层：学习局部语法（如名词短语结构）</li>
+<li>中层：捕捉句间逻辑关系（因果、转折）</li>
+<li>高层：整合全局语义（篇章级信息）</li>
+</ul>
+<hr />
+<h3
+id="三解码器decoder细节"><strong>三、解码器（Decoder）细节</strong></h3>
+<h4 id="1-单层结构-1"><strong>1. 单层结构</strong></h4>
+<p>每层解码器包含三个子层：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入 → 掩码自注意力 → 残差连接+层归一化 → 编码器-解码器注意力 → 残差连接+层归一化 → 前馈网络 → 残接+层归一化 → 输出</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-核心差异点"><strong>2. 核心差异点</strong></h4>
+<ul>
+<li><strong>掩码自注意力 (Masked Self-Attention)</strong>
+<ul>
+<li><strong>实现方式</strong>：在softmax前将未来位置权重设为-∞</li>
+<li><strong>作用</strong>：确保预测第t个词时仅依赖前t-1个词 例：生成"I
+love"时，第三个词只能基于前两个词预测</li>
+</ul></li>
+<li><strong>编码器-解码器注意力</strong>
+<ul>
+<li><strong>Query来源</strong>：解码器当前状态</li>
+<li><strong>Key/Value来源</strong>：编码器最终输出</li>
+<li><strong>功能</strong>：实现源语言与目标语言的词对齐
+可视化案例：翻译"knowledge"时可能重点关注"知识"</li>
+</ul></li>
+</ul>
+<h4 id="3-位置偏移技巧"><strong>3. 位置偏移技巧</strong></h4>
+<ul>
+<li><strong>输出嵌入右移一位</strong>：
+训练时解码器输入是目标序列右移后的结果，确保当前位置预测仅依赖历史信息</li>
+</ul>
+<hr />
+<h3 id="q---a">Q---A</h3>
+<h4 id="q1-为什么每层都要残差连接"><strong>Q1:
+为什么每层都要残差连接？</strong></h4>
+<ul>
+<li>深层网络信号传递容易衰减，残差结构保留原始信息（类似高速公路）</li>
+<li>实验证明：无残差连接时6层网络难以收敛</li>
+</ul>
+<h4 id="q2-层归一化-vs-批归一化"><strong>Q2: 层归一化 vs
+批归一化</strong></h4>
+<ul>
+<li>批归一化：对同一批次内所有样本的同一特征做归一化（适合CV）</li>
+<li><strong>层归一化</strong>：对单个样本的所有特征做归一化（更适合NLP变长序列）</li>
+</ul>
+<h4 id="q3-为什么用6层而不是更多"><strong>Q3:
+为什么用6层而不是更多？</strong></h4>
+<ul>
+<li>论文实验表明：6层在翻译任务上达到效率与效果的平衡
+（后续研究如BERT使用12/24层，需更多数据与算力支持）</li>
+</ul>
+<hr />
+<h3 id="五实例演算流程"><strong>五、实例演算流程</strong></h3>
+<p>以英译中为例：</p>
+<ol type="1">
+<li><strong>编码过程</strong> 输入："The cat sat on the mat"
+经过6层编码器后，每个词被转换为包含上下文信息的512维向量</li>
+<li><strong>解码过程</strong> 生成："猫坐在垫子上"
+<ul>
+<li>第1步：接收起始符，通过掩码自注意力初始化状态</li>
+<li>第2步：生成"猫"时，编码器-解码器注意力聚焦"cat"</li>
+<li>第3步：生成"坐"时，自注意力关联"sat"，编码器注意力保持对"cat"关注</li>
+<li>后续步骤同理，直至生成终止符</li>
+</ul></li>
+</ol>
+<hr />
+<p><strong>关键结论</strong>：Transformer通过<strong>堆叠自注意力层+位置感知前馈网络</strong>，实现了：
+① 完全并行化计算 ② 长距离依赖捕捉 ③
+端到端对齐能力。这种设计成为后续GPT、BERT等模型的基石。</p>
+]]></content>
+      <tags>
+        <tag>多模态大模型论文学习</tag>
+      </tags>
   </entry>
 </search>
