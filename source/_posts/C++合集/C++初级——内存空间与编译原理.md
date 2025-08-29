@@ -1,8 +1,9 @@
 ---
 layout: posts
-title: C++初——1内存空间与编译原理
+title: C++初级——内存空间与编译原理
 date: 2025-08-07 22:13:10
 tags: C++ 
+mathjax: true
 ---
 
 PS：本C++进阶讲解基于x86 32位linux环境
@@ -114,14 +115,26 @@ int main()
 
 
 
-## 指令角度详解函数调用堆栈过程
+## 汇编角度详解函数调用堆栈过程
 
 观察以下代码：
 
 ```c++
+#include"pch.cpp"
 #include<iostream>
 using namespace std;
 
+int sum(int a,int b)
+{
+    int temp = 0;
+    temp = a + b;
+    return temp;
+}
+
+int main()
+{
+    
+}
 ```
 
 

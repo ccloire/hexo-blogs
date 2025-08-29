@@ -105,7 +105,7 @@ pandoc:
   pandoc_path: "D:\\Program Files\\Pandoc插件\\pandoc-3.6.4\\pandoc.exe" # 根据你的 Pandoc 安装路径修改
   args: #参数列表
     - "-f"
-    - "gfm"
+    - "markdown+markdown_in_html_blocks+tex_math_dollars+pipe_tables+footnotes+emoji+smart+auto_identifiers+implicit_figures+fenced_divs+bracketed_spans+link_attributes"
     - "-t"
     - "html"
     - "--mathjax"
