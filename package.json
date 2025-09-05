@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "cuid": "^3.0.0",
-    "glob": "^11.0.1",
+    "glob": "^11.0.3",
     "hexo": "^7.3.0",
     "hexo-all-minifier": "^0.5.7",
     "hexo-asset-img": "^1.2.0",
